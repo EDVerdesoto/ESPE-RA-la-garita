@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7i0r26dtlu3x"]
+
+[ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="1_t6biv"]
+[ext_resource type="Texture2D" uid="uid://bmvdirmwvj5ei" path="res://assets/objetos/mesa.png" id="2_araee"]
+[ext_resource type="Texture2D" uid="uid://yi45cywvqkut" path="res://assets/objetos/carpeta.png" id="3_afuwr"]
+[ext_resource type="Texture2D" uid="uid://nx31x6cqpmre" path="res://assets/objetos/lista negra.png" id="4_g5epp"]
+[ext_resource type="Texture2D" uid="uid://cwa4fdsg61n14" path="res://assets/objetos/compu.png" id="5_lkbym"]
+[ext_resource type="Texture2D" uid="uid://cua4xu50s8yfl" path="res://assets/objetos/radio.png" id="6_5m7ae"]
+[ext_resource type="Texture2D" uid="uid://dul8pdnw5vnlv" path="res://assets/objetos/escaner.png" id="7_sfnrh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Carnet" type="Sprite2D" parent="."]
+position = Vector2(372, -155)
+scale = Vector2(0.13156159, 0.14285713)
+texture = ExtResource("1_t6biv")
+
+[node name="Mesa" type="Sprite2D" parent="."]
+position = Vector2(656.00006, 431.24997)
+scale = Vector2(1.0821356, 1.1297117)
+texture = ExtResource("2_araee")
+
+[node name="Carpeta" type="Sprite2D" parent="Mesa"]
+position = Vector2(152, -222.00002)
+scale = Vector2(0.1664882, 0.16343391)
+texture = ExtResource("3_afuwr")
+
+[node name="ListaNegra" type="Sprite2D" parent="Mesa"]
+position = Vector2(92, -122)
+scale = Vector2(0.13763441, 0.15591407)
+texture = ExtResource("4_g5epp")
+
+[node name="Compu" type="Sprite2D" parent="Mesa"]
+position = Vector2(-238.34378, -258.34375)
+scale = Vector2(0.44470638, 0.41988638)
+texture = ExtResource("5_lkbym")
+
+[node name="Radio" type="Sprite2D" parent="Mesa"]
+position = Vector2(349, -185.99998)
+scale = Vector2(0.20588236, 0.17467652)
+texture = ExtResource("6_5m7ae")
+
+[node name="Escaner" type="Sprite2D" parent="."]
+position = Vector2(283.5625, -63.5)
+scale = Vector2(0.14674322, 0.16641565)
+texture = ExtResource("7_sfnrh")
