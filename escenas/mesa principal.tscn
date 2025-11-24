@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7i0r26dtlu3x"]
+[gd_scene load_steps=10 format=3 uid="uid://c7i0r26dtlu3x"]
 
 [ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="1_t6biv"]
 [ext_resource type="Texture2D" uid="uid://bmvdirmwvj5ei" path="res://assets/objetos/mesa.png" id="2_araee"]
@@ -7,16 +7,18 @@
 [ext_resource type="Texture2D" uid="uid://cwa4fdsg61n14" path="res://assets/objetos/compu.png" id="5_lkbym"]
 [ext_resource type="Texture2D" uid="uid://cua4xu50s8yfl" path="res://assets/objetos/radio.png" id="6_5m7ae"]
 [ext_resource type="Texture2D" uid="uid://dul8pdnw5vnlv" path="res://assets/objetos/escaner.png" id="7_sfnrh"]
+[ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://escenas/camera_2d.gd" id="8_afuwr"]
+[ext_resource type="Texture2D" uid="uid://dihaj0rf6wu5m" path="res://assets/fondo/everaldo-coelho-2tigIl6Tt7E-unsplash.jpg" id="8_araee"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Carnet" type="Sprite2D" parent="."]
-position = Vector2(372, -155)
-scale = Vector2(0.13156159, 0.14285713)
+position = Vector2(5913.437, 1830.4998)
+scale = Vector2(0.13156159, 0.13440855)
 texture = ExtResource("1_t6biv")
 
 [node name="Mesa" type="Sprite2D" parent="."]
-position = Vector2(656.00006, 431.24997)
+position = Vector2(6019, 2467)
 scale = Vector2(1.0821356, 1.1297117)
 texture = ExtResource("2_araee")
 
@@ -41,6 +43,18 @@ scale = Vector2(0.20588236, 0.17467652)
 texture = ExtResource("6_5m7ae")
 
 [node name="Escaner" type="Sprite2D" parent="."]
-position = Vector2(283.5625, -63.5)
+position = Vector2(5757.4375, 1857.5)
 scale = Vector2(0.14674322, 0.16641565)
 texture = ExtResource("7_sfnrh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(5892, 2219)
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("8_afuwr")
+ruta_panoramica = NodePath("../Fondo")
+
+[node name="Fondo" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(5, 5)
+texture = ExtResource("8_araee")
+centered = false
