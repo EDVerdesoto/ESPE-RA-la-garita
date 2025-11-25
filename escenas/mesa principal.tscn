@@ -8,18 +8,19 @@
 [ext_resource type="Texture2D" uid="uid://cua4xu50s8yfl" path="res://assets/objetos/radio.png" id="6_5m7ae"]
 [ext_resource type="Texture2D" uid="uid://dul8pdnw5vnlv" path="res://assets/objetos/escaner.png" id="7_sfnrh"]
 [ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://escenas/camera_2d.gd" id="8_afuwr"]
-[ext_resource type="Texture2D" uid="uid://dihaj0rf6wu5m" path="res://assets/fondo/everaldo-coelho-2tigIl6Tt7E-unsplash.jpg" id="8_araee"]
+[ext_resource type="Texture2D" uid="uid://cu6gn3bhy7etr" path="res://assets/fondo/FONDO_ESPE_GARITA.png" id="9_afuwr"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Carnet" type="Sprite2D" parent="."]
-position = Vector2(5913.437, 1830.4998)
-scale = Vector2(0.13156159, 0.13440855)
+position = Vector2(2843, 425)
+scale = Vector2(0.1, 0.102)
 texture = ExtResource("1_t6biv")
 
 [node name="Mesa" type="Sprite2D" parent="."]
-position = Vector2(6019, 2467)
-scale = Vector2(1.0821356, 1.1297117)
+z_index = 1
+position = Vector2(2815, 886.99994)
+scale = Vector2(0.8, 0.835)
 texture = ExtResource("2_araee")
 
 [node name="Carpeta" type="Sprite2D" parent="Mesa"]
@@ -43,18 +44,20 @@ scale = Vector2(0.20588236, 0.17467652)
 texture = ExtResource("6_5m7ae")
 
 [node name="Escaner" type="Sprite2D" parent="."]
-position = Vector2(5757.4375, 1857.5)
+position = Vector2(2687, 466)
 scale = Vector2(0.14674322, 0.16641565)
 texture = ExtResource("7_sfnrh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(5892, 2219)
-zoom = Vector2(0.5, 0.5)
+position = Vector2(2908, 751)
 script = ExtResource("8_afuwr")
 ruta_panoramica = NodePath("../Fondo")
+zoom_normal = Vector2(1, 1)
+zoom_out = Vector2(0.87, 0.87)
+permitir_paneo_libre = false
 
 [node name="Fondo" type="Sprite2D" parent="."]
 z_index = -1
-scale = Vector2(5, 5)
-texture = ExtResource("8_araee")
+scale = Vector2(6, 6)
+texture = ExtResource("9_afuwr")
 centered = false

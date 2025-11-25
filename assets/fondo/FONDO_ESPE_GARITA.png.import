@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dihaj0rf6wu5m"
-path="res://.godot/imported/everaldo-coelho-2tigIl6Tt7E-unsplash.jpg-4c1db6545e0861fe95201c9bf33b20c0.ctex"
+uid="uid://cu6gn3bhy7etr"
+path="res://.godot/imported/FONDO_ESPE_GARITA.png-afa609454fa53b5e4b6e77e6e0b06619.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fondo/everaldo-coelho-2tigIl6Tt7E-unsplash.jpg"
-dest_files=["res://.godot/imported/everaldo-coelho-2tigIl6Tt7E-unsplash.jpg-4c1db6545e0861fe95201c9bf33b20c0.ctex"]
+source_file="res://assets/fondo/FONDO_ESPE_GARITA.png"
+dest_files=["res://.godot/imported/FONDO_ESPE_GARITA.png-afa609454fa53b5e4b6e77e6e0b06619.ctex"]
 
 [params]
 
