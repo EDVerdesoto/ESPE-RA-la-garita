@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7i0r26dtlu3x"]
+[gd_scene load_steps=13 format=3 uid="uid://c7i0r26dtlu3x"]
 
 [ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="1_t6biv"]
 [ext_resource type="Texture2D" uid="uid://bmvdirmwvj5ei" path="res://assets/objetos/mesa.png" id="2_araee"]
@@ -8,9 +8,212 @@
 [ext_resource type="Texture2D" uid="uid://cua4xu50s8yfl" path="res://assets/objetos/radio.png" id="6_5m7ae"]
 [ext_resource type="Texture2D" uid="uid://ji5t3ghyvj28" path="res://assets/HUD/manos_guardia.png" id="7_lkbym"]
 [ext_resource type="Texture2D" uid="uid://dul8pdnw5vnlv" path="res://assets/objetos/escaner.png" id="7_sfnrh"]
-[ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://escenas/camera_2d.gd" id="8_afuwr"]
 [ext_resource type="Texture2D" uid="uid://cu6gn3bhy7etr" path="res://assets/fondo/FONDO_ESPE_GARITA.png" id="9_afuwr"]
 [ext_resource type="Texture2D" uid="uid://c6pbudnnh0i5v" path="res://assets/personajes/estudiante.png" id="11_5m7ae"]
+
+[sub_resource type="GDScript" id="GDScript_g5epp"]
+script/source = "extends Camera2D
+
+@export var ruta_panoramica: NodePath
+@export var velocidad := 700.0
+@export var tiempo_transicion := 0.9
+
+@export var vista_afuera := Vector2(2885, 555)
+@export var vista_adentro := Vector2(1325, 540)
+
+@export var zoom_normal := Vector2(1.1, 1.1) 
+@export var zoom_out := Vector2(0.85, 0.85)    
+
+@export var permitir_paneo_libre := true
+
+var rect_fondo: Rect2
+var mitad_viewport_mundo := Vector2.ZERO
+var tween_activo: Tween = null
+
+func _ready():
+	_actualizar_rect_fondo()
+	_actualizar_mitad_viewport()
+	
+	global_position = _limitar_pos_actual(vista_afuera)
+	zoom = zoom_normal 
+
+func _process(delta):
+	# Actualizamos esto constantemente para el paneo manual
+	_actualizar_mitad_viewport()
+
+	if permitir_paneo_libre and tween_activo == null:
+		var direccion := Vector2(
+			Input.get_action_strength(\"pan_derecha\") - Input.get_action_strength(\"pan_izquierda\"),
+			Input.get_action_strength(\"pan_abajo\")   - Input.get_action_strength(\"pan_arriba\")
+		)
+
+		if direccion != Vector2.ZERO:
+			print(global_position)
+			global_position += direccion.normalized() * velocidad * delta
+			# Aquí sí usamos el límite actual porque nos movemos con el zoom actual
+			global_position = _limitar_pos_actual(global_position)
+
+	if Input.is_action_just_pressed(\"mirar_adentro\"):
+		_ir_a(vista_adentro, zoom_out) 
+	elif Input.is_action_just_pressed(\"mirar_afuera\"):
+		_ir_a(vista_afuera, zoom_normal)
+
+func _ir_a(pos: Vector2, target_zoom: Vector2):
+	if tween_activo:
+		tween_activo.kill()
+
+	# 1. Calculamos cuál será el limite permitido CON EL FUTURO ZOOM
+	var limite_futuro = _calcular_limite_con_zoom(pos, target_zoom)
+
+	tween_activo = create_tween()
+	tween_activo.set_parallel(true) 
+	
+	# 2. Usamos ese límite futuro como destino final
+	tween_activo.tween_property(
+		self,
+		\"global_position\",
+		limite_futuro, 
+		tiempo_transicion
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	tween_activo.tween_property(
+		self,
+		\"zoom\",
+		target_zoom,
+		tiempo_transicion
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	tween_activo.finished.connect(func():
+		tween_activo = null
+	)
+
+# Función estándar que usa el zoom actual (para _process)
+func _limitar_pos_actual(pos: Vector2) -> Vector2:
+	if rect_fondo.size == Vector2.ZERO: return pos 
+	return _aplicar_clamp(pos, mitad_viewport_mundo)
+
+# NUEVA FUNCIÓN: Calcula el clamp simulando un zoom diferente
+func _calcular_limite_con_zoom(pos: Vector2, zoom_simulado: Vector2) -> Vector2:
+	if rect_fondo.size == Vector2.ZERO: return pos 
+	
+	var vp_size := get_viewport_rect().size
+	# Calculamos la mitad del viewport hipotética con el zoom futuro
+	var mitad_futura = (vp_size * 0.5) / zoom_simulado
+	
+	return _aplicar_clamp(pos, mitad_futura)
+
+# Lógica del clamp extraída para reutilizar
+func _aplicar_clamp(pos: Vector2, margen: Vector2) -> Vector2:
+	return Vector2(
+		clamp(
+			pos.x,
+			rect_fondo.position.x + margen.x,
+			rect_fondo.position.x + rect_fondo.size.x - margen.x
+		),
+		clamp(
+			pos.y,
+			rect_fondo.position.y + margen.y,
+			rect_fondo.position.y + rect_fondo.size.y - margen.y
+		)
+	)
+# El resto de funciones (_actualizar_rect_fondo, etc) siguen igual...
+func _actualizar_rect_fondo():
+	var pano := get_node(ruta_panoramica) as Sprite2D
+	if not pano: return 
+	var tex_size := pano.texture.get_size()
+	var escala := pano.global_transform.get_scale()
+	var size_mundo := tex_size * escala
+	var top_left_local := Vector2.ZERO
+	if pano.centered:
+		top_left_local = -tex_size * 0.5 + pano.offset
+	else:
+		top_left_local = pano.offset
+	var top_left_global := pano.to_global(top_left_local)
+	rect_fondo = Rect2(top_left_global, size_mundo)
+
+func _actualizar_mitad_viewport():
+	var vp_size := get_viewport_rect().size
+	mitad_viewport_mundo = (vp_size * 0.5) / zoom
+"
+
+[sub_resource type="GDScript" id="GDScript_lkbym"]
+script/source = "extends Node
+
+# Esta es la \"plantilla\" de datos que usaremos para cada persona
+var perfil_actual : Dictionary = {
+	\"nombre\": \"\",
+	\"rol\": \"\",          # Estudiante, Docente, Visitante
+	\"personalidad\": \"\", # Enojado, Amable, Nervioso
+	\"motivo\": \"\",       # Ir a examen, graduación, entrega de papeles
+	\"incidencia\": \"\",   # Ninguna, Fecha_Vencida, Foto_Falsa, Nombre_Erroneo
+	\"es_valido\": true   # Si debe entrar o no
+}
+
+# Listas de datos para que sea aleatorio
+var nombres : Array = [
+	\"Juan Pérez\", \"María Sangucho\", \"Kevin Tipán\", \"Domenica Castillo\", \"Ruben Benavides\",
+	\"Joan Cobeña\", \"Carlos Jaya\", \"Edison Verdesoto\", \"Juan Pasquel\"
+]
+var roles : Array = [
+	\"Estudiante\", \"Docente\", \"Visitante\"
+]
+var personalidades : Array = [
+	\"Amable\", \"Nervioso\", \"Arrogante\", \"Desesperado\"
+]
+var motivos_estudiante = [
+	\"Tengo examen de Software Seguro\", \"Vengo a la biblioteca\", \"Cita con el director\"
+]
+	
+func generar_nuevo_npc() -> Dictionary:
+	# 1. Elegimos datos básicos al azar
+	perfil_actual.nombre = nombres.pick_random()
+	perfil_actual.rol = roles.pick_random()
+	perfil_actual.personalidad = personalidades.pick_random()
+	perfil_actual.motivo = motivos_estudiante.pick_random()
+	
+	# 2. Lógica de la \"Trampa\" (30% de probabilidad de error)
+	var suerte = randf() 
+	const tasa_error = 0.3
+	if suerte < tasa_error:
+		perfil_actual.es_valido = false
+		# Elegimos qué error tiene
+		var tipos_error = [
+			\"Fecha_Vencida\", \"Foto_Falsa\", \"Nombre_Erroneo\"
+		]
+		
+		perfil_actual.incidencia = tipos_error.pick_random()
+	else:
+		perfil_actual.es_valido = true
+		perfil_actual.incidencia = \"Ninguna\"
+	
+	print(\"Se ha generado a: \", perfil_actual.nombre, \" con error: \", perfil_actual.incidencia)
+	return perfil_actual
+
+# Esta función recibe un texto: \"APROBADO\" o \"DENEGADO\"
+func validar_decision(decision_jugador) -> bool:
+	var acierto = false
+	
+	if decision_jugador == \"APROBADO\":
+		if perfil_actual.es_valido == true:
+			acierto = true # Bien hecho, era legal y lo dejaste pasar
+		else:
+			acierto = false # ¡MAL! Dejaste pasar a alguien con error
+			
+	elif decision_jugador == \"DENEGADO\":
+		if perfil_actual.es_valido == false:
+			acierto = true # Bien hecho, detectaste al impostor
+		else:
+			acierto = false # ¡MAL! Rechazaste a alguien que sí podía entrar
+	
+	if acierto:
+		print(\"¡Resultado: EXCELENTE! Ganas $10.00\")
+		# Aquí le avisaríamos al HUD de Carlos que suba el dinero
+	else:
+		print(\"¡Resultado: ERROR! Multa de $20.00\")
+		# Aquí le avisaríamos al HUD que baje el dinero
+		
+	return acierto
+"
 
 [node name="Node2D" type="Node2D"]
 
@@ -57,7 +260,7 @@ texture = ExtResource("7_sfnrh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2908, 751)
-script = ExtResource("8_afuwr")
+script = SubResource("GDScript_g5epp")
 ruta_panoramica = NodePath("../Fondo")
 zoom_normal = Vector2(1, 1)
 zoom_out = Vector2(0.87, 0.87)
@@ -73,3 +276,6 @@ centered = false
 position = Vector2(2956.3499, 650.64185)
 scale = Vector2(0.46015206, 0.4030581)
 texture = ExtResource("11_5m7ae")
+
+[node name="Gestor_NPC" type="Node" parent="."]
+script = SubResource("GDScript_lkbym")

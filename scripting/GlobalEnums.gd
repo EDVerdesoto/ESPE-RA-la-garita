@@ -1,0 +1,6 @@
+extends Node
+
+class_name GlobalEnums
+
+enum NPCState { NUEVO, APROBADO, EN_VALIDACION, DESAPROBADO }
+enum Incidencia { NINGUNA, CARNET_INVALIDO, FECHA_VENCIDA, FOTO_FALSA, SOSPECHOSO }
