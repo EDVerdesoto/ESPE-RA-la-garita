@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7i0r26dtlu3x"]
+[gd_scene load_steps=11 format=3 uid="uid://c7i0r26dtlu3x"]
 
 [ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="1_t6biv"]
 [ext_resource type="Texture2D" uid="uid://bmvdirmwvj5ei" path="res://assets/objetos/mesa.png" id="2_araee"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cwa4fdsg61n14" path="res://assets/objetos/compu.png" id="5_lkbym"]
 [ext_resource type="Texture2D" uid="uid://cua4xu50s8yfl" path="res://assets/objetos/radio.png" id="6_5m7ae"]
 [ext_resource type="Texture2D" uid="uid://ji5t3ghyvj28" path="res://assets/HUD/manos_guardia.png" id="7_lkbym"]
-[ext_resource type="Texture2D" uid="uid://dul8pdnw5vnlv" path="res://assets/objetos/escaner.png" id="7_sfnrh"]
 [ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://escenas/camera_2d.gd" id="8_afuwr"]
 [ext_resource type="Texture2D" uid="uid://cu6gn3bhy7etr" path="res://assets/fondo/FONDO_ESPE_GARITA.png" id="9_afuwr"]
 [ext_resource type="Texture2D" uid="uid://c6pbudnnh0i5v" path="res://assets/personajes/estudiante.png" id="11_5m7ae"]
@@ -15,9 +14,14 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Carnet" type="Sprite2D" parent="."]
-position = Vector2(2843, 425)
-scale = Vector2(0.1, 0.102)
+position = Vector2(2874.05, 526.201)
+scale = Vector2(0.07624673, 0.07250533)
 texture = ExtResource("1_t6biv")
+
+[node name="Estudiante" type="Sprite2D" parent="."]
+position = Vector2(2956.3499, 650.6417)
+scale = Vector2(0.46015206, 0.40305817)
+texture = ExtResource("11_5m7ae")
 
 [node name="Mesa" type="Sprite2D" parent="."]
 z_index = 1
@@ -50,11 +54,6 @@ position = Vector2(-133.28125, -86.976074)
 scale = Vector2(0.34317163, 0.32103264)
 texture = ExtResource("7_lkbym")
 
-[node name="Escaner" type="Sprite2D" parent="."]
-position = Vector2(2687, 466)
-scale = Vector2(0.14674322, 0.16641565)
-texture = ExtResource("7_sfnrh")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2908, 751)
 script = ExtResource("8_afuwr")
@@ -65,11 +64,7 @@ permitir_paneo_libre = false
 
 [node name="Fondo" type="Sprite2D" parent="."]
 z_index = -1
+position = Vector2(-198, 72)
 scale = Vector2(6, 6)
 texture = ExtResource("9_afuwr")
 centered = false
-
-[node name="Estudiante" type="Sprite2D" parent="."]
-position = Vector2(2956.3499, 650.64185)
-scale = Vector2(0.46015206, 0.4030581)
-texture = ExtResource("11_5m7ae")
