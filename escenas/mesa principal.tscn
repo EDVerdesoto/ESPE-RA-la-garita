@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="1_t6biv"]
 [ext_resource type="Texture2D" uid="uid://b8qvlx0hlbnqo" path="res://assets/fondo/fondo normal/normal_soleado.png" id="2_2buuu"]
 [ext_resource type="Texture2D" uid="uid://bmvdirmwvj5ei" path="res://assets/objetos/mesa.png" id="2_araee"]
-[ext_resource type="Texture2D" uid="uid://bsnkqhx7h605r" path="res://assets/fondo/fondo normal/normal_dia_lluvioso.png" id="2_job3a"]
+[ext_resource type="Texture2D" uid="uid://tujbtpba2cyv" path="res://assets/fondo/fondo normal/Nomal_dia_lluvioso.png" id="2_job3a"]
 [ext_resource type="Texture2D" uid="uid://d4cqx8ua7ljjj" path="res://assets/fondo/fondo normal/normal_nublado.png" id="3_22t22"]
 [ext_resource type="Texture2D" uid="uid://yi45cywvqkut" path="res://assets/objetos/carpeta.png" id="3_afuwr"]
 [ext_resource type="Texture2D" uid="uid://nx31x6cqpmre" path="res://assets/objetos/lista negra.png" id="4_g5epp"]
@@ -41,7 +41,7 @@ size = Vector2(959.28467, 1028.4204)
 script = ExtResource("1_fkgjx")
 n_soleado = NodePath("ContenedorFondoNormal/NormalSoleado")
 n_nublado = NodePath("ContenedorFondoNormal/NormalNublado")
-n_lluvioso = NodePath("ContenedorFondoNormal/NormalDiaLluvioso")
+n_lluvioso = NodePath("ContenedorFondoNormal/NomalDiaLluvioso")
 i_soleado = NodePath("ContenedorFondoIzquierda/IzquierdaSoleado")
 i_nublado = NodePath("ContenedorFondoIzquierda/IzquierdaNublado")
 i_lluvioso = NodePath("ContenedorFondoIzquierda/IzquierdaDiaLluvioso")
@@ -49,19 +49,21 @@ lluvia_particulas = NodePath("Lluvia")
 
 [node name="ContenedorFondoNormal" type="Node2D" parent="."]
 
-[node name="NormalDiaLluvioso" type="Sprite2D" parent="ContenedorFondoNormal"]
+[node name="NomalDiaLluvioso" type="Sprite2D" parent="ContenedorFondoNormal"]
 position = Vector2(2836, 352)
 scale = Vector2(0.458, 0.376)
 texture = ExtResource("2_job3a")
 
 [node name="NormalNublado" type="Sprite2D" parent="ContenedorFondoNormal"]
+visible = false
 position = Vector2(2836, 352)
 scale = Vector2(0.45833322, 0.376)
 texture = ExtResource("3_22t22")
 
 [node name="NormalSoleado" type="Sprite2D" parent="ContenedorFondoNormal"]
+visible = false
 position = Vector2(2836, 351.99997)
-scale = Vector2(0.45833325, 0.37569755)
+scale = Vector2(0.458, 0.376)
 texture = ExtResource("2_2buuu")
 
 [node name="ContenedorFondoIzquierda" type="Node2D" parent="."]
