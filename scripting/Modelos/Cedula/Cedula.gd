@@ -10,12 +10,12 @@ var fecha_expiracion: String
 var ruta_sprite: String
 
 func _init(
-	p_numero_cedula := "",
-	p_nombre := "",
-	p_apellido := "",
-	p_fecha_emision := "",
-	p_fecha_expiracion := "",
-	p_ruta_sprite := ""
+	p_numero_cedula : String = "",
+	p_nombre : String = "",
+	p_apellido : String = "",
+	p_fecha_emision : String = "",
+	p_fecha_expiracion : String = "",
+	p_ruta_sprite : String = ""
 ):
 	numero_cedula = p_numero_cedula
 	nombre = p_nombre
