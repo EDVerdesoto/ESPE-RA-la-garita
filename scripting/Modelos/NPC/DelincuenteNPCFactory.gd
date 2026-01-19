@@ -9,17 +9,18 @@ var motivos_sospechosos = [
 	"Vengo a dejar un paquete", "Busco a un amigo", "Solo voy de paso"
 ]
 
-func crear_npc() -> AbstractNPC:
+func crear_npc(
+	nombre:String, personalidad:String, ruta_sprite_npc:String,
+	ruta_sprite_carnet:String, ruta_sprite_cedula:String,
+	fecha_expiracion_cedula:Variant = null, carrera:Variant = null
+) -> AbstractNPC:
+	
 	var nuevo_delincuente = NPCDelincuente.new()
 	
-	nuevo_delincuente.personalidad = [
-		"Agresivo", "Demasiado Amable", "Callado"
-	].pick_random()
+	nuevo_delincuente.nombre = nombre
+	nuevo_delincuente.personalidad = personalidad
+	nuevo_delincuente.ruta_sprite_npc = ruta_sprite_npc
 	
-	# Ruben, aquí podrías luego conectar esto con el sistema de motivos de los civiles
-	
-	# Generador de nombres
-	GeneradorNombres.generar_nombre(nuevo_delincuente)
 	# Generador de incidencias
 	GeneradorIncidencias.generar_incidencias(nuevo_delincuente)
 	

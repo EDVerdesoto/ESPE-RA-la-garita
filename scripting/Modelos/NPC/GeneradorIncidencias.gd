@@ -4,7 +4,11 @@ extends Node
 const PROBABILIDAD_INCIDENCIA_GENERIC = 0.3      # 30% para estudiantes/profesores
 const PROBABILIDAD_INCIDENCIA_DELINCUENTE = 0.9  # 90% para delincuentes 
 
-static func generar_incidencias(npc: AbstractNPC) -> void:
+static func generar_incidencias(
+	npc: AbstractNPC, 
+	ruta_sprite_carnet:String, ruta_sprite_cedula:String,
+	fecha_expiracion_cedula:Variant = null, carrera:Variant = null
+) -> void:
 	var probabilidad_base: float = 0.0
 	
 	# Identificamos el tipo de NPC para decidir la probabilidad
@@ -12,7 +16,7 @@ static func generar_incidencias(npc: AbstractNPC) -> void:
 		probabilidad_base = PROBABILIDAD_INCIDENCIA_DELINCUENTE
 	elif npc is NPCGenerico:
 		probabilidad_base = PROBABILIDAD_INCIDENCIA_GENERIC
-	
+
 	# Aplicamos el azar
 	if randf() < probabilidad_base:
 		_seleccionar_error_por_tipo(npc)
