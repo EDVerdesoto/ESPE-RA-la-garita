@@ -1,0 +1,9 @@
+[
+	{
+		"id": "npc_001",
+		"nombre_base": "Kevin",
+		"personalidad": "Nervioso",
+		"rol_base": "Estudiante",
+		"sprite_path": "res://assets/sprites/personajes/estudiante.png"
+	},
+]

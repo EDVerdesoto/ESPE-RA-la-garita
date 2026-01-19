@@ -15,6 +15,11 @@ run/main_scene="uid://c7i0r26dtlu3x"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalGameManager="*res://scripting/GlobalGameManager.gd"
+GeminiManager="*res://scripting/Servicios/GeminiManager.gd"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
