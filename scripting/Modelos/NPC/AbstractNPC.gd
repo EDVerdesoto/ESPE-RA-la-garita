@@ -5,6 +5,9 @@ var nombre: String
 var personalidad: String
 var incidencia: int = GlobalEnums.Incidencia.NINGUNA
 var estado: int = GlobalEnums.NPCState.NUEVO
+var ruta_sprite_npc: String
+var carnet: Carnet
+var cedula: Cedula
 
 # Método abstracto
 func post_accion():

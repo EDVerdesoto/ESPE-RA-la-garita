@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalGameManager="*res://scripting/GlobalGameManager.gd"
 GeminiManager="*res://scripting/Servicios/GeminiManager.gd"
+FechaGlobal="*res://scripting/FechaGlobal.gd"
 
 [editor]
 
