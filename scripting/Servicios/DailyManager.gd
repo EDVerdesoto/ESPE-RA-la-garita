@@ -21,7 +21,7 @@ func preparar_npcs_para_hoy(cantidad: int) -> Array:
 	# Mezclamos la BDD para que no salgan siempre los mismos
 	bdd.shuffle()
 	
-	var factory = RandomNPCFactory.new() # Tu factory existente
+	var factory = NpcFactoryProvider.get_factory("generico")
 	
 	for i in range(cantidad):
 		# 1. Tomamos un 'cascarón' visual de la BDD

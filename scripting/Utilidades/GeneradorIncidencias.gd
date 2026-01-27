@@ -6,8 +6,9 @@ const PROBABILIDAD_INCIDENCIA_DELINCUENTE = 0.95
 
 static func generar_incidencias(
 	npc: AbstractNPC, 
-	carnet: Carnet,
-	cedula: Cedula
+	cedula_config : CedulaNPCConfig,
+	carnet_universitario_config : CarnetUniversitarioNPCConfig,
+	pase_visitante_config : PaseVisitanteNPCConfig
 ) -> void:
 	
 	var probabilidad_base: float = 0.0
@@ -23,14 +24,14 @@ static func generar_incidencias(
 
 	# Lógica específica para FECHA_CEDULA_CADUCADA
 	if npc.incidencia == GlobalEnums.Incidencia.FECHA_CEDULA_CADUCADA:
-		if _es_fecha_valida_para_expirar(cedula.fecha_expiracion):
-			cedula.fecha_expiracion = _generar_fecha_invalida_real()
+		if _es_fecha_valida_para_expirar(cedula_config.fecha_expiracion_cedula):
+			cedula_config.fecha_expiracion_cedula = _generar_fecha_invalida_real()
 		else:
 			# Es false: Recalculamos la incidencia omitiendo la fecha
 			_recalcular_incidencia_sin_fecha(npc)
 	
 	# Construcción de los objetos con las fechas finales
-	_construir_documentos(npc, carnet, cedula)
+	_construir_documentos(npc, cedula_config, carnet_universitario_config, pase_visitante_config)
 
 # --- MÉTODOS DE LÓGICA DE FECHAS ---
 
@@ -96,16 +97,30 @@ static func _recalcular_incidencia_sin_fecha(npc: AbstractNPC) -> void:
 	npc.incidencia = incidencias.pick_random()
 
 static func _construir_documentos(
-	npc: AbstractNPC, carnet: Carnet, cedula: Cedula
+	npc : AbstractNPC, 
+	cedula_config : CedulaNPCConfig,
+	carnet_universitario_config : CarnetUniversitarioNPCConfig,
+	pase_visitante_config : PaseVisitanteNPCConfig
 ) -> void:
 
+	# Cédula
 	var nom_ced = npc.nombre
-	var nom_car = npc.nombre
 	var apellido_ced = npc.apellido
+	var ruta_sprite_ced = cedula_config.ruta_sprite_cedula
+	var fecha_final_cedula = cedula_config.fecha_expiracion
+	
+	# Carnet
+	var nom_car = npc.nombre
 	var apellido_car = npc.apellido
 	var carrera = npc.carrera
-		
-	var fecha_final_cedula = cedula.fecha_expiracion
+	var ruta_sprite_car = carnet_universitario_config.ruta_sprite_carnet_universitario
+	
+	# Pase Visitante
+	var nom_pase = npc.nombre
+	var apellido_pase = npc.apellido
+	var ruta_sprite_pase = pase_visitante_config.ruta_sprite_pase_visitante
+	var razon = "Que te importa pues"
+
 
 	var nombres_aleatorios : Array[String] = ["Juan", "María", "Carlos", "Ana", "Pedro", "Lucía", "José", "Valentina", "Diego", "Sofía"]
 	var apellidos_aleatorios : Array[String] = ["Pérez", "Gómez", "Rodríguez", "Martínez", "López", "Hernández", "Torres", "Ramírez", "Vargas", "Flores"]
@@ -123,30 +138,57 @@ static func _construir_documentos(
 			nom_car = nombres_aleatorios.filter(func(n): return n != npc.nombre).pick_random()
 			apellido_car = apellidos_aleatorios.filter(func(a): return a != npc.apellido).pick_random()
 			
+		GlobalEnums.Incidencia.NOMBRE_PASE_DIFERENTE:
+			# Lo mismo para el carnet universitario
+			nom_pase = nombres_aleatorios.filter(func(n): return n != npc.nombre).pick_random()
+			apellido_pase = apellidos_aleatorios.filter(func(a): return a != npc.apellido).pick_random()
+			
 		GlobalEnums.Incidencia.CARRERA_DIFERENTE:
 			# Aseguramos que la carrera en el carnet no sea la real (ej. Ingeniería de Software )
 			carrera = carreras_aleatorias.filter(func(c): return c != npc.carrera).pick_random()
-
+		
+		
 	# Si la fecha es nula tras las validaciones, asegurar una válida
 	if fecha_final_cedula == null:
 		fecha_final_cedula = _generar_fecha_valida_real()
 
-	npc.carnet = null
-	npc.cedula = null
+	npc.documentos = Array[AbstractDocumentoNPC].new()
 
-	# Creación de objetos Cedula y Carnet
+	# Creación de documentos si no son la incidencia olvidada
 	if npc.incidencia != GlobalEnums.Incidencia.CEDULA_OLVIDADA:
-		npc.cedula = Cedula.new(
-			cedula.numero_cedula,
-			nom_ced, 
-			apellido_ced, 
-			"10/10/2020", 
-			str(fecha_final_cedula)
+		var p_cedula_config = CedulaNPCConfig.new(
+			nom_ced,
+			apellido_ced,
+			ruta_sprite_ced,
+			cedula_config.numero_cedula,
+			cedula_config.fecha_emision,
+			fecha_final_cedula
 		)
+
+		var p_cedula = DocumentoNpcFactoryProvider.get_factory("cedula").crear_documento(p_cedula_config)
+		npc.documentos.append(p_cedula)
+		
 	if npc.incidencia != GlobalEnums.Incidencia.CARNET_OLVIDADO:
-		npc.carnet = Carnet.new(
-			nom_car, 
-			apellido_car, 
-			carrera, 
-			carnet.ruta_sprite
+		var p_carnet_config = CarnetUniversitarioNPCConfig.new(
+			nom_car,
+			apellido_car,
+			ruta_sprite_car,
+			carrera,
+			"estudiante"	# TO CHECK
 		)
+
+		var p_carnet = DocumentoNpcFactoryProvider.get_factory("carnet_universitario").crear_documento(p_carnet_config)
+		npc.documentos.append(p_carnet)
+	
+	# Solo visitantes pueden tener pase, sería ilógico que un estudiante tenga un pase de visitante,
+	# o depende si luego queremos hacerlo así
+	if npc.incidencia != GlobalEnums.Incidencia.PASE_VISITANTE_OLVIDADO && !npc is NPCGenerico:
+		var p_pase_config = PaseVisitanteNPCConfig.new(
+			nom_pase,
+			apellido_pase,
+			ruta_sprite_pase,
+			razon
+		)
+
+		var p_pase = DocumentoNpcFactoryProvider.get_factory("pase_visitante").crear_documento(p_pase_config)
+		npc.documentos.append(p_pase)

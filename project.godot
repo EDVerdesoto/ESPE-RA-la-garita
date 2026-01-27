@@ -19,7 +19,9 @@ config/icon="res://icon.svg"
 
 GlobalGameManager="*res://scripting/GlobalGameManager.gd"
 GeminiManager="*res://scripting/Servicios/GeminiManager.gd"
-FechaGlobal="*res://scripting/FechaGlobal.gd"
+FechaGlobal="*res://scripting/Proveedores/FechaGlobal.gd"
+DocumentoNpcFactoryProvider="*res://scripting/Proveedores/DocumentoNPCFactoryProvider.gd"
+NpcFactoryProvider="*res://scripting/Proveedores/NPCFactoryProvider.gd"
 
 [editor]
 

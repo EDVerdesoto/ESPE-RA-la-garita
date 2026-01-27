@@ -1,3 +1,5 @@
+# Autoload
+
 extends Node
 
 signal dia_avanzado(fecha_actual)
