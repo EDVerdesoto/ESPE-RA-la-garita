@@ -6,14 +6,46 @@ signal batch_completed(dialogos_array: Array)
 signal error_ocurred(mensaje: String)
 
 # CONFIGURACIÓN
-const API_KEY = "AIzaSyCSPOtIY-KqadDV5LUQOg0KTNWQkqOBRFk" 
-const URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=" + API_KEY
+var API_KEY: String = ""
+var URL: String = ""
 
-@onready var http_request = HTTPRequest.new()
+@ontml var http_request = HTTPRequest.new()
 
 func _ready():
+	# Cargar la API key desde el archivo .env
+	_cargar_api_key()
 	add_child(http_request)
 	http_request.request_completed.connect(_on_request_completed)
+
+# Función para leer el archivo .env y cargar la API key
+func _cargar_api_key():
+	var env_path = "res://.env"
+	var file = FileAccess.open(env_path, FileAccess.READ)
+	
+	if file == null:
+		push_error("[GEMINI] No se encontró el archivo .env en la raíz del proyecto")
+		error_ocurred.emit("No se encontró el archivo .env")
+		return
+	
+	while not file.eof_reached():
+		var line = file.get_line().strip_edges()
+		
+		# Ignorar líneas vacías y comentarios
+		if line.is_empty() or line.begins_with("#"):
+			continue
+		
+		# Buscar la variable GEMINI_API_KEY
+		if line.begins_with("GEMINI_API_KEY="):
+			API_KEY = line.replace("GEMINI_API_KEY=", "")
+			URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=" + API_KEY
+			print("[GEMINI] API Key cargada correctamente")
+			break
+	
+	file.close()
+	
+	if API_KEY.is_empty():
+		push_error("[GEMINI] No se encontró GEMINI_API_KEY en el archivo .env")
+		error_ocurred.emit("No se encontró GEMINI_API_KEY en .env")
 
 # --- FUNCIÓN PRINCIPAL ---
 # Recibe un Array de objetos NPC (AbstractNPC) y el String del clima
