@@ -6,8 +6,8 @@ signal batch_completed(dialogos_array: Array)
 signal error_ocurred(mensaje: String)
 
 # CONFIGURACIÓN
-const API_KEY = "TU_API_KEY_AQUI" 
-const URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY
+const API_KEY = "AIzaSyCSPOtIY-KqadDV5LUQOg0KTNWQkqOBRFk" 
+const URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=" + API_KEY
 
 @onready var http_request = HTTPRequest.new()
 
@@ -18,6 +18,7 @@ func _ready():
 # --- FUNCIÓN PRINCIPAL ---
 # Recibe un Array de objetos NPC (AbstractNPC) y el String del clima
 func solicitar_dialogos_batch(lista_npcs: Array, clima_actual: String):
+	print("[GEMINI] Iniciando solicitud para %d NPCs" % lista_npcs.size())
 	
 	# 1. Convertimos los objetos NPC a datos simples para el Prompt
 	var datos_para_prompt = []
@@ -32,7 +33,7 @@ func solicitar_dialogos_batch(lista_npcs: Array, clima_actual: String):
 		if "tipo_amenaza" in npc and npc.tipo_amenaza != "":
 			verdad_oculta = "CRIMINAL PELIGROSO (%s). Incidencia técnica: %s" % [npc.tipo_amenaza, npc.incidencia]
 			intencion = "HOSTIL/MENTIROSO. Miente. Si te descubren, ponte agresivo o intenta sobornar."
-		elif npc.incidencia != null and npc.incidencia != "":
+		elif npc.incidencia != GlobalEnums.Incidencia.NINGUNA:
 			verdad_oculta = "Ciudadano despistado. Incidencia real: %s" % npc.incidencia
 			intencion = "INOCENTE/NERVIOSO. No sabías del error. Reacciona con sorpresa o miedo."
 		else:
@@ -57,17 +58,24 @@ func solicitar_dialogos_batch(lista_npcs: Array, clima_actual: String):
 			"parts": [{"text": prompt}]
 		}],
 		"generationConfig": {
-			"responseMimeType": "application/json", # FORZAMOS JSON PURO
-			"temperature": 1.0 # Creatividad alta para variedad de excusas
+			"temperature": 1.0,
+			"topK": 40,
+			"topP": 0.95,
+			"maxOutputTokens": 8192,
+			"responseMimeType": "application/json"
 		}
 	})
 	
 	var headers = ["Content-Type: application/json"]
 	
 	# 4. Enviar
+	print("[GEMINI] Enviando request a Gemini API...")
 	var error = http_request.request(URL, headers, HTTPClient.METHOD_POST, body)
 	if error != OK:
+		print("[GEMINI ERROR] Fallo al enviar request: ", error)
 		emit_signal("error_ocurred", "Fallo al conectar con Gemini")
+	else:
+		print("[GEMINI] Request enviado exitosamente, esperando respuesta...")
 
 # --- CONSTRUCTOR DEL PROMPT ---
 func _construir_prompt(datos_npcs: Array, clima: String) -> String:
@@ -119,24 +127,29 @@ func _construir_prompt(datos_npcs: Array, clima: String) -> String:
 
 # --- MANEJO DE RESPUESTA ---
 func _on_request_completed(result, response_code, headers, body):
+	print("[GEMINI] Respuesta recibida - Código: %d, Result: %d" % [response_code, result])
+	
 	if response_code != 200:
-		printerr("Error API Gemini: ", response_code)
-		print(body.get_string_from_utf8())
+		printerr("[GEMINI ERROR] Error API Gemini: ", response_code)
+		var error_body = body.get_string_from_utf8()
+		print("[GEMINI ERROR] Detalles: ", error_body)
 		emit_signal("error_ocurred", "Error API: " + str(response_code))
 		return
 
 	# Parsear respuesta de la API
 	var response_string = body.get_string_from_utf8()
+	print("[GEMINI] Procesando respuesta...")
 	var json_api = JSON.parse_string(response_string)
 	
 	if json_api and "candidates" in json_api:
 		var contenido_texto = json_api["candidates"][0]["content"]["parts"][0]["text"]
+		print("[GEMINI] Contenido recibido, parseando diálogos...")
 		
 		# Parsear el texto interno (que es el JSON de diálogos)
 		var dialogos_finales = JSON.parse_string(contenido_texto)
-		
+		print(dialogos_finales)
 		if dialogos_finales is Array:
-			print("¡Lote de diálogos recibido correctamente!")
+			print("[GEMINI SUCCESS] ¡Lote de %d diálogos recibido correctamente!" % dialogos_finales.size())
 			emit_signal("batch_completed", dialogos_finales)
 		else:
 			printerr("Gemini no devolvió un Array. Recibido: ", dialogos_finales)

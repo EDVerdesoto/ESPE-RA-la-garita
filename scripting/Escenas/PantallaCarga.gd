@@ -1,8 +1,8 @@
 extends Control
 
 # Configuración
-# Para el MVP
-const NPCS_POR_DIA = 6
+# Para el MVP - reducido a 3 para pruebas más rápidas
+const NPCS_POR_DIA = 3
 # Procesar de 3 en 3 para no saturar
 const BATCH_SIZE = 3
 
@@ -15,6 +15,9 @@ var procesados_count = 0
 @onready var label_estado = $LabelEstado
 # Pon una barra
 @onready var barra = $ProgressBar
+
+# Flag para modo sin IA (para testing)
+var MODO_SIN_IA = false  # Cambiar a false cuando tengas API key de Gemini
 
 func _ready():
 	start_dia_process()
@@ -38,6 +41,27 @@ func _procesar_siguiente_lote():
 	
 	label_estado.text = "Generando personalidades con IA..."
 	
+	# Modo sin IA para testing rápido
+	if MODO_SIN_IA:
+		# Simular diálogos básicos sin llamar a Gemini
+		var fin = min(procesados_count + BATCH_SIZE, raw_npcs.size())
+		var lote = raw_npcs.slice(procesados_count, fin)
+		
+		for npc in lote:
+			npc.dialogos = {
+				"saludo_inicial": "Hola, soy %s y vengo a %s." % [npc.nombre, npc.carrera],
+				"respuesta_decision": "Gracias por procesar mi entrada."
+			}
+		
+		procesados_count += lote.size()
+		barra.value = (float(procesados_count) / NPCS_POR_DIA) * 100
+		
+		# Recursividad: Siguiente lote
+		await get_tree().create_timer(0.5).timeout  # Simular delay de red
+		_procesar_siguiente_lote()
+		return
+	
+	# Modo con IA (requiere API key)
 	# Cortar el lote actual (ej: del 0 al 3)
 	var fin = min(procesados_count + BATCH_SIZE, raw_npcs.size())
 	var lote = raw_npcs.slice(procesados_count, fin)
@@ -71,4 +95,4 @@ func _finalizar_carga():
 	GlobalGameManager.npcs_del_dia = raw_npcs
 	
 	await get_tree().create_timer(1.0).timeout
-	get_tree().change_scene_to_file("res://Scenes/GameScene.tscn")
+	get_tree().change_scene_to_file("res://escenas/mesa principal.tscn")
