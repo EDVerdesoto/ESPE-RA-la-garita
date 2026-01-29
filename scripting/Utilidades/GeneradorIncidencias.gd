@@ -24,8 +24,8 @@ static func generar_incidencias(
 
 	# Lógica específica para FECHA_CEDULA_CADUCADA
 	if npc.incidencia == GlobalEnums.Incidencia.FECHA_CEDULA_CADUCADA:
-		if _es_fecha_valida_para_expirar(cedula_config.fecha_expiracion_cedula):
-			cedula_config.fecha_expiracion_cedula = _generar_fecha_invalida_real()
+		if _es_fecha_valida_para_expirar(cedula_config.fecha_expiracion):
+			cedula_config.fecha_expiracion = _generar_fecha_invalida_real()
 		else:
 			# Es false: Recalculamos la incidencia omitiendo la fecha
 			_recalcular_incidencia_sin_fecha(npc)
@@ -106,19 +106,19 @@ static func _construir_documentos(
 	# Cédula
 	var nom_ced = npc.nombre
 	var apellido_ced = npc.apellido
-	var ruta_sprite_ced = cedula_config.ruta_sprite_cedula
+	var ruta_sprite_ced = cedula_config.ruta_sprite
 	var fecha_final_cedula = cedula_config.fecha_expiracion
 	
 	# Carnet
 	var nom_car = npc.nombre
 	var apellido_car = npc.apellido
 	var carrera = npc.carrera
-	var ruta_sprite_car = carnet_universitario_config.ruta_sprite_carnet_universitario
+	var ruta_sprite_car = carnet_universitario_config.ruta_sprite
 	
 	# Pase Visitante
 	var nom_pase = npc.nombre
 	var apellido_pase = npc.apellido
-	var ruta_sprite_pase = pase_visitante_config.ruta_sprite_pase_visitante
+	var ruta_sprite_pase = pase_visitante_config.ruta_sprite
 	var razon = "Que te importa pues"
 
 
@@ -152,7 +152,7 @@ static func _construir_documentos(
 	if fecha_final_cedula == null:
 		fecha_final_cedula = _generar_fecha_valida_real()
 
-	npc.documentos = Array[AbstractDocumentoNPC].new()
+	npc.documentos = []
 
 	# Creación de documentos si no son la incidencia olvidada
 	if npc.incidencia != GlobalEnums.Incidencia.CEDULA_OLVIDADA:

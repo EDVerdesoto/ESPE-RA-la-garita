@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7i0r26dtlu3x"]
+[gd_scene load_steps=14 format=3 uid="uid://c7i0r26dtlu3x"]
 
+[ext_resource type="Script" uid="uid://b0t1jl8symc5o" path="res://scripting/Escenas/MesaPrincipal.gd" id="1_main"]
 [ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="1_t6biv"]
 [ext_resource type="Texture2D" uid="uid://bmvdirmwvj5ei" path="res://assets/objetos/mesa.png" id="2_araee"]
 [ext_resource type="Texture2D" uid="uid://yi45cywvqkut" path="res://assets/objetos/carpeta.png" id="3_afuwr"]
@@ -10,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dul8pdnw5vnlv" path="res://assets/objetos/escaner.png" id="7_sfnrh"]
 [ext_resource type="Texture2D" uid="uid://cu6gn3bhy7etr" path="res://assets/fondo/FONDO_ESPE_GARITA.png" id="9_afuwr"]
 [ext_resource type="Texture2D" uid="uid://c6pbudnnh0i5v" path="res://assets/personajes/estudiante.png" id="11_5m7ae"]
+[ext_resource type="Script" uid="uid://b48k2lf2nayq0" path="res://check_models.gd" id="12_5m7ae"]
 
 [sub_resource type="GDScript" id="GDScript_g5epp"]
 script/source = "extends Camera2D
@@ -136,86 +138,8 @@ func _actualizar_mitad_viewport():
 	mitad_viewport_mundo = (vp_size * 0.5) / zoom
 "
 
-[sub_resource type="GDScript" id="GDScript_lkbym"]
-script/source = "extends Node
-
-# Esta es la \"plantilla\" de datos que usaremos para cada persona
-var perfil_actual : Dictionary = {
-	\"nombre\": \"\",
-	\"rol\": \"\",          # Estudiante, Docente, Visitante
-	\"personalidad\": \"\", # Enojado, Amable, Nervioso
-	\"motivo\": \"\",       # Ir a examen, graduación, entrega de papeles
-	\"incidencia\": \"\",   # Ninguna, Fecha_Vencida, Foto_Falsa, Nombre_Erroneo
-	\"es_valido\": true   # Si debe entrar o no
-}
-
-# Listas de datos para que sea aleatorio
-var nombres : Array = [
-	\"Juan Pérez\", \"María Sangucho\", \"Kevin Tipán\", \"Domenica Castillo\", \"Ruben Benavides\",
-	\"Joan Cobeña\", \"Carlos Jaya\", \"Edison Verdesoto\", \"Juan Pasquel\"
-]
-var roles : Array = [
-	\"Estudiante\", \"Docente\", \"Visitante\"
-]
-var personalidades : Array = [
-	\"Amable\", \"Nervioso\", \"Arrogante\", \"Desesperado\"
-]
-var motivos_estudiante = [
-	\"Tengo examen de Software Seguro\", \"Vengo a la biblioteca\", \"Cita con el director\"
-]
-	
-func generar_nuevo_npc() -> Dictionary:
-	# 1. Elegimos datos básicos al azar
-	perfil_actual.nombre = nombres.pick_random()
-	perfil_actual.rol = roles.pick_random()
-	perfil_actual.personalidad = personalidades.pick_random()
-	perfil_actual.motivo = motivos_estudiante.pick_random()
-	
-	# 2. Lógica de la \"Trampa\" (30% de probabilidad de error)
-	var suerte = randf() 
-	const tasa_error = 0.3
-	if suerte < tasa_error:
-		perfil_actual.es_valido = false
-		# Elegimos qué error tiene
-		var tipos_error = [
-			\"Fecha_Vencida\", \"Foto_Falsa\", \"Nombre_Erroneo\"
-		]
-		
-		perfil_actual.incidencia = tipos_error.pick_random()
-	else:
-		perfil_actual.es_valido = true
-		perfil_actual.incidencia = \"Ninguna\"
-	
-	print(\"Se ha generado a: \", perfil_actual.nombre, \" con error: \", perfil_actual.incidencia)
-	return perfil_actual
-
-# Esta función recibe un texto: \"APROBADO\" o \"DENEGADO\"
-func validar_decision(decision_jugador) -> bool:
-	var acierto = false
-	
-	if decision_jugador == \"APROBADO\":
-		if perfil_actual.es_valido == true:
-			acierto = true # Bien hecho, era legal y lo dejaste pasar
-		else:
-			acierto = false # ¡MAL! Dejaste pasar a alguien con error
-			
-	elif decision_jugador == \"DENEGADO\":
-		if perfil_actual.es_valido == false:
-			acierto = true # Bien hecho, detectaste al impostor
-		else:
-			acierto = false # ¡MAL! Rechazaste a alguien que sí podía entrar
-	
-	if acierto:
-		print(\"¡Resultado: EXCELENTE! Ganas $10.00\")
-		# Aquí le avisaríamos al HUD de Carlos que suba el dinero
-	else:
-		print(\"¡Resultado: ERROR! Multa de $20.00\")
-		# Aquí le avisaríamos al HUD que baje el dinero
-		
-	return acierto
-"
-
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_main")
 
 [node name="Carnet" type="Sprite2D" parent="."]
 position = Vector2(2843, 425)
@@ -277,5 +201,5 @@ position = Vector2(2956.3499, 650.64185)
 scale = Vector2(0.46015206, 0.4030581)
 texture = ExtResource("11_5m7ae")
 
-[node name="Gestor_NPC" type="Node" parent="."]
-script = SubResource("GDScript_lkbym")
+[node name="Node" type="Node" parent="."]
+script = ExtResource("12_5m7ae")

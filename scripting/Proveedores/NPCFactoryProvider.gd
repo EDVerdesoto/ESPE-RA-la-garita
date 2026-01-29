@@ -1,4 +1,4 @@
-# DocumentoNPCFactoryProvider.gd
+# NPCFactoryProvider.gd
 # Autoload
 extends Node
 
@@ -8,5 +8,5 @@ func _ready():
 	_factories["generico"] = NPCGenericoFactory.new()
 	_factories["delincuente"] = DelincuenteNPCFactory.new()
 
-func get_factory(tipo : String) -> IDocumentoNPCFactory:
+func get_factory(tipo : String) -> INPCFactory:
 	return _factories[tipo]

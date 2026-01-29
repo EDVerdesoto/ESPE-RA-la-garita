@@ -79,6 +79,23 @@ func get_fecha_dict() -> Dictionary:
 
 func get_fecha_string() -> String:
 	return "%02d/%02d/%d" % [dia, mes, anio]
+
+func obtener_fecha_actual() -> String:
+	return get_fecha_string()
+
+func obtener_fecha_futura(dias_adelante: int) -> String:
+	var futuro_dia = dia + dias_adelante
+	var futuro_mes = mes
+	var futuro_anio = anio
+	
+	while futuro_dia > _dias_del_mes(futuro_mes, futuro_anio):
+		futuro_dia -= _dias_del_mes(futuro_mes, futuro_anio)
+		futuro_mes += 1
+		if futuro_mes > 12:
+			futuro_mes = 1
+			futuro_anio += 1
+	
+	return "%02d/%02d/%d" % [futuro_dia, futuro_mes, futuro_anio]
 	
 func get_datos_a_guardar() -> Dictionary:
 	return {
