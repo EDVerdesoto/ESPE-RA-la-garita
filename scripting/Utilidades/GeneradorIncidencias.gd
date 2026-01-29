@@ -139,7 +139,7 @@ static func _construir_documentos(
 			apellido_car = apellidos_aleatorios.filter(func(a): return a != npc.apellido).pick_random()
 			
 		GlobalEnums.Incidencia.NOMBRE_PASE_DIFERENTE:
-			# Lo mismo para el carnet universitario
+			# Lo mismo para el pase de visitante
 			nom_pase = nombres_aleatorios.filter(func(n): return n != npc.nombre).pick_random()
 			apellido_pase = apellidos_aleatorios.filter(func(a): return a != npc.apellido).pick_random()
 			

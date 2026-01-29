@@ -1,4 +1,4 @@
-class_name SistemaEvaluacion
+class_name DetectorMentiras
 extends Node
 
 # Definimos las recompensas y multas como constantes para fácil balanceo
