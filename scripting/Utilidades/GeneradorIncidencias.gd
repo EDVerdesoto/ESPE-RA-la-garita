@@ -47,20 +47,20 @@ static func _es_fecha_valida_para_expirar(fecha: String) -> bool:
 	var f_anio = int(partes[2])
 	
 	# 1. Comparación de Año
-	if f_anio > FechaGlobal.anio: return true
-	if f_anio < FechaGlobal.anio: return false
+	if f_anio > ProgresoGlobal.anio: return true
+	if f_anio < ProgresoGlobal.anio: return false
 
 	# 2. Si el año es el mismo, comparamos Mes
-	if f_mes > FechaGlobal.mes: return true
-	if f_mes < FechaGlobal.mes: return false
+	if f_mes > ProgresoGlobal.mes: return true
+	if f_mes < ProgresoGlobal.mes: return false
 	
 	# 3. Si año y mes son iguales, el Día decide
 	# Si el día de la cédula es hoy o después, la fecha aún es válida (se puede caducar)
-	return f_dia >= FechaGlobal.dia
+	return f_dia >= ProgresoGlobal.dia
 
 static func _generar_fecha_invalida_real() -> String:
 	# Generamos una fecha del año pasado respecto al juego para que sea INVÁLIDA
-	var anio_pasado = FechaGlobal.anio - 1
+	var anio_pasado = ProgresoGlobal.anio - 1
 	var mes_random = randi() % 12 + 1
 	var dia_random = randi() % 28 + 1
 	return "%02d/%02d/%d" % [dia_random, mes_random, anio_pasado]
@@ -68,7 +68,7 @@ static func _generar_fecha_invalida_real() -> String:
 static func _generar_fecha_valida_real() -> String:
 	# Generamos una fecha a 5 años en el futuro para que sea VÁLIDA
 	# Las cédulas en Ecuador suelen durar 10 años, usamos 5 para seguridad
-	var anio_futuro = FechaGlobal.anio + 5
+	var anio_futuro = ProgresoGlobal.anio + 5
 	var mes_random = randi() % 12 + 1
 	var dia_random = randi() % 28 + 1
 	return "%02d/%02d/%d" % [dia_random, mes_random, anio_futuro]
@@ -139,7 +139,7 @@ static func _construir_documentos(
 			apellido_car = apellidos_aleatorios.filter(func(a): return a != npc.apellido).pick_random()
 			
 		GlobalEnums.Incidencia.NOMBRE_PASE_DIFERENTE:
-			# Lo mismo para el carnet universitario
+			# Lo mismo para el pase de visitante
 			nom_pase = nombres_aleatorios.filter(func(n): return n != npc.nombre).pick_random()
 			apellido_pase = apellidos_aleatorios.filter(func(a): return a != npc.apellido).pick_random()
 			

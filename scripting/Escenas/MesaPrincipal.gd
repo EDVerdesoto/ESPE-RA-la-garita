@@ -19,12 +19,16 @@ var decisiones_correctas: int = 0
 var decisiones_totales: int = 0
 
 func _ready():
-	_cargar_interfaz_visual()
+	# DESACTIVADO: Interfaz visual de new-game-project
+	# _cargar_interfaz_visual()
 	_crear_ui_adicional()
 	_cargar_primer_npc()
 
 # Cargar la interfaz visual que creaste
+# DESACTIVADO: Usar solo la mesa original de la escena
 func _cargar_interfaz_visual():
+	return  # Desactivado temporalmente
+	
 	var interfaz_scene = load("res://escenas/InterfazJuego.tscn")
 	if interfaz_scene:
 		var instancia = interfaz_scene.instantiate()

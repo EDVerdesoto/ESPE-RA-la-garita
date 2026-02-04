@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pq7t76e0efos"
-path="res://.godot/imported/Mesa.jpeg-ca409afbf902e4d8d41cfa7277d71359.ctex"
+path="res://.godot/imported/Mesa.jpeg-4297763690ab111745236b2ca03c1472.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objetos/Mesa.jpeg"
-dest_files=["res://.godot/imported/Mesa.jpeg-ca409afbf902e4d8d41cfa7277d71359.ctex"]
+source_file="res://Mesa.jpeg"
+dest_files=["res://.godot/imported/Mesa.jpeg-4297763690ab111745236b2ca03c1472.ctex"]
 
 [params]
 

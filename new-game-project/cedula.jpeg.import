@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pq7t76e0efos"
-path="res://.godot/imported/Mesa.jpeg-ca409afbf902e4d8d41cfa7277d71359.ctex"
+uid="uid://gugqrcn31poq"
+path="res://.godot/imported/cedula.jpeg-66f461e2330a989469a8fdfdf3fc723d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objetos/Mesa.jpeg"
-dest_files=["res://.godot/imported/Mesa.jpeg-ca409afbf902e4d8d41cfa7277d71359.ctex"]
+source_file="res://cedula.jpeg"
+dest_files=["res://.godot/imported/cedula.jpeg-66f461e2330a989469a8fdfdf3fc723d.ctex"]
 
 [params]
 

@@ -9,7 +9,7 @@ signal error_ocurred(mensaje: String)
 var API_KEY: String = ""
 var URL: String = ""
 
-@ontml var http_request = HTTPRequest.new()
+@onready var http_request = HTTPRequest.new()
 
 func _ready():
 	# Cargar la API key desde el archivo .env

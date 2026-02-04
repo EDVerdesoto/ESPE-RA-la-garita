@@ -17,7 +17,7 @@ var procesados_count = 0
 @onready var barra = $ProgressBar
 
 # Flag para modo sin IA (para testing)
-var MODO_SIN_IA = false  # Cambiar a false cuando tengas API key de Gemini
+var MODO_SIN_IA = true  # Cambiar a false cuando tengas API key de Gemini
 
 func _ready():
 	start_dia_process()

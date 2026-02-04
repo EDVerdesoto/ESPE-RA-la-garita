@@ -34,8 +34,8 @@ func preparar_npcs_para_hoy(cantidad: int) -> Array:
 			data_visual.get("apellido", "Pérez"),
 			"res://assets/documentos/cedula.png",
 			"1234567890",
-			FechaGlobal.obtener_fecha_actual(),
-			FechaGlobal.obtener_fecha_futura(365)
+			ProgresoGlobal.obtener_fecha_actual(),
+			ProgresoGlobal.obtener_fecha_futura(365)
 		)
 		
 		var carnet_config = CarnetUniversitarioNPCConfig.new(
