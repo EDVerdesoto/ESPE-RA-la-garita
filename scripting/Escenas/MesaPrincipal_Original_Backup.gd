@@ -1,10 +1,10 @@
-# MesaPrincipal_Integrado.gd - Versión integrada con InterfazJuego visual
+# MesaPrincipal.gd
 extends Node2D
 
 # Referencias a nodos de la escena
-@onready var sprite_npc = $Estudiante if has_node("Estudiante") else null
-@onready var camera = $Camera2D if has_node("Camera2D") else null
-var interfaz_juego: CanvasLayer = null
+@onready var sprite_npc = $Estudiante
+@onready var camera = $Camera2D
+@onready var interfaz_juego: CanvasLayer = null
 
 # UI Elements adicionales (para información extendida)
 var label_dialogo: RichTextLabel
@@ -40,26 +40,72 @@ func _cargar_interfaz_visual():
 		push_error("No se pudo cargar InterfazJuego.tscn")
 
 func _crear_ui_adicional():
-	# Crear CanvasLayer para UI adicional (diálogos y documentos)
+	# Crear CanvasLayer para UI
 	var canvas_layer = CanvasLayer.new()
-	canvas_layer.name = "UI_Adicional"
-	canvas_layer.layer = 2  # Por encima de la interfaz visual
+	canvas_layer.name = "UI"
 	add_child(canvas_layer)
 	
-	# Panel de diálogo (arriba)
-	var panel_dialogo_container = PanelContainer.new()
-	panel_dialogo_container.position = Vector2(20, 20)
-	panel_dialogo_container.custom_minimum_size = Vector2(600, 150)
-	canvas_layer.add_child(panel_dialogo_container)
+	# Panel principal de información
+	var panel_info = PanelContainer.new()
+	panel_info.position = Vector2(20, 20)
+	panel_info.custom_minimum_size = Vector2(400, 200)
+	canvas_layer.add_child(panel_info)
+	
+	var vbox_info = VBoxContainer.new()
+	panel_info.add_child(vbox_info)
+	
+	# Label del nombre
+	label_nombre = Label.new()
+	label_nombre.add_theme_font_size_override("font_size", 24)
+	vbox_info.add_child(label_nombre)
+	
+	# Label de info básica
+	label_info = Label.new()
+	label_info.add_theme_font_size_override("font_size", 16)
+	vbox_info.add_child(label_info)
+	
+	# Panel de diálogo
+	var panel_dialogo = PanelContainer.new()
+	panel_dialogo.position = Vector2(20, 240)
+	panel_dialogo.custom_minimum_size = Vector2(600, 300)
+	canvas_layer.add_child(panel_dialogo)
 	
 	label_dialogo = RichTextLabel.new()
 	label_dialogo.bbcode_enabled = true
 	label_dialogo.fit_content = true
-	panel_dialogo_container.add_child(label_dialogo)
+	panel_dialogo.add_child(label_dialogo)
 	
-	# Panel de documentos (derecha)
+	# Botones de decisión
+	var hbox_botones = HBoxContainer.new()
+	hbox_botones.position = Vector2(20, 560)
+	hbox_botones.add_theme_constant_override("separation", 20)
+	canvas_layer.add_child(hbox_botones)
+	
+	btn_aprobar = Button.new()
+	btn_aprobar.text = "✓ APROBAR ENTRADA"
+	btn_aprobar.custom_minimum_size = Vector2(200, 50)
+	btn_aprobar.add_theme_font_size_override("font_size", 18)
+	btn_aprobar.pressed.connect(_on_aprobar_pressed)
+	hbox_botones.add_child(btn_aprobar)
+	
+	btn_denegar = Button.new()
+	btn_denegar.text = "✗ DENEGAR ENTRADA"
+	btn_denegar.custom_minimum_size = Vector2(200, 50)
+	btn_denegar.add_theme_font_size_override("font_size", 18)
+	btn_denegar.pressed.connect(_on_denegar_pressed)
+	hbox_botones.add_child(btn_denegar)
+	
+	btn_siguiente = Button.new()
+	btn_siguiente.text = "→ SIGUIENTE NPC"
+	btn_siguiente.custom_minimum_size = Vector2(200, 50)
+	btn_siguiente.add_theme_font_size_override("font_size", 18)
+	btn_siguiente.visible = false
+	btn_siguiente.pressed.connect(_on_siguiente_pressed)
+	hbox_botones.add_child(btn_siguiente)
+	
+	# Panel de documentos (a la derecha)
 	panel_documentos = Control.new()
-	panel_documentos.position = Vector2(850, 20)
+	panel_documentos.position = Vector2(640, 20)
 	canvas_layer.add_child(panel_documentos)
 	
 	var label_docs = Label.new()
@@ -69,9 +115,11 @@ func _crear_ui_adicional():
 
 func _cargar_primer_npc():
 	if GlobalGameManager.npcs_del_dia.is_empty():
-		if interfaz_juego:
-			interfaz_juego.ocultar_mesa()
-		_mostrar_error_sin_npcs()
+		label_nombre.text = "NO HAY NPCs GENERADOS"
+		label_info.text = "La pantalla de carga no generó NPCs correctamente."
+		label_dialogo.text = "[color=red]Error: Lista de NPCs vacía. Reinicia el juego.[/color]"
+		btn_aprobar.disabled = true
+		btn_denegar.disabled = true
 		return
 	
 	index_actual = GlobalGameManager.npc_actual_index
@@ -84,11 +132,13 @@ func _mostrar_npc_actual():
 	
 	npc_actual = GlobalGameManager.npcs_del_dia[index_actual]
 	
-	# Mostrar NPC en la interfaz visual
-	if interfaz_juego:
-		interfaz_juego.mostrar_npc(npc_actual)
-		interfaz_juego.actualizar_reloj(tiempo_restante)
-		interfaz_juego.actualizar_dinero(dinero_acumulado)
+	# Actualizar información básica
+	label_nombre.text = "%s %s" % [npc_actual.nombre, npc_actual.apellido]
+	label_info.text = "Rol: %s | Carrera: %s\nPersonalidad: %s" % [
+		npc_actual.rol,
+		npc_actual.carrera,
+		npc_actual.personalidad
+	]
 	
 	# Mostrar diálogo inicial
 	_mostrar_dialogo_inicial()
@@ -97,13 +147,17 @@ func _mostrar_npc_actual():
 	_mostrar_documentos()
 	
 	# Actualizar sprite si es posible
-	if sprite_npc and npc_actual.sprite_path and ResourceLoader.exists(npc_actual.sprite_path):
+	if npc_actual.sprite_path and ResourceLoader.exists(npc_actual.sprite_path):
 		sprite_npc.texture = load(npc_actual.sprite_path)
+	
+	# Habilitar botones
+	btn_aprobar.disabled = false
+	btn_denegar.disabled = false
+	btn_aprobar.visible = true
+	btn_denegar.visible = true
+	btn_siguiente.visible = false
 
 func _mostrar_dialogo_inicial():
-	if not label_dialogo:
-		return
-		
 	# El diálogo viene del JSON de Gemini
 	var dialogo_texto = "[b]NPC:[/b] Buenas, vengo a ingresar al campus.\n\n"
 	
@@ -115,15 +169,12 @@ func _mostrar_dialogo_inicial():
 		dialogo_texto += "Motivo de visita: %s" % npc_actual.carrera
 	
 	# Mostrar incidencia (solo para debug - en producción esto estaría oculto)
-	if OS.is_debug_build() and npc_actual.incidencia != GlobalEnums.Incidencia.NINGUNA:
+	if npc_actual.incidencia != GlobalEnums.Incidencia.NINGUNA:
 		dialogo_texto += "\n\n[color=yellow][DEBUG] Incidencia: %s[/color]" % _nombre_incidencia(npc_actual.incidencia)
 	
 	label_dialogo.text = dialogo_texto
 
 func _mostrar_documentos():
-	if not panel_documentos:
-		return
-		
 	# Limpiar panel anterior
 	for child in panel_documentos.get_children():
 		if child.name != "Label":
@@ -152,35 +203,19 @@ func _mostrar_documentos():
 		y_offset += 80
 		doc_index += 1
 
-# Señal recibida de la interfaz visual
-func _on_decision_tomada(decision: GlobalEnums.NPCState):
+func _on_aprobar_pressed():
+	_procesar_decision(GlobalEnums.NPCState.APROBADO)
+
+func _on_denegar_pressed():
+	_procesar_decision(GlobalEnums.NPCState.DESAPROBADO)
+
+func _procesar_decision(decision: int):
 	npc_actual.estado = decision
-	decisiones_totales += 1
 	
 	# Evaluar si la decisión fue correcta
 	var es_correcto = _evaluar_decision(decision)
 	
-	if es_correcto:
-		decisiones_correctas += 1
-		dinero_acumulado += 5.0  # Ganar $5 por decisión correcta
-	else:
-		dinero_acumulado -= 2.0  # Perder $2 por decisión incorrecta
-	
-	# Actualizar dinero en la interfaz
-	if interfaz_juego:
-		interfaz_juego.actualizar_dinero(dinero_acumulado)
-		interfaz_juego.mostrar_feedback(es_correcto)
-	
-	# Mostrar resultado en el diálogo
-	_mostrar_resultado_decision(es_correcto, decision)
-	
-	# Reducir tiempo
-	tiempo_restante -= 5  # 5 minutos por decisión
-
-func _mostrar_resultado_decision(es_correcto: bool, decision: GlobalEnums.NPCState):
-	if not label_dialogo:
-		return
-		
+	# Mostrar resultado
 	var resultado_texto = ""
 	if es_correcto:
 		resultado_texto = "[color=green][b]✓ DECISIÓN CORRECTA[/b][/color]\n\n"
@@ -197,8 +232,13 @@ func _mostrar_resultado_decision(es_correcto: bool, decision: GlobalEnums.NPCSta
 			resultado_texto += "¿Por qué me niega la entrada? Esto es indignante."
 	
 	label_dialogo.text = resultado_texto
+	
+	# Ocultar botones de decisión, mostrar siguiente
+	btn_aprobar.visible = false
+	btn_denegar.visible = false
+	btn_siguiente.visible = true
 
-func _evaluar_decision(decision: GlobalEnums.NPCState) -> bool:
+func _evaluar_decision(decision: int) -> bool:
 	# Lógica simple: si tiene incidencia, debe ser denegado
 	var tiene_incidencia = npc_actual.incidencia != GlobalEnums.Incidencia.NINGUNA
 	
@@ -207,32 +247,19 @@ func _evaluar_decision(decision: GlobalEnums.NPCState) -> bool:
 	else:
 		return decision == GlobalEnums.NPCState.APROBADO
 
-# Señal recibida de la interfaz visual para pasar al siguiente NPC
-func _on_siguiente_npc():
+func _on_siguiente_pressed():
 	index_actual += 1
 	GlobalGameManager.npc_actual_index = index_actual
 	_mostrar_npc_actual()
 
 func _mostrar_fin_del_dia():
-	if interfaz_juego:
-		interfaz_juego.mostrar_fin_dia()
-	
-	if label_dialogo:
-		var tasa_exito = (float(decisiones_correctas) / decisiones_totales * 100) if decisiones_totales > 0 else 0
-		
-		label_dialogo.text = "[center][b]¡FIN DEL DÍA![/b]\n\n"
-		label_dialogo.text += "Has procesado %d NPCs\n" % decisiones_totales
-		label_dialogo.text += "Decisiones correctas: %d\n" % decisiones_correctas
-		label_dialogo.text += "Tasa de éxito: %.1f%%\n" % tasa_exito
-		label_dialogo.text += "Dinero ganado: $%.2f\n\n" % dinero_acumulado
-		label_dialogo.text += "[i]¡Buen trabajo![/i][/center]"
-	
-	if sprite_npc:
-		sprite_npc.visible = false
-
-func _mostrar_error_sin_npcs():
-	if label_dialogo:
-		label_dialogo.text = "[color=red][b]ERROR:[/b] No hay NPCs generados.\n\nLa pantalla de carga no generó NPCs correctamente.\nReinicia el juego.[/color]"
+	label_nombre.text = "FIN DEL DÍA"
+	label_info.text = "Has procesado todos los NPCs de hoy"
+	label_dialogo.text = "[center][b]¡Buen trabajo![/b]\n\nHas terminado tu turno.\n\n[i]Aquí iría el resumen de estadísticas[/i][/center]"
+	btn_aprobar.visible = false
+	btn_denegar.visible = false
+	btn_siguiente.visible = false
+	sprite_npc.visible = false
 
 func _nombre_incidencia(inc: int) -> String:
 	match inc:
