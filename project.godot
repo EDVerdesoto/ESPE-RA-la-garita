@@ -11,12 +11,17 @@ config_version=5
 [application]
 
 config/name="ESPE-RA la garita"
-run/main_scene="uid://b82p232was157"
+run/main_scene="res://escenas/PantallaCarga.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+GlobalGameManager="*res://scripting/GlobalGameManager.gd"
+GeminiManager="*res://scripting/Servicios/GeminiManager.gd"
+ProgresoGlobal="*res://scripting/Proveedores/ProgresoGlobal.gd"
+DocumentoNpcFactoryProvider="*res://scripting/Proveedores/DocumentoNPCFactoryProvider.gd"
+NpcFactoryProvider="*res://scripting/Proveedores/NPCFactoryProvider.gd"
 SaveManager="*res://scripts/save_manager.gd"
 
 [editor]

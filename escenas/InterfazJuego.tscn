@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://be4v7nv673nf1"]
+
+[ext_resource type="Script" path="res://scripting/Escenas/InterfazJuego.gd" id="1_3nhu5"]
+[ext_resource type="Texture2D" path="res://assets/objetos/Mesa.jpeg" id="2_5yww7"]
+[ext_resource type="Texture2D" path="res://assets/objetos/cedula.jpeg" id="3_1qtkq"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="InterfazJuego" type="CanvasLayer" parent="."]
+script = ExtResource("1_3nhu5")
+
+[node name="Mesa" type="Control" parent="InterfazJuego"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ImagenMesa" type="TextureRect" parent="InterfazJuego/Mesa"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -5.0
+offset_right = 1154.0
+offset_bottom = 651.0
+texture = ExtResource("2_5yww7")
+
+[node name="CedulaFondo" type="TextureRect" parent="InterfazJuego/Mesa"]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 37.0
+offset_right = 698.0
+offset_bottom = 398.0
+texture = ExtResource("3_1qtkq")
+expand_mode = 1
+
+[node name="LblNombre" type="Label" parent="InterfazJuego/Mesa/CedulaFondo"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 201.0
+offset_right = 185.0
+offset_bottom = 227.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="LblCarrera" type="Label" parent="InterfazJuego/Mesa/CedulaFondo"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 233.0
+offset_right = 169.0
+offset_bottom = 261.0
+theme_override_colors/font_color = Color(0.011764706, 0.011764706, 0.011764706, 1)
+
+[node name="BtnAprobar" type="Button" parent="InterfazJuego/Mesa"]
+layout_mode = 0
+offset_left = 359.0
+offset_top = 537.0
+offset_right = 571.0
+offset_bottom = 632.0
+text = "APROBAR
+"
+
+[node name="BtnDenegar" type="Button" parent="InterfazJuego/Mesa"]
+layout_mode = 0
+offset_left = 614.0
+offset_top = 539.0
+offset_right = 838.0
+offset_bottom = 628.0
+text = "DENEGAR"
+
+[node name="LblReloj" type="Label" parent="InterfazJuego"]
+offset_left = 952.0
+offset_top = 22.0
+offset_right = 1043.0
+offset_bottom = 50.0
+
+[node name="LblDinero" type="Label" parent="InterfazJuego"]
+offset_left = 1074.0
+offset_top = 25.0
+offset_right = 1138.0
+offset_bottom = 74.0
+theme_override_colors/font_color = Color(0.011764706, 0.011764706, 0.011764706, 1)
+text = "$ 150.00
+"

@@ -1,0 +1,12 @@
+[
+	{
+		"id": "npc_001",
+		"nombre_base": "Kevin",
+		"apellido": "Morales",
+		"personalidad": "Nervioso",
+		"rol_base": "Estudiante",
+		"carrera": "Ingeniería en Sistemas",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/estudiante.png"
+	}
+]
