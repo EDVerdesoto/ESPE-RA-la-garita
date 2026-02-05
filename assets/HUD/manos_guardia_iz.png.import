@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ji5t3ghyvj28"
-path="res://.godot/imported/manos_guardia.png-2922a95f9374d5bd3946e7cb346c3377.ctex"
+uid="uid://bdijduajyfrta"
+path="res://.godot/imported/manos_guardia_iz.png-5b946b43c48713a602eeb5a034e2c447.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/HUD/manos_guardia.png"
-dest_files=["res://.godot/imported/manos_guardia.png-2922a95f9374d5bd3946e7cb346c3377.ctex"]
+source_file="res://assets/HUD/manos_guardia_iz.png"
+dest_files=["res://.godot/imported/manos_guardia_iz.png-5b946b43c48713a602eeb5a034e2c447.ctex"]
 
 [params]
 

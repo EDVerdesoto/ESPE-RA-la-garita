@@ -1,10 +1,20 @@
 [gd_scene load_steps=14 format=3 uid="uid://c7i0r26dtlu3x"]
 
 [ext_resource type="Script" path="res://scripting/Escenas/MesaPrincipal.gd" id="1_main"]
+[gd_scene load_steps=27 format=3 uid="uid://c7i0r26dtlu3x"]
+
+[ext_resource type="Texture2D" uid="uid://cnubsfgktbe1t" path="res://assets/fondo/fondo izquierda/izquierda_soleado.png" id="1_143rc"]
+[ext_resource type="Script" uid="uid://bft0tb0oyu6is" path="res://escenas/control_clima.gd" id="1_fkgjx"]
 [ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="1_t6biv"]
+[ext_resource type="Texture2D" uid="uid://b8qvlx0hlbnqo" path="res://assets/fondo/fondo normal/normal_soleado.png" id="2_2buuu"]
 [ext_resource type="Texture2D" uid="uid://bmvdirmwvj5ei" path="res://assets/objetos/mesa.png" id="2_araee"]
+[ext_resource type="Texture2D" uid="uid://tujbtpba2cyv" path="res://assets/fondo/fondo normal/Nomal_dia_lluvioso.png" id="2_job3a"]
+[ext_resource type="Texture2D" uid="uid://d4cqx8ua7ljjj" path="res://assets/fondo/fondo normal/normal_nublado.png" id="3_22t22"]
 [ext_resource type="Texture2D" uid="uid://yi45cywvqkut" path="res://assets/objetos/carpeta.png" id="3_afuwr"]
 [ext_resource type="Texture2D" uid="uid://nx31x6cqpmre" path="res://assets/objetos/lista negra.png" id="4_g5epp"]
+[ext_resource type="Script" uid="uid://cpiv75syk74nb" path="res://escenas/estudiante.gd" id="4_n2k65"]
+[ext_resource type="Texture2D" uid="uid://c3a7t5wbjwy53" path="res://assets/fondo/fondo izquierda/izquierda_nublado.png" id="5_3sg0p"]
+[ext_resource type="Texture2D" uid="uid://bck50kc6v0rtd" path="res://assets/objetos/muro.png" id="5_fkgjx"]
 [ext_resource type="Texture2D" uid="uid://cwa4fdsg61n14" path="res://assets/objetos/compu.png" id="5_lkbym"]
 [ext_resource type="Texture2D" uid="uid://cua4xu50s8yfl" path="res://assets/objetos/radio.png" id="6_5m7ae"]
 [ext_resource type="Texture2D" uid="uid://ji5t3ghyvj28" path="res://assets/HUD/manos_guardia.png" id="7_lkbym"]
@@ -140,10 +150,108 @@ func _actualizar_mitad_viewport():
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_main")
+[ext_resource type="Texture2D" uid="uid://51s1jxse4w8l" path="res://assets/objetos/muro_iz.png" id="6_cky0m"]
+[ext_resource type="Texture2D" uid="uid://di3isgglo3q4d" path="res://assets/fondo/fondo izquierda/izquierda_dia_lluvioso.png" id="6_hts7n"]
+[ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://escenas/camera_2d.gd" id="8_afuwr"]
+[ext_resource type="Texture2D" uid="uid://c6pbudnnh0i5v" path="res://assets/personajes/estudiante.png" id="11_5m7ae"]
+[ext_resource type="Texture2D" uid="uid://c5kgeuytqpxnb" path="res://assets/HUD/manos_guardia_der.png" id="13_kksre"]
+[ext_resource type="Texture2D" uid="uid://bdijduajyfrta" path="res://assets/HUD/manos_guardia_iz.png" id="14_14gmk"]
+[ext_resource type="Script" uid="uid://cvsqbefy32bb6" path="res://escenas/RadioBurocractica.gd" id="14_cky0m"]
+[ext_resource type="Script" uid="uid://68sb1vf11xiq" path="res://escenas/hud.gd" id="16_2buuu"]
+[ext_resource type="Script" uid="uid://b2xdwtdvb51rl" path="res://escenas/manos_guardia_der.gd" id="20_22t22"]
+
+[sub_resource type="Gradient" id="Gradient_job3a"]
+offsets = PackedFloat32Array(0, 0.012578616, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.9433962, 0.9433962, 0.9433962, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kksre"]
+gradient = SubResource("Gradient_job3a")
+width = 2
+height = 15
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0.017094018)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2k65"]
+size = Vector2(959.28467, 1028.4204)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("n_soleado", "n_nublado", "n_lluvioso", "i_soleado", "i_nublado", "i_lluvioso", "lluvia_particulas")]
+script = ExtResource("1_fkgjx")
+n_soleado = NodePath("ContenedorFondoNormal/NormalSoleado")
+n_nublado = NodePath("ContenedorFondoNormal/NormalNublado")
+n_lluvioso = NodePath("ContenedorFondoNormal/NomalDiaLluvioso")
+i_soleado = NodePath("ContenedorFondoIzquierda/IzquierdaSoleado")
+i_nublado = NodePath("ContenedorFondoIzquierda/IzquierdaNublado")
+i_lluvioso = NodePath("ContenedorFondoIzquierda/IzquierdaDiaLluvioso")
+lluvia_particulas = NodePath("Lluvia")
+
+[node name="ContenedorFondoNormal" type="Node2D" parent="."]
+
+[node name="NomalDiaLluvioso" type="Sprite2D" parent="ContenedorFondoNormal"]
+position = Vector2(2836, 352)
+scale = Vector2(0.458, 0.376)
+texture = ExtResource("2_job3a")
+
+[node name="NormalNublado" type="Sprite2D" parent="ContenedorFondoNormal"]
+position = Vector2(2836, 352)
+scale = Vector2(0.45833322, 0.376)
+texture = ExtResource("3_22t22")
+
+[node name="NormalSoleado" type="Sprite2D" parent="ContenedorFondoNormal"]
+position = Vector2(2836, 351.99997)
+scale = Vector2(0.458, 0.376)
+texture = ExtResource("2_2buuu")
+
+[node name="ContenedorFondoIzquierda" type="Node2D" parent="."]
+
+[node name="IzquierdaNublado" type="Sprite2D" parent="ContenedorFondoIzquierda"]
+position = Vector2(1284, 331)
+scale = Vector2(0.465, 0.478)
+texture = ExtResource("5_3sg0p")
+
+[node name="IzquierdaDiaLluvioso" type="Sprite2D" parent="ContenedorFondoIzquierda"]
+position = Vector2(1284, 331)
+scale = Vector2(0.465, 0.478)
+texture = ExtResource("6_hts7n")
+
+[node name="IzquierdaSoleado" type="Sprite2D" parent="ContenedorFondoIzquierda"]
+position = Vector2(1284.0001, 330.99997)
+scale = Vector2(0.46458337, 0.4776786)
+texture = ExtResource("1_143rc")
+
+[node name="Estudiante" type="Sprite2D" parent="."]
+position = Vector2(2944, 589)
+scale = Vector2(0.46015206, 0.40305817)
+texture = ExtResource("11_5m7ae")
+script = ExtResource("4_n2k65")
+x_salida_aceptado = 1741.0
+
+[node name="Lluvia" type="CPUParticles2D" parent="."]
+position = Vector2(2137, -58)
+amount = 300
+texture = SubResource("GradientTexture2D_kksre")
+emission_shape = 3
+emission_rect_extents = Vector2(1400, 1)
+particle_flag_align_y = true
+direction = Vector2(-0.5, 1)
+spread = 0.0
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+scale_amount_max = 2.0
+color = Color(0.68000215, 0.79739296, 0.8509393, 0.62352943)
+
+[node name="Muro" type="Sprite2D" parent="."]
+position = Vector2(2842, 547)
+scale = Vector2(0.7252907, 0.7815755)
+texture = ExtResource("5_fkgjx")
+
+[node name="MuroIz" type="Sprite2D" parent="."]
+position = Vector2(1251, 466.50006)
+scale = Vector2(0.98271275, 0.75596905)
+texture = ExtResource("6_cky0m")
 
 [node name="Carnet" type="Sprite2D" parent="."]
-position = Vector2(2843, 425)
-scale = Vector2(0.1, 0.102)
+position = Vector2(2874.05, 526.201)
+scale = Vector2(0.07624673, 0.07250533)
 texture = ExtResource("1_t6biv")
 
 [node name="Mesa" type="Sprite2D" parent="."]
@@ -172,29 +280,36 @@ position = Vector2(349, -185.99998)
 scale = Vector2(0.20588236, 0.17467652)
 texture = ExtResource("6_5m7ae")
 
-[node name="ManosGuardia" type="Sprite2D" parent="Mesa"]
-position = Vector2(-133.28125, -86.976074)
-scale = Vector2(0.34317163, 0.32103264)
-texture = ExtResource("7_lkbym")
+[node name="Area2D" type="Area2D" parent="Mesa/Radio"]
+position = Vector2(-55.856842, -80.14776)
+script = ExtResource("14_cky0m")
 
-[node name="Escaner" type="Sprite2D" parent="."]
-position = Vector2(2687, 466)
-scale = Vector2(0.14674322, 0.16641565)
-texture = ExtResource("7_sfnrh")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mesa/Radio/Area2D"]
+position = Vector2(72.85742, 82.27197)
+shape = SubResource("RectangleShape2D_n2k65")
+
+[node name="ManosGuardiaDer" type="Sprite2D" parent="Mesa"]
+position = Vector2(-117.500015, -16.766418)
+scale = Vector2(0.38993362, 0.45180565)
+texture = ExtResource("13_kksre")
+script = ExtResource("20_22t22")
+
+[node name="ManosGuardiaIz" type="Sprite2D" parent="Mesa"]
+position = Vector2(-315.00012, -43.11368)
+scale = Vector2(0.41954947, 0.44297132)
+texture = ExtResource("14_14gmk")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2908, 751)
 script = SubResource("GDScript_g5epp")
 ruta_panoramica = NodePath("../Fondo")
+script = ExtResource("8_afuwr")
 zoom_normal = Vector2(1, 1)
 zoom_out = Vector2(0.87, 0.87)
 permitir_paneo_libre = false
 
-[node name="Fondo" type="Sprite2D" parent="."]
-z_index = -1
-scale = Vector2(6, 6)
-texture = ExtResource("9_afuwr")
-centered = false
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("16_2buuu")
 
 [node name="Estudiante" type="Sprite2D" parent="."]
 position = Vector2(2956.3499, 650.64185)
@@ -203,3 +318,23 @@ texture = ExtResource("11_5m7ae")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("12_5m7ae")
+[node name="TiempoLabel" type="Label" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.44700003
+anchor_top = -0.08400001
+anchor_right = 0.44700003
+anchor_bottom = -0.08400001
+offset_left = -261.94403
+offset_top = 77.43201
+offset_right = -221.94403
+offset_bottom = 100.43201
+metadata/_edit_use_anchors_ = true
+
+[node name="Cronometro" type="Timer" parent="HUD"]
+wait_time = 7.0
+one_shot = true
+
+[node name="ReproductorMusica" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="HUD/Cronometro" to="HUD" method="_on_cronometro_timeout"]
+[connection signal="finished" from="ReproductorMusica" to="." method="_on_reproductor_musica_finished"]

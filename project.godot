@@ -22,6 +22,7 @@ GeminiManager="*res://scripting/Servicios/GeminiManager.gd"
 ProgresoGlobal="*res://scripting/Proveedores/ProgresoGlobal.gd"
 DocumentoNpcFactoryProvider="*res://scripting/Proveedores/DocumentoNPCFactoryProvider.gd"
 NpcFactoryProvider="*res://scripting/Proveedores/NPCFactoryProvider.gd"
+SaveManager="*res://scripts/save_manager.gd"
 
 [editor]
 
