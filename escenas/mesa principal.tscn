@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c7i0r26dtlu3x"]
+[gd_scene load_steps=27 format=3 uid="uid://c7i0r26dtlu3x"]
 
 [ext_resource type="Texture2D" uid="uid://cnubsfgktbe1t" path="res://assets/fondo/fondo izquierda/izquierda_soleado.png" id="1_143rc"]
 [ext_resource type="Script" uid="uid://bft0tb0oyu6is" path="res://escenas/control_clima.gd" id="1_fkgjx"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bdijduajyfrta" path="res://assets/HUD/manos_guardia_iz.png" id="14_14gmk"]
 [ext_resource type="Script" uid="uid://cvsqbefy32bb6" path="res://escenas/RadioBurocractica.gd" id="14_cky0m"]
 [ext_resource type="Script" uid="uid://68sb1vf11xiq" path="res://escenas/hud.gd" id="16_2buuu"]
+[ext_resource type="Script" uid="uid://b2xdwtdvb51rl" path="res://escenas/manos_guardia_der.gd" id="20_22t22"]
 
 [sub_resource type="Gradient" id="Gradient_job3a"]
 offsets = PackedFloat32Array(0, 0.012578616, 1)
@@ -55,13 +56,11 @@ scale = Vector2(0.458, 0.376)
 texture = ExtResource("2_job3a")
 
 [node name="NormalNublado" type="Sprite2D" parent="ContenedorFondoNormal"]
-visible = false
 position = Vector2(2836, 352)
 scale = Vector2(0.45833322, 0.376)
 texture = ExtResource("3_22t22")
 
 [node name="NormalSoleado" type="Sprite2D" parent="ContenedorFondoNormal"]
-visible = false
 position = Vector2(2836, 351.99997)
 scale = Vector2(0.458, 0.376)
 texture = ExtResource("2_2buuu")
@@ -157,6 +156,7 @@ shape = SubResource("RectangleShape2D_n2k65")
 position = Vector2(-117.500015, -16.766418)
 scale = Vector2(0.38993362, 0.45180565)
 texture = ExtResource("13_kksre")
+script = ExtResource("20_22t22")
 
 [node name="ManosGuardiaIz" type="Sprite2D" parent="Mesa"]
 position = Vector2(-315.00012, -43.11368)

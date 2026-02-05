@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="ESPE-RA la garita"
-run/main_scene="uid://c7i0r26dtlu3x"
+run/main_scene="uid://b82p232was157"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SaveManager="*res://scripts/save_manager.gd"
 
 [editor]
 
