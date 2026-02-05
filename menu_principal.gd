@@ -15,8 +15,14 @@ extends Control
 const RUTA_GUARDADO = "user://guardado.save"
 
 func _ready():
+	# --- PRUEBA TEMPORAL ---
+	if GlobalGameManager.dia_actual == 1:
+		print("SIMULACIÓN")
+		GlobalGameManager.aciertos_hoy = 5
+		GlobalGameManager.calcular_fin_de_dia()
 	verificar_partida_guardada()
 	conectar_botones()
+	
 
 func verificar_partida_guardada():
 	# Si existe el archivo de guardado...
@@ -40,11 +46,12 @@ func conectar_botones():
 
 func _on_continuar_pressed():
 	print("Continuando partida...")
-	get_tree().change_scene_to_file("res://escenas/nivel_garita.tscn")
+	get_tree().change_scene_to_file("res://escenas/SelectorPartida.tscn")
+	
 
 func _on_nuevo_turno_pressed():
 	print("Iniciando nuevo turno...")
-	get_tree().change_scene_to_file("res://escenas/nivel_garita.tscn")
+	get_tree().change_scene_to_file("res://escenas/SelectorPartida.tscn")
 
 func _on_puntuacion_pressed():
 	print("Abriendo puntuación...")
