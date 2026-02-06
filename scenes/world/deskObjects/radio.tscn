@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cwxumyxiqbjfk"]
+
+[ext_resource type="Script" uid="uid://s24ppy82q81v" path="res://scenes/world/deskObjects/radio.gd" id="1_27ddf"]
+
+[node name="Radio" type="Node2D" unique_id=81294274]
+script = ExtResource("1_27ddf")

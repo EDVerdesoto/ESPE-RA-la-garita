@@ -19,9 +19,13 @@ func _ready():
 	slider_volumen.value = db_to_linear(AudioServer.get_bus_volume_db(bus_index))
 
 func _on_regresar_pressed():
-	# Volvemos al menú principal
-	get_tree().change_scene_to_file("res://escenas/menu_principal.tscn") # OJO: Pon la ruta exacta de tu menú
-
+	# Si tenemos guardado a donde volver, vamos allá
+	if GlobalGameManager.escena_retorno != "":
+		get_tree().change_scene_to_file(GlobalGameManager.escena_retorno)
+	else:
+		# Por si acaso, volvemos al menú
+		get_tree().change_scene_to_file("res://escenas/menu_principal.tscn")
+		
 func _on_volumen_changed(valor):
 	# Convertimos de lineal (0 a 1) a Decibeles
 	var bus_index = AudioServer.get_bus_index("Master")

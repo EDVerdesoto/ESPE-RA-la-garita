@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://nyeeya5bg5bx"]
+
+[ext_resource type="Script" uid="uid://dwmxrme4inxqi" path="res://scenes/ui/manosJugador.gd" id="1_7u6by"]
+
+[node name="ManosJugador" type="Area2D" unique_id=1443160236]
+script = ExtResource("1_7u6by")

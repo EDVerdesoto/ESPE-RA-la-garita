@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cplwhnoowti86"]
+
+[ext_resource type="Script" uid="uid://b3pqy250f1lfi" path="res://scenes/world/deskObjects/carpetaDocumentos.gd" id="1_3gsix"]
+
+[node name="CarpetaDocumentos" type="Area2D" unique_id=389950837]
+script = ExtResource("1_3gsix")

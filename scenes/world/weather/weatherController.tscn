@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dfh51iwhvhhss"]
+
+[ext_resource type="Script" uid="uid://bm7qywvlm00at" path="res://scenes/world/weather/weatherController.gd" id="1_06hpm"]
+
+[node name="WeatherController" type="Node2D" unique_id=1164922981]
+script = ExtResource("1_06hpm")

@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://djbymnfx7pwho"]
+[gd_scene format=3 uid="uid://djbymnfx7pwho"]
 
-[ext_resource type="Script" uid="uid://bc7kcc0afpbpp" path="res://escenas/opciones.gd" id="1_s8bbw"]
+[ext_resource type="Script" uid="uid://bc7kcc0afpbpp" path="res://scenes/ui/menus/opciones.gd" id="1_s8bbw"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_4n5yr"]
 [ext_resource type="Texture2D" uid="uid://b6nu1ir3ac0xi" path="res://assets/HUD/image.png" id="3_chcw5"]
 [ext_resource type="Texture2D" uid="uid://cf4c38huyo8jm" path="res://assets/HUD/New Piskel.png" id="4_os4os"]
@@ -49,7 +49,7 @@ border_color = Color(1, 0.7019608, 0.2784314, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6soht"]
 
-[node name="Opciones" type="Control"]
+[node name="Opciones" type="Control" unique_id=548329233]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,7 +59,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 script = ExtResource("1_s8bbw")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=181077297]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,7 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.16470589, 0.2, 0.14509805, 1)
 
-[node name="VBox_Principal" type="VBoxContainer" parent="ColorRect2"]
+[node name="VBox_Principal" type="VBoxContainer" parent="ColorRect2" unique_id=1164246225]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 35
 
-[node name="VBox_Titulo" type="VBoxContainer" parent="ColorRect2/VBox_Principal"]
+[node name="VBox_Titulo" type="VBoxContainer" parent="ColorRect2/VBox_Principal" unique_id=1270263730]
 custom_minimum_size = Vector2(0, 570)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -86,7 +86,7 @@ size_flags_vertical = 8
 theme_override_constants/separation = 13
 alignment = 1
 
-[node name="lbl_Titulo" type="Label" parent="ColorRect2/VBox_Principal/VBox_Titulo"]
+[node name="lbl_Titulo" type="Label" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=861920421]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_fonts/font = ExtResource("2_4n5yr")
@@ -96,7 +96,7 @@ label_settings = SubResource("LabelSettings_chcw5")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="lbl_volumen" type="Label" parent="ColorRect2/VBox_Principal/VBox_Titulo"]
+[node name="lbl_volumen" type="Label" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=1641455956]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -106,19 +106,19 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_4n5yr")
 text = "Volumen"
 
-[node name="slider_volumen" type="HSlider" parent="ColorRect2/VBox_Principal/VBox_Titulo"]
+[node name="slider_volumen" type="HSlider" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=1842159574]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_s8bbw")
 max_value = 1.0
 step = 0.1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect2/VBox_Principal/VBox_Titulo"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=103446849]
 layout_mode = 2
 theme_override_constants/separation = 26
 alignment = 1
 
-[node name="lbl_fullscreen" type="Label" parent="ColorRect2/VBox_Principal/VBox_Titulo/HBoxContainer"]
+[node name="lbl_fullscreen" type="Label" parent="ColorRect2/VBox_Principal/VBox_Titulo/HBoxContainer" unique_id=2048257906]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -128,7 +128,7 @@ theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_4n5yr")
 text = "Pantalla Completa"
 
-[node name="chck_full" type="CheckBox" parent="ColorRect2/VBox_Principal/VBox_Titulo/HBoxContainer"]
+[node name="chck_full" type="CheckBox" parent="ColorRect2/VBox_Principal/VBox_Titulo/HBoxContainer" unique_id=173786549]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/normal = SubResource("StyleBoxEmpty_s8bbw")
@@ -141,7 +141,7 @@ theme_override_icons/checked = ExtResource("3_chcw5")
 theme_override_icons/unchecked = ExtResource("4_os4os")
 icon_alignment = 2
 
-[node name="btn_regresar" type="Button" parent="ColorRect2/VBox_Principal/VBox_Titulo"]
+[node name="btn_regresar" type="Button" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=1577344710]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
@@ -155,7 +155,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ay0lj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6soht")
 text = "Regresar"
 
-[node name="lbl_Version" type="Label" parent="ColorRect2"]
+[node name="lbl_Version" type="Label" parent="ColorRect2" unique_id=242659399]
 layout_mode = 0
 offset_top = 559.0
 offset_right = 1152.0

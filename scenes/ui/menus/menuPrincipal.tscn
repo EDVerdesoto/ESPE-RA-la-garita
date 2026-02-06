@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b82p232was157"]
+[gd_scene format=3 uid="uid://b82p232was157"]
 
-[ext_resource type="Script" uid="uid://de4qp32vk7ns4" path="res://menu_principal.gd" id="1_qf1q6"]
-[ext_resource type="Texture2D" uid="uid://6wmi5tg46jx2" path="res://fotos/sello(1).png" id="2_p8sbp"]
-[ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="3_olkao"]
+[ext_resource type="Script" uid="uid://de4qp32vk7ns4" path="res://scenes/ui/menus/menuPrincipal.gd" id="1_1e0j1"]
+[ext_resource type="Texture2D" uid="uid://6wmi5tg46jx2" path="res://fotos/sello(1).png" id="2_o0pl7"]
+[ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="3_mqn46"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gmcsc"]
-font = ExtResource("3_olkao")
+font = ExtResource("3_mqn46")
 font_size = 96
 font_color = Color(0.8320714, 0.7792464, 0.6268813, 1)
 outline_size = 6
@@ -28,16 +28,16 @@ border_color = Color(1, 0.7019608, 0.2784314, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gmcsc"]
 
-[node name="MenuPrincipal" type="Control"]
+[node name="MenuPrincipal" type="Control" unique_id=1077386923]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_qf1q6")
+script = ExtResource("1_1e0j1")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1099836862]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.16470589, 0.2, 0.14509805, 1)
 
-[node name="VBox_Principal" type="VBoxContainer" parent="ColorRect"]
+[node name="VBox_Principal" type="VBoxContainer" parent="ColorRect" unique_id=1984165636]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,20 +56,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 35
 
-[node name="VBox_TituloSello" type="VBoxContainer" parent="ColorRect/VBox_Principal"]
+[node name="VBox_TituloSello" type="VBoxContainer" parent="ColorRect/VBox_Principal" unique_id=1659841904]
 layout_mode = 2
 
-[node name="Sello" type="TextureRect" parent="ColorRect/VBox_Principal/VBox_TituloSello"]
+[node name="Sello" type="TextureRect" parent="ColorRect/VBox_Principal/VBox_TituloSello" unique_id=1954091951]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
-texture = ExtResource("2_p8sbp")
+texture = ExtResource("2_o0pl7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="lbl_Titulo" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello"]
+[node name="lbl_Titulo" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello" unique_id=328518406]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
-theme_override_fonts/font = ExtResource("3_olkao")
+theme_override_fonts/font = ExtResource("3_mqn46")
 theme_override_font_sizes/font_size = 100
 text = "ESPE-RA:
 LA GARITA"
@@ -77,17 +77,17 @@ label_settings = SubResource("LabelSettings_gmcsc")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBox_botones" type="VBoxContainer" parent="ColorRect/VBox_Principal"]
+[node name="VBox_botones" type="VBoxContainer" parent="ColorRect/VBox_Principal" unique_id=1747930062]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="btn_continuar" type="Button" parent="ColorRect/VBox_Principal/VBox_botones"]
+[node name="btn_continuar" type="Button" parent="ColorRect/VBox_Principal/VBox_botones" unique_id=510335037]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
 theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
-theme_override_fonts/font = ExtResource("3_olkao")
+theme_override_fonts/font = ExtResource("3_mqn46")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_ns3he")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_gmcsc")
@@ -95,17 +95,17 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fa1tu")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gmcsc")
 text = "CONTINUAR"
 
-[node name="Fila1" type="HBoxContainer" parent="ColorRect/VBox_Principal/VBox_botones"]
+[node name="Fila1" type="HBoxContainer" parent="ColorRect/VBox_Principal/VBox_botones" unique_id=747568938]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 120
 
-[node name="btn_nuevoTurno" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila1"]
+[node name="btn_nuevoTurno" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila1" unique_id=648898934]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
 theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
-theme_override_fonts/font = ExtResource("3_olkao")
+theme_override_fonts/font = ExtResource("3_mqn46")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_ns3he")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_gmcsc")
@@ -113,12 +113,12 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fa1tu")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gmcsc")
 text = "EMPEZAR NUEVO TURNO"
 
-[node name="btn_puntuacion" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila1"]
+[node name="btn_puntuacion" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila1" unique_id=244320216]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
 theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
-theme_override_fonts/font = ExtResource("3_olkao")
+theme_override_fonts/font = ExtResource("3_mqn46")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_ns3he")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_gmcsc")
@@ -126,17 +126,17 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fa1tu")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gmcsc")
 text = "PUNTUACION"
 
-[node name="Fila2" type="HBoxContainer" parent="ColorRect/VBox_Principal/VBox_botones"]
+[node name="Fila2" type="HBoxContainer" parent="ColorRect/VBox_Principal/VBox_botones" unique_id=336905709]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 120
 
-[node name="btn_opciones" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila2"]
+[node name="btn_opciones" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila2" unique_id=1085693744]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
 theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
-theme_override_fonts/font = ExtResource("3_olkao")
+theme_override_fonts/font = ExtResource("3_mqn46")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_ns3he")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_gmcsc")
@@ -144,12 +144,12 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fa1tu")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gmcsc")
 text = "OPCIONES"
 
-[node name="btn_creditos" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila2"]
+[node name="btn_creditos" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila2" unique_id=990750720]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
 theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
-theme_override_fonts/font = ExtResource("3_olkao")
+theme_override_fonts/font = ExtResource("3_mqn46")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_ns3he")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_gmcsc")
@@ -157,12 +157,12 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fa1tu")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gmcsc")
 text = "CREDITOS"
 
-[node name="btn_salir" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila2"]
+[node name="btn_salir" type="Button" parent="ColorRect/VBox_Principal/VBox_botones/Fila2" unique_id=2009747533]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
 theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
-theme_override_fonts/font = ExtResource("3_olkao")
+theme_override_fonts/font = ExtResource("3_mqn46")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_ns3he")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_gmcsc")
@@ -170,12 +170,12 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_fa1tu")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gmcsc")
 text = "SALIR"
 
-[node name="lbl_Version" type="Label" parent="ColorRect"]
+[node name="lbl_Version" type="Label" parent="ColorRect" unique_id=214288824]
 layout_mode = 0
 offset_top = 559.0
 offset_right = 1152.0
 offset_bottom = 574.0
-theme_override_fonts/font = ExtResource("3_olkao")
+theme_override_fonts/font = ExtResource("3_mqn46")
 text = "v0.0.1 "
 horizontal_alignment = 2
 vertical_alignment = 2

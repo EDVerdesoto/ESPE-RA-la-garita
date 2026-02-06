@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bv4kkh36bkx56"]
+[gd_scene format=3 uid="uid://bv4kkh36bkx56"]
 
-[ext_resource type="Script" uid="uid://brj0mvv6j3uid" path="res://escenas/selector_partida.gd" id="1_4ylsk"]
+[ext_resource type="Script" uid="uid://brj0mvv6j3uid" path="res://scenes/ui/menus/selectorPartida.gd" id="1_4ylsk"]
 [ext_resource type="Texture2D" uid="uid://cpxrfi5disgxw" path="res://assets/fondo/fondo normal/normal_noche.png" id="2_t28eo"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="3_336hp"]
 
@@ -36,7 +36,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 
-[node name="SelectorPartida" type="Control"]
+[node name="SelectorPartida" type="Control" unique_id=734727204]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,7 +45,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4ylsk")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1265289136]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,7 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.16470589, 0.2, 0.14509805, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=2010164714]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,19 +64,19 @@ grow_vertical = 2
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer" unique_id=1532594743]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="BtnSlot1" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer"]
+[node name="BtnSlot1" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=50254332]
 custom_minimum_size = Vector2(280, 2)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_yjnd6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sffut")
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1" unique_id=1448233990]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,23 +88,23 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer" unique_id=525844306]
 modulate = Color(1, 1, 1, 0.5686275)
 layout_mode = 2
 texture = ExtResource("2_t28eo")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer" unique_id=834031092]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer" unique_id=920600320]
 layout_mode = 2
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer/VBoxContainer" unique_id=37213014]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_336hp")
@@ -112,7 +112,7 @@ theme_override_font_sizes/font_size = 40
 text = "VACÍO"
 autowrap_mode = 3
 
-[node name="lblDetalles" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="lblDetalles" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer/VBoxContainer" unique_id=543078669]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_336hp")
@@ -120,13 +120,13 @@ theme_override_font_sizes/font_size = 35
 text = "Nueva Partida"
 autowrap_mode = 3
 
-[node name="BtnSlot2" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer"]
+[node name="BtnSlot2" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=1529538812]
 custom_minimum_size = Vector2(280, 2)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_yjnd6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sffut")
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2" unique_id=1852185430]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,23 +138,23 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer" unique_id=1554920756]
 modulate = Color(1, 1, 1, 0.5686275)
 layout_mode = 2
 texture = ExtResource("2_t28eo")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer" unique_id=2093985578]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer/MarginContainer" unique_id=717579660]
 layout_mode = 2
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer/MarginContainer/VBoxContainer" unique_id=1553047461]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_336hp")
@@ -162,7 +162,7 @@ theme_override_font_sizes/font_size = 40
 text = "VACÍO"
 autowrap_mode = 3
 
-[node name="lblDetalles" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="lblDetalles" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer/MarginContainer/VBoxContainer" unique_id=1355428787]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_336hp")
@@ -170,13 +170,13 @@ theme_override_font_sizes/font_size = 35
 text = "Nueva Partida"
 autowrap_mode = 3
 
-[node name="BtnSlot3" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer"]
+[node name="BtnSlot3" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=1774729387]
 custom_minimum_size = Vector2(280, 2)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_yjnd6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sffut")
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3" unique_id=1210385287]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,23 +188,23 @@ offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer" unique_id=1415765559]
 modulate = Color(1, 1, 1, 0.5686275)
 layout_mode = 2
 texture = ExtResource("2_t28eo")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer" unique_id=848380443]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer/MarginContainer" unique_id=169423903]
 layout_mode = 2
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer/MarginContainer/VBoxContainer" unique_id=852281022]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_336hp")
@@ -212,7 +212,7 @@ theme_override_font_sizes/font_size = 40
 text = "VACÍO"
 autowrap_mode = 3
 
-[node name="lblDetalles" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="lblDetalles" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer/MarginContainer/VBoxContainer" unique_id=1158317342]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_336hp")
@@ -220,11 +220,11 @@ theme_override_font_sizes/font_size = 35
 text = "Nueva Partida"
 autowrap_mode = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer" unique_id=515567733]
 layout_mode = 2
 theme_override_constants/margin_right = 52
 
-[node name="btn_regresar" type="Button" parent="ColorRect/VBoxContainer/MarginContainer"]
+[node name="btn_regresar" type="Button" parent="ColorRect/VBoxContainer/MarginContainer" unique_id=1598072960]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4

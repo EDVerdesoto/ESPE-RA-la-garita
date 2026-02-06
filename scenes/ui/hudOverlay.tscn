@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b3t6dmgcnxw8s"]
+
+[ext_resource type="Script" uid="uid://c26blqes8eev0" path="res://scenes/ui/hudOverlay.gd" id="1_8771v"]
+
+[node name="HudOverlay" type="Control" unique_id=58143630]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8771v")
