@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://be4v7nv673nf1"]
+[gd_scene format=3 uid="uid://be4v7nv673nf1"]
 
 [ext_resource type="Script" path="res://scripting/Escenas/InterfazJuego.gd" id="1_3nhu5"]
 [ext_resource type="Texture2D" path="res://assets/objetos/Mesa.jpeg" id="2_5yww7"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b82p232was157"]
+[gd_scene format=3 uid="uid://b82p232was157"]
 
 [ext_resource type="Script" uid="uid://de4qp32vk7ns4" path="res://menu_principal.gd" id="1_qf1q6"]
 [ext_resource type="Texture2D" uid="uid://6wmi5tg46jx2" path="res://fotos/sello(1).png" id="2_p8sbp"]
