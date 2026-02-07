@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://qqwspqsy4fbw"]
 
-[node name="creditos" type="Control"]
+[ext_resource type="Script" uid="uid://c0hc3m1ldeagm" path="res://scenes/ui/menus/creditos.gd" id="1_rsilq"]
+
+[node name="creditos" type="Control" unique_id=494089894]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_rsilq")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=813879287]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

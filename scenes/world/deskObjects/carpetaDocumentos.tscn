@@ -1,6 +1,19 @@
 [gd_scene format=3 uid="uid://cplwhnoowti86"]
 
 [ext_resource type="Script" uid="uid://b3pqy250f1lfi" path="res://scenes/world/deskObjects/carpetaDocumentos.gd" id="1_3gsix"]
+[ext_resource type="Texture2D" uid="uid://yi45cywvqkut" path="res://assets/objetos/carpeta.png" id="2_mbgyg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aabv1"]
+size = Vector2(158, 109)
 
 [node name="CarpetaDocumentos" type="Area2D" unique_id=389950837]
 script = ExtResource("1_3gsix")
+
+[node name="Carpeta" type="Sprite2D" parent="." unique_id=171823794]
+position = Vector2(152, -222.00002)
+scale = Vector2(0.1664882, 0.16343391)
+texture = ExtResource("2_mbgyg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1702817764]
+position = Vector2(152, -221.5)
+shape = SubResource("RectangleShape2D_aabv1")

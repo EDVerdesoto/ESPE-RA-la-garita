@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var reproductor = get_node("../../../ReproductorMusica")
+@onready var reproductor: AudioStreamPlayer = $ReproductorMusica
 var lista_canciones = []
 var cancion_actual = 0
 var ruta_musica = "res://music/"
@@ -24,13 +24,17 @@ func cargar_canciones_automaticamente():
 		dir.list_dir_end()
 
 func reproducir_cancion(indice):
-	cancion_actual = indice
+	if lista_canciones.size() == 0:
+		return
+	cancion_actual = indice % lista_canciones.size()
 	var stream = load(lista_canciones[cancion_actual])
 	reproductor.stream = stream
 	reproductor.play()
 
 func _input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed:
+		if lista_canciones.size() == 0:
+			return
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			# Clic izquierdo: Siguiente canción
 			cancion_actual = (cancion_actual + 1) % lista_canciones.size()
@@ -44,5 +48,7 @@ func _input_event(_viewport, event, _shape_idx):
 
 # Para que cambie sola cuando termine
 func _on_reproductor_musica_finished():
+	if lista_canciones.size() == 0:
+		return
 	cancion_actual = (cancion_actual + 1) % lista_canciones.size()
 	reproducir_cancion(cancion_actual)

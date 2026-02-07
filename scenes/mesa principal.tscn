@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c7i0r26dtlu3x"]
 
 [ext_resource type="Texture2D" uid="uid://cnubsfgktbe1t" path="res://assets/fondo/fondo izquierda/izquierda_soleado.png" id="1_143rc"]
-[ext_resource type="Script" uid="uid://bft0tb0oyu6is" path="res://scenes/control_clima.gd" id="1_fkgjx"]
 [ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="1_t6biv"]
 [ext_resource type="Texture2D" uid="uid://b8qvlx0hlbnqo" path="res://assets/fondo/fondo normal/normal_soleado.png" id="2_2buuu"]
 [ext_resource type="Texture2D" uid="uid://bmvdirmwvj5ei" path="res://assets/objetos/mesa.png" id="2_araee"]
@@ -9,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://d4cqx8ua7ljjj" path="res://assets/fondo/fondo normal/normal_nublado.png" id="3_22t22"]
 [ext_resource type="Texture2D" uid="uid://yi45cywvqkut" path="res://assets/objetos/carpeta.png" id="3_afuwr"]
 [ext_resource type="Texture2D" uid="uid://nx31x6cqpmre" path="res://assets/objetos/lista negra.png" id="4_g5epp"]
-[ext_resource type="Script" uid="uid://cpiv75syk74nb" path="res://scenes/estudiante.gd" id="4_n2k65"]
 [ext_resource type="Texture2D" uid="uid://c3a7t5wbjwy53" path="res://assets/fondo/fondo izquierda/izquierda_nublado.png" id="5_3sg0p"]
 [ext_resource type="Texture2D" uid="uid://bck50kc6v0rtd" path="res://assets/objetos/muro.png" id="5_fkgjx"]
 [ext_resource type="Texture2D" uid="uid://cwa4fdsg61n14" path="res://assets/objetos/compu.png" id="5_lkbym"]
@@ -22,14 +20,105 @@
 [ext_resource type="Texture2D" uid="uid://bdijduajyfrta" path="res://assets/HUD/manos_guardia_iz.png" id="14_14gmk"]
 [ext_resource type="Script" uid="uid://cvsqbefy32bb6" path="res://scenes/RadioBurocractica.gd" id="14_cky0m"]
 [ext_resource type="Script" uid="uid://68sb1vf11xiq" path="res://scenes/hud.gd" id="16_2buuu"]
-[ext_resource type="Script" uid="uid://b2xdwtdvb51rl" path="res://scenes/manos_guardia_der.gd" id="20_22t22"]
+[ext_resource type="Script" uid="uid://b2xdwtdvb51rl" path="res://scenes/ui/manos_guardia_der.gd" id="20_22t22"]
 
-[sub_resource type="Gradient" id="Gradient_job3a"]
+[sub_resource type="GDScript" id="GDScript_sf3w8"]
+script/source = "extends Node2D
+
+# Variables para arrastrar los nodos desde el Inspector
+@export_group(\"Fondos Derecha\")
+@export var n_soleado: Sprite2D
+@export var n_nublado: Sprite2D
+@export var n_lluvioso: Sprite2D # El que tiene calles mojadas
+
+@export_group(\"Fondos Izquierda\")
+@export var i_soleado: Sprite2D
+@export var i_nublado: Sprite2D
+@export var i_lluvioso: Sprite2D
+
+@export_group(\"Efectos\")
+@export var lluvia_particulas: CPUParticles2D
+
+# Estados del clima en orden lineal
+enum Clima { SOLEADO, NUBLADO, LLUVIOSO, MOJADO }
+var estado_actual: int
+
+func _ready():
+	# 1. Elegir un clima aleatorio para empezar de una
+	estado_actual = randi() % 4 
+	
+	# 2. Configurar visuales iniciales sin transiciones (de golpe)
+	aplicar_clima_instantaneo()
+	
+	# 3. Timer para \"tirar el dado\" cada 20 segundos
+	var timer = Timer.new()
+	timer.wait_time = 5.0
+	timer.autostart = true
+	timer.timeout.connect(_intentar_cambio_clima)
+	add_child(timer)
+
+func _intentar_cambio_clima():
+	# Tirar el dado (1 de 5 posibilidades)
+	if randi_range(3, 3) == 3:
+		avanzar_clima()
+
+func avanzar_clima():
+	# Flujo lineal: Soleado -> Nublado -> Lluvioso -> Mojado -> Soleado
+	estado_actual = (estado_actual + 1) % 4
+	transicion_suave_clima()
+
+func aplicar_clima_instantaneo():
+	# Apagamos todo de una para el inicio del juego
+	for s in [n_soleado, n_nublado, n_lluvioso, i_soleado, i_nublado, i_lluvioso]:
+		s.modulate.a = 0
+	
+	lluvia_particulas.emitting = (estado_actual == Clima.LLUVIOSO)
+	
+	# Prendemos los que corresponden al estado aleatorio inicial
+	match estado_actual:
+		Clima.SOLEADO:
+			n_soleado.modulate.a = 1; i_soleado.modulate.a = 1
+		Clima.NUBLADO:
+			n_nublado.modulate.a = 1; i_nublado.modulate.a = 1
+		Clima.LLUVIOSO, Clima.MOJADO:
+			n_lluvioso.modulate.a = 1; i_lluvioso.modulate.a = 1
+
+func transicion_suave_clima():
+	var tween = create_tween().set_parallel(true)
+	
+	# Desvanecer todos los fondos actuales
+	for s in [n_soleado, n_nublado, n_lluvioso, i_soleado, i_nublado, i_lluvioso]:
+		tween.tween_property(s, \"modulate:a\", 0.0, 3.0)
+	
+	# Aparecer los nuevos fondos y activar/desactivar partículas
+	match estado_actual:
+		Clima.SOLEADO:
+			tween.tween_property(n_soleado, \"modulate:a\", 1.0, 3.0)
+			tween.tween_property(i_soleado, \"modulate:a\", 1.0, 3.0)
+			lluvia_particulas.emitting = false
+		Clima.NUBLADO:
+			tween.tween_property(n_nublado, \"modulate:a\", 1.0, 3.0)
+			tween.tween_property(i_nublado, \"modulate:a\", 1.0, 3.0)
+		Clima.LLUVIOSO:
+			tween.tween_property(n_lluvioso, \"modulate:a\", 1.0, 3.0)
+			tween.tween_property(i_lluvioso, \"modulate:a\", 1.0, 3.0)
+			lluvia_particulas.emitting = true
+		Clima.MOJADO:
+			tween.tween_property(n_lluvioso, \"modulate:a\", 1.0, 3.0)
+			tween.tween_property(i_lluvioso, \"modulate:a\", 1.0, 3.0)
+			lluvia_particulas.emitting = false
+"
+
+[sub_resource type="GDScript" id="GDScript_bgitj"]
+script/source = "extends Sprite2D
+"
+
+[sub_resource type="Gradient" id="Gradient_2rb3i"]
 offsets = PackedFloat32Array(0, 0.012578616, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.9433962, 0.9433962, 0.9433962, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kksre"]
-gradient = SubResource("Gradient_job3a")
+gradient = SubResource("Gradient_2rb3i")
 width = 2
 height = 15
 fill_from = Vector2(1, 1)
@@ -39,7 +128,7 @@ fill_to = Vector2(0, 0.017094018)
 size = Vector2(959.28467, 1028.4204)
 
 [node name="Node2D" type="Node2D" unique_id=14269347 node_paths=PackedStringArray("n_soleado", "n_nublado", "n_lluvioso", "i_soleado", "i_nublado", "i_lluvioso", "lluvia_particulas")]
-script = ExtResource("1_fkgjx")
+script = SubResource("GDScript_sf3w8")
 n_soleado = NodePath("ContenedorFondoNormal/NormalSoleado")
 n_nublado = NodePath("ContenedorFondoNormal/NormalNublado")
 n_lluvioso = NodePath("ContenedorFondoNormal/NomalDiaLluvioso")
@@ -86,8 +175,7 @@ texture = ExtResource("1_143rc")
 position = Vector2(2944, 589)
 scale = Vector2(0.46015206, 0.40305817)
 texture = ExtResource("11_5m7ae")
-script = ExtResource("4_n2k65")
-x_salida_aceptado = 1741.0
+script = SubResource("GDScript_bgitj")
 
 [node name="Lluvia" type="CPUParticles2D" parent="." unique_id=101532509]
 position = Vector2(2137, -58)

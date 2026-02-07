@@ -1,6 +1,96 @@
 [gd_scene format=3 uid="uid://dfh51iwhvhhss"]
 
 [ext_resource type="Script" uid="uid://bm7qywvlm00at" path="res://scenes/world/weather/weatherController.gd" id="1_06hpm"]
+[ext_resource type="Texture2D" uid="uid://tujbtpba2cyv" path="res://assets/fondo/fondo normal/Nomal_dia_lluvioso.png" id="2_8afg3"]
+[ext_resource type="Texture2D" uid="uid://d4cqx8ua7ljjj" path="res://assets/fondo/fondo normal/normal_nublado.png" id="3_f6h5v"]
+[ext_resource type="Texture2D" uid="uid://b8qvlx0hlbnqo" path="res://assets/fondo/fondo normal/normal_soleado.png" id="4_q7303"]
+[ext_resource type="Texture2D" uid="uid://c3a7t5wbjwy53" path="res://assets/fondo/fondo izquierda/izquierda_nublado.png" id="5_jquw3"]
+[ext_resource type="Texture2D" uid="uid://di3isgglo3q4d" path="res://assets/fondo/fondo izquierda/izquierda_dia_lluvioso.png" id="6_u1q7b"]
+[ext_resource type="Texture2D" uid="uid://cnubsfgktbe1t" path="res://assets/fondo/fondo izquierda/izquierda_soleado.png" id="7_g2kw5"]
+[ext_resource type="Texture2D" uid="uid://bck50kc6v0rtd" path="res://assets/objetos/muro.png" id="8_8eehv"]
+[ext_resource type="PackedScene" uid="uid://ma1uf2g4inis" path="res://scenes/characters/npc.tscn" id="8_f6h5v"]
+[ext_resource type="Texture2D" uid="uid://51s1jxse4w8l" path="res://assets/objetos/muro_iz.png" id="9_ui6i4"]
+[ext_resource type="PackedScene" uid="uid://b3t6dmgcnxw8s" path="res://scenes/ui/hudOverlay.tscn" id="10_hud01"]
 
-[node name="WeatherController" type="Node2D" unique_id=1164922981]
+[sub_resource type="Gradient" id="Gradient_job3a"]
+offsets = PackedFloat32Array(0, 0.012578616, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.9433962, 0.9433962, 0.9433962, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dwmpw"]
+gradient = SubResource("Gradient_job3a")
+width = 2
+height = 15
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0.017094018)
+
+[node name="WeatherController" type="Node2D" unique_id=1164922981 node_paths=PackedStringArray("n_soleado", "n_nublado", "n_lluvioso", "i_soleado", "i_nublado", "i_lluvioso", "lluvia_particulas")]
 script = ExtResource("1_06hpm")
+n_soleado = NodePath("ContenedorFondoNormal/NormalSoleado")
+n_nublado = NodePath("ContenedorFondoNormal/NormalNublado")
+n_lluvioso = NodePath("ContenedorFondoNormal/NomalDiaLluvioso")
+i_soleado = NodePath("ContenedorFondoIzquierda/IzquierdaSoleado")
+i_nublado = NodePath("ContenedorFondoIzquierda/IzquierdaNublado")
+i_lluvioso = NodePath("ContenedorFondoIzquierda/IzquierdaDiaLluvioso")
+lluvia_particulas = NodePath("Lluvia")
+
+[node name="ContenedorFondoNormal" type="Node2D" parent="." unique_id=1586817297]
+
+[node name="NomalDiaLluvioso" type="Sprite2D" parent="ContenedorFondoNormal" unique_id=522499537]
+position = Vector2(2836, 352)
+scale = Vector2(0.458, 0.376)
+texture = ExtResource("2_8afg3")
+
+[node name="NormalNublado" type="Sprite2D" parent="ContenedorFondoNormal" unique_id=420602776]
+position = Vector2(2836, 352)
+scale = Vector2(0.45833322, 0.376)
+texture = ExtResource("3_f6h5v")
+
+[node name="NormalSoleado" type="Sprite2D" parent="ContenedorFondoNormal" unique_id=2112998000]
+position = Vector2(2836, 351.99997)
+scale = Vector2(0.458, 0.376)
+texture = ExtResource("4_q7303")
+
+[node name="ContenedorFondoIzquierda" type="Node2D" parent="." unique_id=1981104113]
+
+[node name="IzquierdaNublado" type="Sprite2D" parent="ContenedorFondoIzquierda" unique_id=928251228]
+position = Vector2(1284, 331)
+scale = Vector2(0.465, 0.478)
+texture = ExtResource("5_jquw3")
+
+[node name="IzquierdaDiaLluvioso" type="Sprite2D" parent="ContenedorFondoIzquierda" unique_id=1978122279]
+position = Vector2(1284, 331)
+scale = Vector2(0.465, 0.478)
+texture = ExtResource("6_u1q7b")
+
+[node name="IzquierdaSoleado" type="Sprite2D" parent="ContenedorFondoIzquierda" unique_id=1693672888]
+position = Vector2(1284.0001, 330.99997)
+scale = Vector2(0.46458337, 0.4776786)
+texture = ExtResource("7_g2kw5")
+
+[node name="Npc" parent="." unique_id=72313117 instance=ExtResource("8_f6h5v")]
+
+[node name="Lluvia" type="CPUParticles2D" parent="." unique_id=1944737018]
+position = Vector2(2137, -58)
+amount = 300
+texture = SubResource("GradientTexture2D_dwmpw")
+emission_shape = 3
+emission_rect_extents = Vector2(1400, 1)
+particle_flag_align_y = true
+direction = Vector2(-0.5, 1)
+spread = 0.0
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+scale_amount_max = 2.0
+color = Color(0.68000215, 0.79739296, 0.8509393, 0.62352943)
+
+[node name="Muro" type="Sprite2D" parent="." unique_id=1502443961]
+position = Vector2(2842, 547)
+scale = Vector2(0.7252907, 0.7815755)
+texture = ExtResource("8_8eehv")
+
+[node name="MuroIz" type="Sprite2D" parent="." unique_id=1635748858]
+position = Vector2(1251, 466.50006)
+scale = Vector2(0.98271275, 0.75596905)
+texture = ExtResource("9_ui6i4")
+
+[node name="HudOverlay" parent="." unique_id=1729628180 instance=ExtResource("10_hud01")]

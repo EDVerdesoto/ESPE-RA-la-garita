@@ -1,5 +1,24 @@
 [gd_scene load_steps=5 format=3 uid="uid://hsg1vodq0cke"]
 
+<<<<<<< HEAD
+[ext_resource type="Script" uid="uid://brhi6mwr78871" path="res://scenes/world/deskObjects/PC.gd" id="1_6gkdf"]
+[ext_resource type="Texture2D" uid="uid://cwa4fdsg61n14" path="res://assets/objetos/compu.png" id="2_8ok64"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhvea"]
+size = Vector2(357, 292)
+
+[node name="Pc" type="Area2D" unique_id=2120212604]
+script = ExtResource("1_6gkdf")
+
+[node name="Compu" type="Sprite2D" parent="." unique_id=1161742070]
+position = Vector2(-263.34378, -242.34375)
+scale = Vector2(0.39082706, 0.37832794)
+texture = ExtResource("2_8ok64")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=327681125]
+position = Vector2(-262.5, -240)
+shape = SubResource("RectangleShape2D_uhvea")
+=======
 [ext_resource type="Script" path="res://scenes/world/deskObjects/PC.gd" id="1_pc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc_body"]
@@ -137,3 +156,4 @@ shape = SubResource("RectangleShape2D_campo_m")
 [node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickFotoM"]
 position = Vector2(160, 40)
 shape = SubResource("RectangleShape2D_foto_m")
+>>>>>>> ea7c6d2892cba18be21429e471ea651a102a8f25

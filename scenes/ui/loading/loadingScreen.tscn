@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://bmx8puneodbuk"]
 
+[ext_resource type="Script" uid="uid://dqji0ap6doxj2" path="res://scenes/ui/loading/loadingScreen.gd" id="1_v66jl"]
+
 [node name="LoadingScreen" type="Control" unique_id=783104558]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_v66jl")

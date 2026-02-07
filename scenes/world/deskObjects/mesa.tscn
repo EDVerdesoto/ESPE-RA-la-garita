@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bprosf8ro6jsv"]
+
+[ext_resource type="Texture2D" uid="uid://bmvdirmwvj5ei" path="res://assets/objetos/mesa.png" id="1_u0cg5"]
+
+[node name="Mesa" type="Node2D" unique_id=1067390501]
+
+[node name="Mesa" type="Sprite2D" parent="." unique_id=693982679]
+position = Vector2(2815, 886.99994)
+scale = Vector2(1, 0.835)
+texture = ExtResource("1_u0cg5")
