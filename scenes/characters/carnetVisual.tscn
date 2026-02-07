@@ -1,104 +1,109 @@
 [gd_scene format=3 uid="uid://cxswrjg7au4to"]
 
-[ext_resource type="Script" path="res://scenes/characters/carnetVisual.gd" id="1_carnet"]
+[ext_resource type="Script" uid="uid://7kafkmxrrero" path="res://scenes/characters/carnetVisual.gd" id="1_carnet"]
+[ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="2_y758m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_carnet_main"]
-size = Vector2(160, 100)
+size = Vector2(63, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_nombre"]
-size = Vector2(90, 14)
+size = Vector2(78, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_apellido"]
-size = Vector2(90, 14)
+size = Vector2(78, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_carrera"]
-size = Vector2(90, 14)
+size = Vector2(36, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_codigo"]
-size = Vector2(90, 14)
+size = Vector2(78, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_foto"]
-size = Vector2(50, 50)
+size = Vector2(86, 67)
 
-[node name="CarnetVisual" type="Area2D"]
+[node name="CarnetVisual" type="Area2D" unique_id=1346391406]
+position = Vector2(-8, 0)
 script = ExtResource("1_carnet")
 
-[node name="SpriteFondo" type="Sprite2D" parent="."]
-position = Vector2(0, 0)
+[node name="SpriteFondo" type="Sprite2D" parent="." unique_id=1484995712]
+position = Vector2(7, 3.0000029)
+scale = Vector2(0.16010498, 0.16858678)
+texture = ExtResource("2_y758m")
 
-[node name="FotoSprite" type="Sprite2D" parent="SpriteFondo"]
+[node name="FotoSprite" type="Sprite2D" parent="SpriteFondo" unique_id=1027816298]
 position = Vector2(-45, -20)
 scale = Vector2(0.3, 0.3)
 
-[node name="LblNombre" type="Label" parent="SpriteFondo"]
-offset_left = -10.0
-offset_top = -55.0
-offset_right = 80.0
-offset_bottom = -40.0
+[node name="LblNombre" type="Label" parent="SpriteFondo" unique_id=402656682]
+offset_left = -224.85242
+offset_top = 11.863312
+offset_right = -126.114716
+offset_bottom = 47.453285
 text = "Nombre"
-horizontal_alignment = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="LblApellido" type="Label" parent="SpriteFondo"]
-offset_left = -10.0
-offset_top = -38.0
-offset_right = 80.0
-offset_bottom = -23.0
+[node name="LblApellido" type="Label" parent="SpriteFondo" unique_id=383409503]
+offset_left = -218.60657
+offset_top = 83.043274
+offset_right = -128.60657
+offset_bottom = 106.043274
 text = "Apellido"
-horizontal_alignment = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="LblCarrera" type="Label" parent="SpriteFondo"]
-offset_left = -10.0
-offset_top = -5.0
-offset_right = 80.0
-offset_bottom = 10.0
+[node name="LblCarrera" type="Label" parent="SpriteFondo" unique_id=1336569545]
+offset_left = 37.475433
+offset_top = 148.29155
+offset_right = 127.47543
+offset_bottom = 171.29155
 text = "Carrera"
-horizontal_alignment = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="LblCodigo" type="Label" parent="SpriteFondo"]
-offset_left = -10.0
-offset_top = 12.0
-offset_right = 80.0
-offset_bottom = 27.0
+[node name="LblCodigo" type="Label" parent="SpriteFondo" unique_id=1546205571]
+offset_left = -216.11475
+offset_top = 213.67639
+offset_right = -86.114746
+offset_bottom = 236.67639
 text = "ESPE-0000-00000"
-horizontal_alignment = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="LblRol" type="Label" parent="SpriteFondo"]
-offset_left = -10.0
-offset_top = -21.0
-offset_right = 80.0
-offset_bottom = -6.0
+[node name="LblRol" type="Label" parent="SpriteFondo" unique_id=1073982696]
+offset_left = -228.60706
+offset_top = 148.29163
+offset_right = -138.60706
+offset_bottom = 172.0182
 text = "Estudiante"
-horizontal_alignment = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="CollisionCarnet" type="CollisionShape2D" parent="."]
+[node name="CollisionCarnet" type="CollisionShape2D" parent="." unique_id=565534728]
+position = Vector2(9.5, 76)
 shape = SubResource("RectangleShape2D_carnet_main")
 
-[node name="ClickNombre" type="Area2D" parent="."]
+[node name="ClickNombre" type="Area2D" parent="." unique_id=1935979689]
 
-[node name="Col" type="CollisionShape2D" parent="ClickNombre"]
-position = Vector2(35, -47)
+[node name="Col" type="CollisionShape2D" parent="ClickNombre" unique_id=1525347112]
+position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_campo_nombre")
 
-[node name="ClickApellido" type="Area2D" parent="."]
+[node name="ClickApellido" type="Area2D" parent="." unique_id=1248115413]
 
-[node name="Col" type="CollisionShape2D" parent="ClickApellido"]
-position = Vector2(35, -30)
+[node name="Col" type="CollisionShape2D" parent="ClickApellido" unique_id=348346675]
+position = Vector2(8, 19)
 shape = SubResource("RectangleShape2D_campo_apellido")
 
-[node name="ClickCarrera" type="Area2D" parent="."]
+[node name="ClickCarrera" type="Area2D" parent="." unique_id=1558985794]
 
-[node name="Col" type="CollisionShape2D" parent="ClickCarrera"]
-position = Vector2(35, 2)
+[node name="Col" type="CollisionShape2D" parent="ClickCarrera" unique_id=16987605]
+position = Vector2(29, 30)
 shape = SubResource("RectangleShape2D_campo_carrera")
 
-[node name="ClickCodigo" type="Area2D" parent="."]
+[node name="ClickCodigo" type="Area2D" parent="." unique_id=356406161]
 
-[node name="Col" type="CollisionShape2D" parent="ClickCodigo"]
-position = Vector2(35, 19)
+[node name="Col" type="CollisionShape2D" parent="ClickCodigo" unique_id=1517744847]
+position = Vector2(8, 41)
 shape = SubResource("RectangleShape2D_campo_codigo")
 
-[node name="ClickFoto" type="Area2D" parent="."]
+[node name="ClickFoto" type="Area2D" parent="." unique_id=845848289]
 
-[node name="Col" type="CollisionShape2D" parent="ClickFoto"]
-position = Vector2(-45, -20)
+[node name="Col" type="CollisionShape2D" parent="ClickFoto" unique_id=1087789909]
+position = Vector2(9, -37.5)
 shape = SubResource("RectangleShape2D_campo_foto")
