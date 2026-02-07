@@ -12,7 +12,7 @@
 [node name="EnvironmentGarita" parent="." unique_id=1960233612 instance=ExtResource("1_vsjpj")]
 
 [node name="Pc" parent="." unique_id=2120212604 instance=ExtResource("1_7uwk4")]
-position = Vector2(2817, 899)
+position = Vector2(2828, 902)
 
 [node name="Reporte" parent="." unique_id=1216192213 instance=ExtResource("2_fvuxs")]
 position = Vector2(2732, 874)
