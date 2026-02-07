@@ -1,30 +1,3 @@
 [gd_scene format=3 uid="uid://ma1uf2g4inis"]
 
-[ext_resource type="Script" uid="uid://cpfiivutmrm36" path="res://scenes/characters/npc.gd" id="1_ceaqc"]
-[ext_resource type="Texture2D" uid="uid://c6pbudnnh0i5v" path="res://assets/personajes/estudiante.png" id="2_84hc2"]
-[ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="3_bgitj"]
-
-[sub_resource type="GDScript" id="GDScript_bgitj"]
-script/source = "extends Sprite2D
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgitj"]
-size = Vector2(760.68896, 1296.4568)
-
 [node name="Npc" type="Area2D" unique_id=72313117]
-script = ExtResource("1_ceaqc")
-
-[node name="Estudiante" type="Sprite2D" parent="." unique_id=2110171262]
-scale = Vector2(0.46015206, 0.40305817)
-texture = ExtResource("2_84hc2")
-script = SubResource("GDScript_bgitj")
-
-[node name="Carnet" type="Sprite2D" parent="." unique_id=1425579597]
-position = Vector2(-70, -63)
-scale = Vector2(0.07624673, 0.07250533)
-texture = ExtResource("3_bgitj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Carnet" unique_id=1527869818]
-position = Vector2(-0.65625, -2.7729492)
-scale = Vector2(1.0000001, 1)
-shape = SubResource("RectangleShape2D_bgitj")

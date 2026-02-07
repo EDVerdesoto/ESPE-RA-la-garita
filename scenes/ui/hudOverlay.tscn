@@ -6,8 +6,10 @@
 [node name="HudOverlay" type="Control" unique_id=58143630]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_8771v")
 
+<<<<<<< HEAD
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1514738091]
 script = ExtResource("2_062kv")
 
@@ -28,3 +30,31 @@ wait_time = 7.0
 one_shot = true
 
 [connection signal="timeout" from="HUD/Cronometro" to="HUD" method="_on_cronometro_timeout"]
+=======
+[node name="PanelHUD" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 500.0
+offset_bottom = 40.0
+
+[node name="LblDia" type="Label" parent="PanelHUD"]
+layout_mode = 2
+text = "DÍA 1"
+custom_minimum_size = Vector2(80, 0)
+
+[node name="LblDinero" type="Label" parent="PanelHUD"]
+layout_mode = 2
+text = "$0.00"
+custom_minimum_size = Vector2(80, 0)
+
+[node name="LblAciertos" type="Label" parent="PanelHUD"]
+layout_mode = 2
+text = "✓ 0"
+custom_minimum_size = Vector2(50, 0)
+
+[node name="LblErrores" type="Label" parent="PanelHUD"]
+layout_mode = 2
+text = "✗ 0"
+custom_minimum_size = Vector2(50, 0)
+>>>>>>> ea7c6d2892cba18be21429e471ea651a102a8f25

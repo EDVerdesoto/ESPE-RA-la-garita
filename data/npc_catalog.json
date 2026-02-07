@@ -1,0 +1,112 @@
+[
+	{
+		"id": "npc_001",
+		"nombre_base": "Carlos",
+		"apellido": "Mendoza",
+		"personalidad": "Tranquilo",
+		"rol_base": "Estudiante",
+		"carrera": "Ingeniería en Software",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_001.png",
+		"numero_cedula": "1724567890"
+	},
+	{
+		"id": "npc_002",
+		"nombre_base": "María",
+		"apellido": "Torres",
+		"personalidad": "Nerviosa",
+		"rol_base": "Estudiante",
+		"carrera": "Biotecnología",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_002.png",
+		"numero_cedula": "1712345678"
+	},
+	{
+		"id": "npc_003",
+		"nombre_base": "Juan",
+		"apellido": "Pérez",
+		"personalidad": "Agresivo",
+		"rol_base": "Estudiante",
+		"carrera": "Economía",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_003.png",
+		"numero_cedula": "1709876543"
+	},
+	{
+		"id": "npc_004",
+		"nombre_base": "Ana",
+		"apellido": "Rodríguez",
+		"personalidad": "Amigable",
+		"rol_base": "Estudiante",
+		"carrera": "Fisioterapia",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_004.png",
+		"numero_cedula": "1756789012"
+	},
+	{
+		"id": "npc_005",
+		"nombre_base": "Pedro",
+		"apellido": "Gómez",
+		"personalidad": "Sospechoso",
+		"rol_base": "Estudiante",
+		"carrera": "Derecho",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_005.png",
+		"numero_cedula": "1734567891"
+	},
+	{
+		"id": "npc_006",
+		"nombre_base": "Lucía",
+		"apellido": "Hernández",
+		"personalidad": "Tímida",
+		"rol_base": "Estudiante",
+		"carrera": "Ingeniería en Software",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_006.png",
+		"numero_cedula": "1745678901"
+	},
+	{
+		"id": "npc_007",
+		"nombre_base": "Diego",
+		"apellido": "Vargas",
+		"personalidad": "Relajado",
+		"rol_base": "Estudiante",
+		"carrera": "Biotecnología",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_007.png",
+		"numero_cedula": "1723456789"
+	},
+	{
+		"id": "npc_008",
+		"nombre_base": "Valentina",
+		"apellido": "Flores",
+		"personalidad": "Impaciente",
+		"rol_base": "Estudiante",
+		"carrera": "Economía",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_008.png",
+		"numero_cedula": "1767890123"
+	},
+	{
+		"id": "npc_009",
+		"nombre_base": "José",
+		"apellido": "Ramírez",
+		"personalidad": "Formal",
+		"rol_base": "Estudiante",
+		"carrera": "Derecho",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_009.png",
+		"numero_cedula": "1778901234"
+	},
+	{
+		"id": "npc_010",
+		"nombre_base": "Sofía",
+		"apellido": "López",
+		"personalidad": "Chistosa",
+		"rol_base": "Estudiante",
+		"carrera": "Fisioterapia",
+		"sprite_path": "res://assets/personajes/estudiante.png",
+		"cara_path": "res://assets/personajes/caras/cara_010.png",
+		"numero_cedula": "1789012345"
+	}
+]

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cla1jb0l050j1"]
+
+[node name="DocumentoBase" type="Node2D" unique_id=1886069483]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1899432573]
+
+[node name="Nombre" type="Label" parent="Sprite2D" unique_id=1171016580]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Apellido" type="Label" parent="Sprite2D" unique_id=2037573837]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1416212269]

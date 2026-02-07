@@ -1,7 +1,26 @@
 [gd_scene format=3 uid="uid://csavcagqqsg32"]
 
+[ext_resource type="PackedScene" uid="uid://hsg1vodq0cke" path="res://scenes/world/deskObjects/PC.tscn" id="1_7uwk4"]
 [ext_resource type="PackedScene" uid="uid://beuhvqwj43qeo" path="res://scenes/world/environmentGarita.tscn" id="1_vsjpj"]
+[ext_resource type="PackedScene" uid="uid://dcxmegobm8xa3" path="res://scenes/world/deskObjects/reporte.tscn" id="2_fvuxs"]
+[ext_resource type="PackedScene" uid="uid://cplwhnoowti86" path="res://scenes/world/deskObjects/carpetaDocumentos.tscn" id="3_ysw8s"]
+[ext_resource type="PackedScene" uid="uid://nyeeya5bg5bx" path="res://scenes/ui/manosJugador.tscn" id="4_fgqlb"]
+[ext_resource type="PackedScene" uid="uid://b3t6dmgcnxw8s" path="res://scenes/ui/hudOverlay.tscn" id="5_3drsx"]
 
 [node name="NivelGarita" type="Node" unique_id=134314660]
 
 [node name="EnvironmentGarita" parent="." unique_id=1960233612 instance=ExtResource("1_vsjpj")]
+
+[node name="Pc" parent="." unique_id=2120212604 instance=ExtResource("1_7uwk4")]
+position = Vector2(2817, 899)
+
+[node name="Reporte" parent="." unique_id=1216192213 instance=ExtResource("2_fvuxs")]
+position = Vector2(2732, 874)
+
+[node name="CarpetaDocumentos" parent="." unique_id=389950837 instance=ExtResource("3_ysw8s")]
+position = Vector2(2827, 924)
+
+[node name="ManosJugador" parent="." unique_id=1443160236 instance=ExtResource("4_fgqlb")]
+position = Vector2(2905, 904)
+
+[node name="HudOverlay" parent="." unique_id=58143630 instance=ExtResource("5_3drsx")]

@@ -4,11 +4,6 @@
 [ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://globals/camera2d.gd" id="2_7l4h6"]
 [ext_resource type="PackedScene" uid="uid://bprosf8ro6jsv" path="res://scenes/world/deskObjects/mesa.tscn" id="3_1mip0"]
 [ext_resource type="PackedScene" uid="uid://cwxumyxiqbjfk" path="res://scenes/world/deskObjects/radio.tscn" id="3_a5j03"]
-[ext_resource type="PackedScene" uid="uid://hsg1vodq0cke" path="res://scenes/world/deskObjects/PC.tscn" id="4_n0k7f"]
-[ext_resource type="PackedScene" uid="uid://dcxmegobm8xa3" path="res://scenes/world/deskObjects/reporte.tscn" id="5_fig20"]
-[ext_resource type="PackedScene" uid="uid://cplwhnoowti86" path="res://scenes/world/deskObjects/carpetaDocumentos.tscn" id="6_njb83"]
-[ext_resource type="PackedScene" uid="uid://nyeeya5bg5bx" path="res://scenes/ui/manosJugador.tscn" id="7_hs0ja"]
-[ext_resource type="PackedScene" uid="uid://b3t6dmgcnxw8s" path="res://scenes/ui/hudOverlay.tscn" id="9_hud01"]
 [ext_resource type="Script" uid="uid://dpovuoe5hfgjf" path="res://scenes/world/environmentGarita.gd" id="10_env01"]
 
 [node name="EnvironmentGarita" type="Node2D" unique_id=1960233612]
@@ -19,19 +14,7 @@ script = ExtResource("10_env01")
 [node name="Mesa" parent="." unique_id=562084354 instance=ExtResource("3_1mip0")]
 
 [node name="Radio" parent="Mesa" unique_id=1661157786 instance=ExtResource("3_a5j03")]
-position = Vector2(2822, 891)
-
-[node name="Pc" parent="Mesa" unique_id=2120212604 instance=ExtResource("4_n0k7f")]
-position = Vector2(2817, 899)
-
-[node name="Reporte" parent="Mesa" unique_id=1216192213 instance=ExtResource("5_fig20")]
-position = Vector2(2732, 874)
-
-[node name="CarpetaDocumentos" parent="Mesa" unique_id=389950837 instance=ExtResource("6_njb83")]
-position = Vector2(2827, 924)
-
-[node name="ManosJugador" parent="." unique_id=1443160236 instance=ExtResource("7_hs0ja")]
-position = Vector2(2905, 904)
+position = Vector2(2822, 899)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=236578820]
 position = Vector2(2908, 751)
@@ -40,5 +23,3 @@ vista_afuera = Vector2(2885, 520)
 zoom_normal = Vector2(1.3, 1.3)
 zoom_out = Vector2(1.3, 1.2)
 permitir_paneo_libre = false
-
-[node name="HudOverlay" parent="." unique_id=1512245968 instance=ExtResource("9_hud01")]
