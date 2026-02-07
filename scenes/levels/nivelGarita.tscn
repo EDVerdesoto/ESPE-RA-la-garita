@@ -1,3 +1,30 @@
-[gd_scene format=3 uid="uid://csavcagqqsg32"]
+[gd_scene load_steps=7 format=3 uid="uid://csavcagqqsg32"]
 
-[node name="NivelGarita" type="Node" unique_id=134314660]
+[ext_resource type="Script" path="res://scenes/levels/nivelGarita.gd" id="1_nivel"]
+[ext_resource type="Script" path="res://scenes/gameplay/gameplayController.gd" id="2_gameplay"]
+[ext_resource type="PackedScene" uid="uid://ma1uf2g4inis" path="res://scenes/characters/npc.tscn" id="3_npc"]
+[ext_resource type="PackedScene" uid="uid://hsg1vodq0cke" path="res://scenes/world/deskObjects/PC.tscn" id="4_pc"]
+[ext_resource type="PackedScene" uid="uid://b3t6dmgcnxw8s" path="res://scenes/ui/hudOverlay.tscn" id="5_hud"]
+[ext_resource type="PackedScene" uid="uid://dialoguepanel001" path="res://scenes/ui/dialoguePanel.tscn" id="6_dlg"]
+
+[node name="NivelGarita" type="Node"]
+script = ExtResource("1_nivel")
+
+[node name="GameplayController" type="Node" parent="."]
+script = ExtResource("2_gameplay")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="NpcVisual" parent="World" instance=ExtResource("3_npc")]
+position = Vector2(3583, 591)
+
+[node name="DeskObjects" type="Node2D" parent="World"]
+
+[node name="PC" parent="World/DeskObjects" instance=ExtResource("4_pc")]
+position = Vector2(1200, 400)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HudOverlay" parent="UI" instance=ExtResource("5_hud")]
+
+[node name="DialoguePanel" parent="UI" instance=ExtResource("6_dlg")]

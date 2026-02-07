@@ -1,3 +1,139 @@
-[gd_scene format=3 uid="uid://hsg1vodq0cke"]
+[gd_scene load_steps=5 format=3 uid="uid://hsg1vodq0cke"]
 
-[node name="Pc" type="Area2D" unique_id=2120212604]
+[ext_resource type="Script" path="res://scenes/world/deskObjects/PC.gd" id="1_pc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pc_body"]
+size = Vector2(200, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_m"]
+size = Vector2(180, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_foto_m"]
+size = Vector2(50, 50)
+
+[node name="Pc" type="Area2D"]
+script = ExtResource("1_pc")
+
+[node name="SpriteMonitor" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+
+[node name="CollisionPC" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pc_body")
+
+[node name="PantallaMonitor" type="Control" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -95.0
+offset_top = -75.0
+offset_right = 95.0
+offset_bottom = 75.0
+
+[node name="FondoPantalla" type="ColorRect" parent="PantallaMonitor"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 190.0
+offset_bottom = 150.0
+color = Color(0.02, 0.05, 0.02, 0.9)
+
+[node name="LblTitulo" type="Label" parent="PantallaMonitor"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 185.0
+offset_bottom = 18.0
+text = "=== SISTEMA ESPE ==="
+horizontal_alignment = 1
+
+[node name="LblNombreSistema" type="Label" parent="PantallaMonitor"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 22.0
+offset_right = 185.0
+offset_bottom = 37.0
+text = "NOMBRE: ---"
+
+[node name="LblApellidoSistema" type="Label" parent="PantallaMonitor"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 39.0
+offset_right = 185.0
+offset_bottom = 54.0
+text = "APELLIDO: ---"
+
+[node name="LblCedulaSistema" type="Label" parent="PantallaMonitor"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 56.0
+offset_right = 185.0
+offset_bottom = 71.0
+text = "CÉDULA: ---"
+
+[node name="LblFechaExp" type="Label" parent="PantallaMonitor"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 73.0
+offset_right = 185.0
+offset_bottom = 88.0
+text = "EXPIRA: ---"
+
+[node name="LblCarreraSistema" type="Label" parent="PantallaMonitor"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 90.0
+offset_right = 185.0
+offset_bottom = 105.0
+text = "CARRERA: ---"
+
+[node name="LblCodigoSistema" type="Label" parent="PantallaMonitor"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 107.0
+offset_right = 185.0
+offset_bottom = 122.0
+text = "CÓDIGO: ---"
+
+[node name="FotoSistema" type="Sprite2D" parent="PantallaMonitor"]
+position = Vector2(160, 40)
+scale = Vector2(0.2, 0.2)
+
+[node name="ClickNombreM" type="Area2D" parent="PantallaMonitor"]
+
+[node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickNombreM"]
+position = Vector2(95, 29)
+shape = SubResource("RectangleShape2D_campo_m")
+
+[node name="ClickApellidoM" type="Area2D" parent="PantallaMonitor"]
+
+[node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickApellidoM"]
+position = Vector2(95, 46)
+shape = SubResource("RectangleShape2D_campo_m")
+
+[node name="ClickCedulaM" type="Area2D" parent="PantallaMonitor"]
+
+[node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickCedulaM"]
+position = Vector2(95, 63)
+shape = SubResource("RectangleShape2D_campo_m")
+
+[node name="ClickFechaM" type="Area2D" parent="PantallaMonitor"]
+
+[node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickFechaM"]
+position = Vector2(95, 80)
+shape = SubResource("RectangleShape2D_campo_m")
+
+[node name="ClickCarreraM" type="Area2D" parent="PantallaMonitor"]
+
+[node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickCarreraM"]
+position = Vector2(95, 97)
+shape = SubResource("RectangleShape2D_campo_m")
+
+[node name="ClickCodigoM" type="Area2D" parent="PantallaMonitor"]
+
+[node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickCodigoM"]
+position = Vector2(95, 114)
+shape = SubResource("RectangleShape2D_campo_m")
+
+[node name="ClickFotoM" type="Area2D" parent="PantallaMonitor"]
+[node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickFotoM"]
+position = Vector2(160, 40)
+shape = SubResource("RectangleShape2D_foto_m")

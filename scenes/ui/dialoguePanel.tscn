@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=3 uid="uid://dialoguepanel001"]
+
+[ext_resource type="Script" path="res://scenes/ui/dialoguePanel.gd" id="1_dlg"]
+
+[node name="DialoguePanel" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1_dlg")
+
+[node name="PanelDialogo" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 500.0
+offset_right = 500.0
+offset_bottom = 700.0
+
+[node name="VBox" type="VBoxContainer" parent="PanelDialogo"]
+layout_mode = 2
+
+[node name="LblNombreNPC" type="Label" parent="PanelDialogo/VBox"]
+layout_mode = 2
+text = "Nombre NPC"
+horizontal_alignment = 0
+
+[node name="LblDialogo" type="RichTextLabel" parent="PanelDialogo/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+text = "..."
+fit_content = true
+
+[node name="ContenedorOpciones" type="VBoxContainer" parent="PanelDialogo/VBox"]
+layout_mode = 2
+
+[node name="PanelDecision" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 580.0
+offset_right = 770.0
+offset_bottom = 650.0
+
+[node name="HBox" type="HBoxContainer" parent="PanelDecision"]
+layout_mode = 2
+
+[node name="BtnAprobar" type="Button" parent="PanelDecision/HBox"]
+layout_mode = 2
+text = "✓ APROBAR"
+custom_minimum_size = Vector2(110, 50)
+
+[node name="BtnRechazar" type="Button" parent="PanelDecision/HBox"]
+layout_mode = 2
+text = "✗ RECHAZAR"
+custom_minimum_size = Vector2(110, 50)
+
+[node name="PanelReporte" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 520.0
+offset_top = 350.0
+offset_right = 780.0
+offset_bottom = 570.0
+
+[node name="VBox" type="VBoxContainer" parent="PanelReporte"]
+layout_mode = 2
+
+[node name="LblTitulo" type="Label" parent="PanelReporte/VBox"]
+layout_mode = 2
+text = "¿Cuál es el problema?"
+horizontal_alignment = 1
+
+[node name="ContenedorIncidencias" type="VBoxContainer" parent="PanelReporte/VBox"]
+layout_mode = 2
+
+[node name="LblFeedback" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 300.0
+offset_top = 450.0
+offset_right = 700.0
+offset_bottom = 490.0
+horizontal_alignment = 1

@@ -1,0 +1,4 @@
+class_name AbstractDocumentoNPC
+extends RefCounted
+
+var configuracion : AbstractDocumentoNPCConfig
