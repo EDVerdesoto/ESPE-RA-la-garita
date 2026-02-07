@@ -1,6 +1,22 @@
 [gd_scene format=3 uid="uid://cwxumyxiqbjfk"]
 
 [ext_resource type="Script" uid="uid://s24ppy82q81v" path="res://scenes/world/deskObjects/radio.gd" id="1_27ddf"]
+[ext_resource type="Texture2D" uid="uid://cua4xu50s8yfl" path="res://assets/objetos/radio.png" id="2_2omuk"]
 
-[node name="Radio" type="Node2D" unique_id=81294274]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkx8o"]
+size = Vector2(996.9286, 1054.4722)
+
+[node name="Radio" type="Area2D" unique_id=1661157786]
 script = ExtResource("1_27ddf")
+
+[node name="Radio" type="Sprite2D" parent="." unique_id=1991695718]
+position = Vector2(349, -185.99998)
+scale = Vector2(0.20588236, 0.17467652)
+texture = ExtResource("2_2omuk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1051722273]
+position = Vector2(348.625, -187.90424)
+scale = Vector2(0.20588236, 0.17467652)
+shape = SubResource("RectangleShape2D_rkx8o")
+
+[node name="ReproductorMusica" type="AudioStreamPlayer" parent="." unique_id=379972639]

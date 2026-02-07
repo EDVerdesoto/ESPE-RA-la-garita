@@ -1,6 +1,24 @@
 [gd_scene format=3 uid="uid://nyeeya5bg5bx"]
 
-[ext_resource type="Script" uid="uid://dwmxrme4inxqi" path="res://scenes/ui/manosJugador.gd" id="1_7u6by"]
+[ext_resource type="Texture2D" uid="uid://c5kgeuytqpxnb" path="res://assets/HUD/manos_guardia_der.png" id="2_mmwgw"]
+[ext_resource type="Script" uid="uid://b2xdwtdvb51rl" path="res://scenes/ui/manos_guardia_der.gd" id="3_fib0n"]
+[ext_resource type="Texture2D" uid="uid://bdijduajyfrta" path="res://assets/HUD/manos_guardia_iz.png" id="4_gjwdl"]
+
+[sub_resource type="GDScript" id="GDScript_t5k2h"]
+script/source = "extends Area2D
+"
 
 [node name="ManosJugador" type="Area2D" unique_id=1443160236]
-script = ExtResource("1_7u6by")
+position = Vector2(828, 521)
+script = SubResource("GDScript_t5k2h")
+
+[node name="ManosGuardiaDer" type="Sprite2D" parent="." unique_id=2130882508]
+position = Vector2(-117.500015, -16.766418)
+scale = Vector2(0.3, 0.348)
+texture = ExtResource("2_mmwgw")
+script = ExtResource("3_fib0n")
+
+[node name="ManosGuardiaIz" type="Sprite2D" parent="." unique_id=572369305]
+position = Vector2(-315.00012, -43.11368)
+scale = Vector2(0.3, 0.348)
+texture = ExtResource("4_gjwdl")

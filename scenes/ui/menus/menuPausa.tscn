@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://55c8s8k2k1x1"]
 
+[ext_resource type="Script" uid="uid://c6b2x2ey23jgj" path="res://scenes/ui/menus/menuPausa.gd" id="1_k07w2"]
 [ext_resource type="Texture2D" uid="uid://6wmi5tg46jx2" path="res://fotos/sello(1).png" id="1_v2jgs"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_1cdjc"]
 
@@ -18,6 +19,7 @@ offset_right = -98.0
 offset_bottom = -128.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_k07w2")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=651817696]
 layout_mode = 1

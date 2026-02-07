@@ -1,3 +1,7 @@
 [gd_scene format=3 uid="uid://csavcagqqsg32"]
 
+[ext_resource type="PackedScene" uid="uid://beuhvqwj43qeo" path="res://scenes/world/environmentGarita.tscn" id="1_vsjpj"]
+
 [node name="NivelGarita" type="Node" unique_id=134314660]
+
+[node name="EnvironmentGarita" parent="." unique_id=1960233612 instance=ExtResource("1_vsjpj")]

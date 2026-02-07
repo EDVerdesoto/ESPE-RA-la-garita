@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://ccitr8jw8uwjh"]
 
+[ext_resource type="Script" uid="uid://c7wangrhssjkg" path="res://scenes/ui/menus/puntuacion.gd" id="1_360jr"]
+
 [node name="puntuacion" type="Control" unique_id=979815780]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_360jr")
 
 [node name="Label" type="Label" parent="." unique_id=264159267]
 layout_mode = 0

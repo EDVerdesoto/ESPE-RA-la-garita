@@ -1,6 +1,19 @@
 [gd_scene format=3 uid="uid://dcxmegobm8xa3"]
 
 [ext_resource type="Script" uid="uid://c2vjxx8iriere" path="res://scenes/world/deskObjects/reporte.gd" id="1_kjerp"]
+[ext_resource type="Texture2D" uid="uid://nx31x6cqpmre" path="res://assets/objetos/lista negra.png" id="2_7sij4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd57e"]
+size = Vector2(124, 81)
 
 [node name="Reporte" type="Area2D" unique_id=1216192213]
 script = ExtResource("1_kjerp")
+
+[node name="ListaNegra" type="Sprite2D" parent="." unique_id=1260667896]
+position = Vector2(92, -122)
+scale = Vector2(0.13763441, 0.15591407)
+texture = ExtResource("2_7sij4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1807185741]
+position = Vector2(92, -122.5)
+shape = SubResource("RectangleShape2D_dd57e")
