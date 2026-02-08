@@ -4,7 +4,7 @@ extends Control
 @onready var btn_slot_1 = $ColorRect/VBoxContainer/HBoxContainer/BtnSlot1
 @onready var btn_slot_2 = $ColorRect/VBoxContainer/HBoxContainer/BtnSlot2
 @onready var btn_slot_3 = $ColorRect/VBoxContainer/HBoxContainer/BtnSlot3
-@onready var btn_regresar = $ColorRect/VBoxContainer/MarginContainer/btn_regresar
+@onready var btn_regresar = $ColorRect/VBoxContainer/MarginContainer/btnRegresar
 
 # --- REFERENCIAS A LOS TEXTOS (Para cambiar lo que dicen) ---
 @onready var titulo_1 = $ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer/VBoxContainer/lblTitulo
