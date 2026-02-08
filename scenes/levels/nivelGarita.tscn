@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cplwhnoowti86" path="res://scenes/world/deskObjects/carpetaDocumentos.tscn" id="3_ysw8s"]
 [ext_resource type="PackedScene" uid="uid://nyeeya5bg5bx" path="res://scenes/ui/manosJugador.tscn" id="4_fgqlb"]
 [ext_resource type="PackedScene" uid="uid://c5ybjdinenp6p" path="res://scenes/gameplay/gameplayController.tscn" id="7_fgqlb"]
-[ext_resource type="PackedScene" path="res://scenes/ui/dialoguePanel.tscn" id="8_3drsx"]
 [ext_resource type="PackedScene" uid="uid://ma1uf2g4inis" path="res://scenes/characters/npc.tscn" id="9_d1myb"]
 [ext_resource type="Texture2D" uid="uid://bck50kc6v0rtd" path="res://assets/objetos/muro.png" id="10_73ynv"]
 [ext_resource type="Texture2D" uid="uid://51s1jxse4w8l" path="res://assets/objetos/muro_iz.png" id="11_no0k4"]
 [ext_resource type="PackedScene" uid="uid://bprosf8ro6jsv" path="res://scenes/world/deskObjects/mesa.tscn" id="12_ksadw"]
 [ext_resource type="PackedScene" uid="uid://cwxumyxiqbjfk" path="res://scenes/world/deskObjects/radio.tscn" id="13_8tfxl"]
 [ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://globals/camera2d.gd" id="14_73ynv"]
+[ext_resource type="PackedScene" uid="uid://cs2wrqej12fgn" path="res://scenes/ui/UI.tscn" id="14_no0k4"]
 [ext_resource type="PackedScene" uid="uid://dfh51iwhvhhss" path="res://scenes/world/weather/weatherController.tscn" id="14_odw3v"]
 
 [node name="NivelGarita" type="Node" unique_id=134314660]
@@ -38,20 +38,6 @@ z_index = -1
 position = Vector2(-17, -1)
 
 [node name="GameplayController" parent="." unique_id=1302597862 instance=ExtResource("7_fgqlb")]
-
-[node name="DialoguePanel" parent="." unique_id=334300632 instance=ExtResource("8_3drsx")]
-layout_mode = 3
-anchors_preset = -1
-anchor_left = 1.7960001
-anchor_top = -0.079
-anchor_right = 3.265
-anchor_bottom = 1.368
-offset_left = 437.0078
-offset_top = 128.192
-offset_right = -537.28
-offset_bottom = -446.464
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=528954651]
 position = Vector2(2908, 751)
@@ -83,5 +69,6 @@ z_index = 3
 position = Vector2(2813, 912)
 
 [node name="ManosJugador" parent="." unique_id=1443160236 instance=ExtResource("4_fgqlb")]
-z_index = 3
-position = Vector2(2871, 888)
+position = Vector2(2905, 904)
+
+[node name="UI" parent="." unique_id=183366563 instance=ExtResource("14_no0k4")]

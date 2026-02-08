@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cs2wrqej12fgn"]
+
+[ext_resource type="Script" uid="uid://bmfev5yvft66" path="res://scenes/ui/UI.gd" id="1_d2gw2"]
+
+[node name="UI" type="CanvasLayer" unique_id=183366563]
+script = ExtResource("1_d2gw2")
+
+[node name="MainLayout" type="Control" parent="." unique_id=1239981275]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainLayout" unique_id=1026178231]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="TopHUD" type="HBoxContainer" parent="MainLayout/MarginContainer" unique_id=1552337285]
+layout_mode = 2
+
+[node name="LblDia" type="Label" parent="MainLayout/MarginContainer/TopHUD" unique_id=911007908]
+layout_mode = 2
+
+[node name="LblDinero" type="Label" parent="MainLayout/MarginContainer/TopHUD" unique_id=1315104915]
+layout_mode = 2
+
+[node name="MiddleLayout" type="HBoxContainer" parent="MainLayout/MarginContainer" unique_id=949960340]
+layout_mode = 2
+
+[node name="ChatContainer" type="PanelContainer" parent="MainLayout/MarginContainer/MiddleLayout" unique_id=205564684]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/MarginContainer/MiddleLayout/ChatContainer" unique_id=1007918721]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="MainLayout/MarginContainer/MiddleLayout" unique_id=1952501596]
+layout_mode = 2
+
+[node name="ResponseMenu" type="VBoxContainer" parent="MainLayout/MarginContainer/MiddleLayout" unique_id=96425782]
+layout_mode = 2
+
+[node name="ActionFooter" type="HBoxContainer" parent="MainLayout/MarginContainer" unique_id=1400400436]
+layout_mode = 2
+
+[node name="BtnAprobar" type="TextureButton" parent="MainLayout/MarginContainer/ActionFooter" unique_id=171459681]
+layout_mode = 2
+
+[node name="BtnRechazar" type="TextureButton" parent="MainLayout/MarginContainer/ActionFooter" unique_id=1464010216]
+layout_mode = 2
