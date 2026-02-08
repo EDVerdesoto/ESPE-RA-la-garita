@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://51s1jxse4w8l" path="res://assets/objetos/muro_iz.png" id="6_cky0m"]
 [ext_resource type="Texture2D" uid="uid://di3isgglo3q4d" path="res://assets/fondo/fondo izquierda/izquierda_dia_lluvioso.png" id="6_hts7n"]
 [ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://globals/camera2d.gd" id="8_afuwr"]
-[ext_resource type="Texture2D" uid="uid://c6pbudnnh0i5v" path="res://assets/personajes/estudiante.png" id="11_5m7ae"]
+[ext_resource type="Texture2D" path="res://assets/personajes/estudiante.png" id="11_5m7ae"]
 [ext_resource type="Texture2D" uid="uid://c5kgeuytqpxnb" path="res://assets/HUD/manos_guardia_der.png" id="13_kksre"]
 [ext_resource type="Texture2D" uid="uid://bdijduajyfrta" path="res://assets/HUD/manos_guardia_iz.png" id="14_14gmk"]
 [ext_resource type="Script" uid="uid://cvsqbefy32bb6" path="res://scenes/RadioBurocractica.gd" id="14_cky0m"]
