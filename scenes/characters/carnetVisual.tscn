@@ -7,10 +7,10 @@
 size = Vector2(54.5, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_nombre"]
-size = Vector2(78, 10)
+size = Vector2(50, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_apellido"]
-size = Vector2(78, 10)
+size = Vector2(50.5, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_carrera"]
 size = Vector2(36, 10)
@@ -21,7 +21,7 @@ size = Vector2(78, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_foto"]
 size = Vector2(41, 61)
 
-[node name="CarnetVisual" type="Area2D" unique_id=1346391406]
+[node name="CarnetVisual" type="Area2D" unique_id=1346391406 groups=["carnet"]]
 position = Vector2(-8, 0)
 script = ExtResource("1_carnet")
 
@@ -35,57 +35,57 @@ position = Vector2(-45, -20)
 scale = Vector2(0.3, 0.3)
 
 [node name="LblNombre" type="Label" parent="SpriteFondo" unique_id=402656682]
-offset_left = -224.85242
-offset_top = 11.863312
-offset_right = -126.114716
-offset_bottom = 47.453285
+offset_left = -299.80347
+offset_top = -17.795013
+offset_right = -100.80347
+offset_bottom = 51.204987
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 21
+theme_override_font_sizes/font_size = 55
 text = "Nombre"
 metadata/_edit_use_anchors_ = true
 
 [node name="LblApellido" type="Label" parent="SpriteFondo" unique_id=383409503]
-offset_left = -224.85242
-offset_top = 77.11163
-offset_right = -134.85242
-offset_bottom = 107.11163
+offset_left = 56.213043
+offset_top = -17.794968
+offset_right = 237.21304
+offset_bottom = 46.205032
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 21
+theme_override_font_sizes/font_size = 55
 text = "Apellido"
 metadata/_edit_use_anchors_ = true
 
 [node name="LblCarrera" type="Label" parent="SpriteFondo" unique_id=1336569545]
-offset_left = 37.475464
-offset_top = 142.35992
-offset_right = 127.475464
-offset_bottom = 172.35992
+offset_left = -299.80347
+offset_top = 112.7016
+offset_right = -116.80347
+offset_bottom = 181.7016
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 21
+theme_override_font_sizes/font_size = 55
 text = "Carrera"
 metadata/_edit_use_anchors_ = true
 
 [node name="LblCodigo" type="Label" parent="SpriteFondo" unique_id=1546205571]
-offset_left = -228.60657
-offset_top = 207.74475
-offset_right = -59.606567
-offset_bottom = 237.74475
+offset_left = -216.11536
+offset_top = 201.81311
+offset_right = 227.88464
+offset_bottom = 277.8131
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 21
+theme_override_font_sizes/font_size = 55
 text = "ESPE-0000-00000"
 metadata/_edit_use_anchors_ = true
 
 [node name="LblRol" type="Label" parent="SpriteFondo" unique_id=1073982696]
-offset_left = -228.60693
-offset_top = 142.35992
-offset_right = -120.60693
-offset_bottom = 172.35992
+offset_left = -131.16394
+offset_top = 53.38495
+offset_right = 152.83606
+offset_bottom = 129.38495
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 21
+theme_override_font_sizes/font_size = 55
 text = "Estudiante"
 metadata/_edit_use_anchors_ = true
 
@@ -96,25 +96,25 @@ shape = SubResource("RectangleShape2D_carnet_main")
 [node name="ClickNombre" type="Area2D" parent="." unique_id=1935979689]
 
 [node name="Col" type="CollisionShape2D" parent="ClickNombre" unique_id=1525347112]
-position = Vector2(8, 8)
+position = Vector2(-16, 7)
 shape = SubResource("RectangleShape2D_campo_nombre")
 
 [node name="ClickApellido" type="Area2D" parent="." unique_id=1248115413]
 
 [node name="Col" type="CollisionShape2D" parent="ClickApellido" unique_id=348346675]
-position = Vector2(8, 19)
+position = Vector2(39.75, 7)
 shape = SubResource("RectangleShape2D_campo_apellido")
 
 [node name="ClickCarrera" type="Area2D" parent="." unique_id=1558985794]
 
 [node name="Col" type="CollisionShape2D" parent="ClickCarrera" unique_id=16987605]
-position = Vector2(29, 30)
+position = Vector2(-23, 29)
 shape = SubResource("RectangleShape2D_campo_carrera")
 
 [node name="ClickCodigo" type="Area2D" parent="." unique_id=356406161]
 
 [node name="Col" type="CollisionShape2D" parent="ClickCodigo" unique_id=1517744847]
-position = Vector2(8, 41)
+position = Vector2(8, 44)
 shape = SubResource("RectangleShape2D_campo_codigo")
 
 [node name="ClickFoto" type="Area2D" parent="." unique_id=845848289]

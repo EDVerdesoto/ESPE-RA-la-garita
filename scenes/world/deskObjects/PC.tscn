@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://brhi6mwr78871" path="res://scenes/world/deskObjects/PC.gd" id="1_pc"]
 [ext_resource type="Texture2D" uid="uid://cwa4fdsg61n14" path="res://assets/objetos/compu.png" id="2_8ok64"]
+[ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="3_uhvea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc_body"]
-size = Vector2(200, 160)
+size = Vector2(185, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_m"]
 size = Vector2(180, 16)
@@ -21,6 +22,7 @@ scale = Vector2(0.42, 0.42)
 texture = ExtResource("2_8ok64")
 
 [node name="CollisionPC" type="CollisionShape2D" parent="." unique_id=411799769]
+position = Vector2(-7.5, 0)
 shape = SubResource("RectangleShape2D_pc_body")
 
 [node name="PantallaMonitor" type="Control" parent="." unique_id=2101749325]
@@ -45,6 +47,8 @@ offset_left = 5.0
 offset_top = 3.0
 offset_right = 185.0
 offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("3_uhvea")
+theme_override_font_sizes/font_size = 13
 text = "=== SISTEMA ESPE ==="
 horizontal_alignment = 1
 
@@ -54,6 +58,8 @@ offset_left = 5.0
 offset_top = 22.0
 offset_right = 185.0
 offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("3_uhvea")
+theme_override_font_sizes/font_size = 13
 text = "NOMBRE: ---"
 
 [node name="LblApellidoSistema" type="Label" parent="PantallaMonitor" unique_id=1098130011]
@@ -62,6 +68,8 @@ offset_left = 5.0
 offset_top = 39.0
 offset_right = 185.0
 offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("3_uhvea")
+theme_override_font_sizes/font_size = 13
 text = "APELLIDO: ---"
 
 [node name="LblCedulaSistema" type="Label" parent="PantallaMonitor" unique_id=2140034885]
@@ -70,6 +78,8 @@ offset_left = 5.0
 offset_top = 56.0
 offset_right = 185.0
 offset_bottom = 71.0
+theme_override_fonts/font = ExtResource("3_uhvea")
+theme_override_font_sizes/font_size = 13
 text = "CÉDULA: ---"
 
 [node name="LblFechaExp" type="Label" parent="PantallaMonitor" unique_id=1025971062]
@@ -78,6 +88,8 @@ offset_left = 5.0
 offset_top = 73.0
 offset_right = 185.0
 offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_uhvea")
+theme_override_font_sizes/font_size = 13
 text = "EXPIRA: ---"
 
 [node name="LblCarreraSistema" type="Label" parent="PantallaMonitor" unique_id=508955950]
@@ -86,6 +98,8 @@ offset_left = 5.0
 offset_top = 90.0
 offset_right = 185.0
 offset_bottom = 105.0
+theme_override_fonts/font = ExtResource("3_uhvea")
+theme_override_font_sizes/font_size = 13
 text = "CARRERA: ---"
 
 [node name="LblCodigoSistema" type="Label" parent="PantallaMonitor" unique_id=1722483588]
@@ -94,6 +108,8 @@ offset_left = 5.0
 offset_top = 107.0
 offset_right = 185.0
 offset_bottom = 122.0
+theme_override_fonts/font = ExtResource("3_uhvea")
+theme_override_font_sizes/font_size = 13
 text = "CÓDIGO: ---"
 
 [node name="FotoSistema" type="Sprite2D" parent="PantallaMonitor" unique_id=403342475]

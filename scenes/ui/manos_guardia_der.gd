@@ -1,45 +1,65 @@
 extends Sprite2D
 
-# --- TEXTURAS (IMÁGENES) ---
-# Arrastra aquí tus imágenes desde el FileSystem
+# --- TEXTURAS ---
 @export var textura_mano_normal: Texture2D 
-@export var textura_escaner: Texture2D     
+@export var textura_escaner: Texture2D      
 
-# --- CONFIGURACIÓN ---
-@export var offset_personalizado: Vector2 = Vector2(-37, 110)
+# --- OFFSETS (VISUALES) ---
+# Estos números mueven SOLO EL DIBUJO, no el detector.
+@export var offset_mano_normal: Vector2 = Vector2(-25, -10)
+@export var offset_escaner: Vector2 = Vector2(0, -70) 
 
-# Definimos el área del carnet basada en tus datos:
-# X: 2845 a 2903 -> Ancho = 58
-# Y: 479 a 573.5 -> Alto = 94.5
-var zona_carnet = Rect2(2845, 479, 58, 94.5)
+# --- ESCALAS ---
+@export var escala_mano_normal: Vector2 = Vector2(0.35, 0.35)
+@export var escala_escaner: Vector2 = Vector2(0.5, 0.5)
+
+@onready var detector = $Detector 
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	z_index = 100 # Le subí a 100 por si acaso el HUD te lo tape
+	z_index = 100
 	
-	# Empezamos con la mano normal por defecto
-	if textura_mano_normal:
-		texture = textura_mano_normal
+	# Importante: Desactivamos la propiedad "Centered" si usas offsets manuales grandes,
+	# pero si tus offsets ya funcionan bien, déjalo como esté.
+	centered = false 
+	
+	activar_mano_normal()
+	
+	if detector:
+		detector.area_entered.connect(_on_detector_area_entered)
+		detector.area_exited.connect(_on_detector_area_exited)
 
 func _process(_delta):
-	# 1. Obtenemos la posición REAL del mouse (sin el offset de la mano)
-	# Usamos esto para chequear si el PUNTERO toca el carnet, no la imagen de la mano
-	var mouse_pos = get_global_mouse_position()
-	
-	# 2. Movemos la mano visualmente (con tu offset)
-	global_position = mouse_pos + offset_personalizado
-	
-	# 3. Lógica del cambio de herramienta
-	# ¿El puntero del mouse está dentro del rectángulo?
-	if zona_carnet.has_point(mouse_pos):
-		# CAMBIAR A ESCÁNER
-		# El 'if' extra es para no cargar la textura 60 veces por segundo, solo si cambió
-		if texture != textura_escaner and textura_escaner:
-			texture = textura_escaner
-			# Opcional: Si el escáner necesita otro offset, cámbialo aquí
-			# offset_personalizado = Vector2(-20, 50) 
-	else:
-		# VOLVER A MANO NORMAL
-		if texture != textura_mano_normal and textura_mano_normal:
-			texture = textura_mano_normal
-			# offset_personalizado = Vector2(-37, 110) # Restaurar offset original
+	# 1. MOVIMIENTO PURO
+	# El Nodo (y el Detector) van EXACTAMENTE a donde está el mouse.
+	# ¡Aquí NO sumamos offsets!
+	global_position = get_global_mouse_position()
+
+# --- FUNCIONES DE CAMBIO ---
+
+func activar_mano_normal():
+	if textura_mano_normal:
+		texture = textura_mano_normal
+		scale = escala_mano_normal
+		
+		# MAGIA: Usamos la propiedad nativa 'offset' del Sprite2D.
+		# Esto mueve la pintura pero deja el nodo (y el detector) quietos en el mouse.
+		offset = offset_mano_normal
+
+func activar_escaner():
+	if textura_escaner:
+		texture = textura_escaner
+		scale = escala_escaner
+		
+		# MAGIA: Cambiamos donde se pinta el escáner visualmente.
+		offset = offset_escaner
+
+# --- SEÑALES ---
+
+func _on_detector_area_entered(area):
+	if area.is_in_group("carnet"):
+		activar_escaner()
+
+func _on_detector_area_exited(area):
+	if area.is_in_group("carnet"):
+		activar_mano_normal()

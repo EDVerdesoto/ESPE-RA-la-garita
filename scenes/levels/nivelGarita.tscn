@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cplwhnoowti86" path="res://scenes/world/deskObjects/carpetaDocumentos.tscn" id="3_ysw8s"]
 [ext_resource type="PackedScene" uid="uid://nyeeya5bg5bx" path="res://scenes/ui/manosJugador.tscn" id="4_fgqlb"]
 [ext_resource type="PackedScene" uid="uid://c5ybjdinenp6p" path="res://scenes/gameplay/gameplayController.tscn" id="7_fgqlb"]
-[ext_resource type="PackedScene" uid="uid://dkon2go7p7dlw" path="res://scenes/ui/dialoguePanel.tscn" id="8_3drsx"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialoguePanel.tscn" id="8_3drsx"]
 [ext_resource type="PackedScene" uid="uid://ma1uf2g4inis" path="res://scenes/characters/npc.tscn" id="9_d1myb"]
 [ext_resource type="Texture2D" uid="uid://bck50kc6v0rtd" path="res://assets/objetos/muro.png" id="10_73ynv"]
 [ext_resource type="Texture2D" uid="uid://51s1jxse4w8l" path="res://assets/objetos/muro_iz.png" id="11_no0k4"]
@@ -67,7 +67,8 @@ position = Vector2(50, 174.00002)
 scale = Vector2(0.98271275, 0.75596905)
 
 [node name="Radio" parent="Mesa" unique_id=1661157786 instance=ExtResource("13_8tfxl")]
-position = Vector2(2820.7632, 910.0902)
+position = Vector2(2873.678, 900.8305)
+scale = Vector2(0.88, 1)
 
 [node name="Reporte" parent="." unique_id=1216192213 instance=ExtResource("2_fvuxs")]
 z_index = 3
@@ -82,4 +83,5 @@ z_index = 3
 position = Vector2(2813, 912)
 
 [node name="ManosJugador" parent="." unique_id=1443160236 instance=ExtResource("4_fgqlb")]
-position = Vector2(2905, 904)
+z_index = 3
+position = Vector2(2871, 888)

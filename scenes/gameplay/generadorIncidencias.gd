@@ -197,7 +197,7 @@ static func _construir_documentos(
 		var p_carnet_config = CarnetUniversitarioNPCConfig.new(
 			nom_car, apellido_car,
 			carnet_universitario_config.ruta_sprite,
-			carrera, "estudiante",
+			carrera, "Estudiante",
 			carnet_universitario_config.codigo_carnet,
 			carnet_universitario_config.foto_path
 		)
