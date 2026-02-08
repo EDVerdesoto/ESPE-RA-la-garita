@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6pbudnnh0i5v"
-path="res://.godot/imported/estudiante.png-c841a1d7ba767c0cacc37efa30c7a89e.ctex"
+uid="uid://dtxgjnoqd4ydi"
+path="res://.godot/imported/cabeza-NPC-estudiante-11.png-c4861d5984c88356efcad533a745c6ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/personajes/estudiante.png"
-dest_files=["res://.godot/imported/estudiante.png-c841a1d7ba767c0cacc37efa30c7a89e.ctex"]
+source_file="res://assets/personajes/cabeza/cabeza-NPC-estudiante-11.png"
+dest_files=["res://.godot/imported/cabeza-NPC-estudiante-11.png-c4861d5984c88356efcad533a745c6ff.ctex"]
 
 [params]
 

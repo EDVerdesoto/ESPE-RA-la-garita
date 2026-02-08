@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dul8pdnw5vnlv"
-path="res://.godot/imported/escaner.png-b7eda605073389a1e9b03c28959244d0.ctex"
+uid="uid://x4bi21i6jkh5"
+path="res://.godot/imported/NPC-estudiante-12.png-8d995bc5f5ca6d4c02d27f15839af68d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objetos/escaner.png"
-dest_files=["res://.godot/imported/escaner.png-b7eda605073389a1e9b03c28959244d0.ctex"]
+source_file="res://assets/personajes/NPCs/NPC-estudiante-12.png"
+dest_files=["res://.godot/imported/NPC-estudiante-12.png-8d995bc5f5ca6d4c02d27f15839af68d.ctex"]
 
 [params]
 
