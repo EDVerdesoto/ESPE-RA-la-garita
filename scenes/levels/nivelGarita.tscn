@@ -1,18 +1,24 @@
 [gd_scene format=3 uid="uid://csavcagqqsg32"]
 
+[ext_resource type="Script" uid="uid://cowwc7q72cxr7" path="res://scenes/levels/nivelGarita.gd" id="1_3drsx"]
 [ext_resource type="PackedScene" uid="uid://hsg1vodq0cke" path="res://scenes/world/deskObjects/PC.tscn" id="1_7uwk4"]
 [ext_resource type="PackedScene" uid="uid://beuhvqwj43qeo" path="res://scenes/world/environmentGarita.tscn" id="1_vsjpj"]
 [ext_resource type="PackedScene" uid="uid://dcxmegobm8xa3" path="res://scenes/world/deskObjects/reporte.tscn" id="2_fvuxs"]
 [ext_resource type="PackedScene" uid="uid://cplwhnoowti86" path="res://scenes/world/deskObjects/carpetaDocumentos.tscn" id="3_ysw8s"]
 [ext_resource type="PackedScene" uid="uid://nyeeya5bg5bx" path="res://scenes/ui/manosJugador.tscn" id="4_fgqlb"]
 [ext_resource type="PackedScene" uid="uid://b3t6dmgcnxw8s" path="res://scenes/ui/hudOverlay.tscn" id="5_3drsx"]
+[ext_resource type="PackedScene" uid="uid://c5ybjdinenp6p" path="res://scenes/gameplay/gameplayController.tscn" id="7_fgqlb"]
+[ext_resource type="PackedScene" uid="uid://dkon2go7p7dlw" path="res://scenes/ui/dialoguePanel.tscn" id="8_3drsx"]
+[ext_resource type="PackedScene" uid="uid://ma1uf2g4inis" path="res://scenes/characters/npc.tscn" id="9_d1myb"]
 
 [node name="NivelGarita" type="Node" unique_id=134314660]
+script = ExtResource("1_3drsx")
 
 [node name="EnvironmentGarita" parent="." unique_id=1960233612 instance=ExtResource("1_vsjpj")]
+position = Vector2(66, -8)
 
 [node name="Pc" parent="." unique_id=2120212604 instance=ExtResource("1_7uwk4")]
-position = Vector2(2828, 902)
+position = Vector2(2564, 576)
 
 [node name="Reporte" parent="." unique_id=1216192213 instance=ExtResource("2_fvuxs")]
 position = Vector2(2732, 874)
@@ -24,3 +30,21 @@ position = Vector2(2827, 924)
 position = Vector2(2905, 904)
 
 [node name="HudOverlay" parent="." unique_id=58143630 instance=ExtResource("5_3drsx")]
+
+[node name="GameplayController" parent="." unique_id=1302597862 instance=ExtResource("7_fgqlb")]
+
+[node name="DialoguePanel" parent="." unique_id=334300632 instance=ExtResource("8_3drsx")]
+layout_mode = 3
+anchors_preset = -1
+anchor_left = 1.9750001
+anchor_right = 2.9280002
+anchor_bottom = 1.062
+offset_left = -0.20019531
+offset_top = 40.0
+offset_right = -0.056152344
+offset_bottom = -0.17602539
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Npc" parent="." unique_id=72313117 instance=ExtResource("9_d1myb")]
+position = Vector2(226, -1)

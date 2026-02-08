@@ -4,10 +4,10 @@
 extends Node
 
 @onready var gameplay_controller = $GameplayController
-@onready var npc_node = $World/NpcVisual
-@onready var pc_monitor = $World/DeskObjects/PC
-@onready var dialogue_panel = $UI/DialoguePanel
-@onready var hud_overlay = $UI/HudOverlay
+@onready var npc_node = $Npc
+@onready var pc_monitor = $Pc
+@onready var dialogue_panel = $DialoguePanel
+@onready var hud_overlay = $HudOverlay
 
 func _ready():
 	print("=== NIVEL GARITA CARGADO ===")

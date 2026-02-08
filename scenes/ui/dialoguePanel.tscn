@@ -10,58 +10,86 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource("1_dlg")
 
-[node name="PanelDialogo" type="PanelContainer" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 20.0
-offset_top = 500.0
-offset_right = 500.0
-offset_bottom = 700.0
+[node name="FondoDialogo" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+offset_top = 10.0
+mouse_filter = 0
 
-[node name="VBox" type="VBoxContainer" parent="PanelDialogo"]
+[node name="MarginContainer" type="MarginContainer" parent="FondoDialogo"]
 layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
 
-[node name="LblNombreNPC" type="Label" parent="PanelDialogo/VBox"]
+[node name="VBoxPrincipal" type="VBoxContainer" parent="FondoDialogo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblNombreNPC" type="Label" parent="FondoDialogo/MarginContainer/VBoxPrincipal"]
 layout_mode = 2
 text = "Nombre NPC"
 horizontal_alignment = 0
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
 
-[node name="LblDialogo" type="RichTextLabel" parent="PanelDialogo/VBox"]
+[node name="ScrollChat" type="ScrollContainer" parent="FondoDialogo/MarginContainer/VBoxPrincipal"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 80)
-text = "..."
-fit_content = true
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
-[node name="ContenedorOpciones" type="VBoxContainer" parent="PanelDialogo/VBox"]
+[node name="ChatContainer" type="VBoxContainer" parent="FondoDialogo/MarginContainer/VBoxPrincipal/ScrollChat"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
 
-[node name="PanelDecision" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 520.0
-offset_top = 580.0
-offset_right = 770.0
-offset_bottom = 650.0
-
-[node name="HBox" type="HBoxContainer" parent="PanelDecision"]
+[node name="ContenedorOpciones" type="VBoxContainer" parent="FondoDialogo/MarginContainer/VBoxPrincipal"]
 layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="BtnAprobar" type="Button" parent="PanelDecision/HBox"]
+[node name="PanelDecision" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -70.0
+offset_right = 140.0
+offset_bottom = -15.0
+alignment = 1
+theme_override_constants/separation = 20
+
+[node name="BtnAprobar" type="Button" parent="PanelDecision"]
 layout_mode = 2
+custom_minimum_size = Vector2(120, 50)
 text = "✓ APROBAR"
-custom_minimum_size = Vector2(110, 50)
 
-[node name="BtnRechazar" type="Button" parent="PanelDecision/HBox"]
+[node name="BtnRechazar" type="Button" parent="PanelDecision"]
 layout_mode = 2
+custom_minimum_size = Vector2(120, 50)
 text = "✗ RECHAZAR"
-custom_minimum_size = Vector2(110, 50)
 
 [node name="PanelReporte" type="PanelContainer" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 520.0
-offset_top = 350.0
-offset_right = 780.0
-offset_bottom = 570.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -120.0
+offset_right = 140.0
+offset_bottom = 120.0
 
 [node name="VBox" type="VBoxContainer" parent="PanelReporte"]
 layout_mode = 2
@@ -76,9 +104,13 @@ layout_mode = 2
 
 [node name="LblFeedback" type="Label" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 300.0
-offset_top = 450.0
-offset_right = 700.0
-offset_bottom = 490.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -200.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 60.0
 horizontal_alignment = 1

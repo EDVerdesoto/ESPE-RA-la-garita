@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://di3isgglo3q4d" path="res://assets/fondo/fondo izquierda/izquierda_dia_lluvioso.png" id="6_u1q7b"]
 [ext_resource type="Texture2D" uid="uid://cnubsfgktbe1t" path="res://assets/fondo/fondo izquierda/izquierda_soleado.png" id="7_g2kw5"]
 [ext_resource type="Texture2D" uid="uid://bck50kc6v0rtd" path="res://assets/objetos/muro.png" id="8_8eehv"]
-[ext_resource type="PackedScene" uid="uid://ma1uf2g4inis" path="res://scenes/characters/npc.tscn" id="8_f6h5v"]
 [ext_resource type="Texture2D" uid="uid://51s1jxse4w8l" path="res://assets/objetos/muro_iz.png" id="9_ui6i4"]
 [ext_resource type="PackedScene" uid="uid://b3t6dmgcnxw8s" path="res://scenes/ui/hudOverlay.tscn" id="10_hud01"]
 
@@ -66,8 +65,6 @@ texture = ExtResource("6_u1q7b")
 position = Vector2(1284.0001, 330.99997)
 scale = Vector2(0.46458337, 0.4776786)
 texture = ExtResource("7_g2kw5")
-
-[node name="Npc" parent="." unique_id=72313117 instance=ExtResource("8_f6h5v")]
 
 [node name="Lluvia" type="CPUParticles2D" parent="." unique_id=1944737018]
 position = Vector2(2137, -58)

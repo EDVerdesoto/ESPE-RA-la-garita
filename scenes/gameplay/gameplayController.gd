@@ -9,7 +9,7 @@ extends Node
 @export var dialogue_panel_node: NodePath   ## Panel de diálogo y decisión
 
 @export_group("Configuración")
-@export var npcs_por_dia: int = 5
+@export var npcs_por_dia: int = 2
 @export var tiempo_por_npc: float = 60.0    ## Segundos antes de timeout
 
 # --- NODOS RESUELTOS ---
@@ -91,6 +91,7 @@ func _conectar_senales():
 
 func iniciar_dia():
 	print("=== INICIANDO DÍA ", GlobalGameManager.dia_actual, " ===")
+	
 	dia_en_curso = true
 	GlobalGameManager.aciertos_hoy = 0
 	GlobalGameManager.errores_hoy = 0

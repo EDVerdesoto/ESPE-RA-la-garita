@@ -37,7 +37,7 @@ func _cargar_api_key():
 		# Buscar la variable GEMINI_API_KEY
 		if line.begins_with("GEMINI_API_KEY="):
 			API_KEY = line.replace("GEMINI_API_KEY=", "")
-			URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=" + API_KEY
+			URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY
 			print("[GEMINI] API Key cargada correctamente")
 			break
 	
@@ -89,12 +89,12 @@ func solicitar_dialogos_batch(lista_npcs: Array, clima_actual: String):
 		"contents": [{
 			"parts": [{"text": prompt}]
 		}],
-		"generationConfig": {
+		"generation_config": {
 			"temperature": 1.0,
-			"topK": 40,
-			"topP": 0.95,
-			"maxOutputTokens": 8192,
-			"responseMimeType": "application/json"
+			"top_k": 40,
+			"top_p": 0.95,
+			"max_output_tokens": 8192,
+			"response_mime_type": "application/json"
 		}
 	})
 	
