@@ -6,7 +6,7 @@
 		"personalidad": "Tranquilo",
 		"rol_base": "Estudiante",
 		"carrera": "Ingeniería en Software",
-		"sprite_path": "res://assets/personajes/estudiante.png",
+		"sprite_path": "res://assets/personajes/NPCs/NPC-estudiante-1.png",
 		"cara_path": "res://assets/personajes/caras/cara_001.png",
 		"numero_cedula": "1724567890"
 	},
@@ -17,7 +17,7 @@
 		"personalidad": "Nerviosa",
 		"rol_base": "Estudiante",
 		"carrera": "Biotecnología",
-		"sprite_path": "res://assets/personajes/estudiante.png",
+		"sprite_path": "res://assets/personajes/NPCs/NPC-estudiante-2.png",
 		"cara_path": "res://assets/personajes/caras/cara_002.png",
 		"numero_cedula": "1712345678"
 	},

@@ -39,7 +39,7 @@ func generar_npcs_para_hoy(cantidad: int) -> Array:
 		var nombre = visual_data.get("nombre_base", "Juan")
 		var apellido = visual_data.get("apellido", "Pérez")
 		var personalidad = visual_data.get("personalidad", "Tranquilo")
-		var sprite_path = visual_data.get("sprite_path", "res://assets/personajes/estudiante.png")
+		var sprite_path = visual_data.get("sprite_path", "res://assets/personajes/NPCs/NPC-estudiante-1.png")
 		var carrera = visual_data.get("carrera", "Ingeniería en Software")
 		var cara_path = visual_data.get("cara_path", "res://assets/personajes/caras/cara_001.png")
 		var num_cedula = visual_data.get("numero_cedula", "17" + str(randi() % 100000000).pad_zeros(8))
