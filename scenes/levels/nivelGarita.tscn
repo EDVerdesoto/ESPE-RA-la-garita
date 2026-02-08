@@ -2,49 +2,84 @@
 
 [ext_resource type="Script" uid="uid://cowwc7q72cxr7" path="res://scenes/levels/nivelGarita.gd" id="1_3drsx"]
 [ext_resource type="PackedScene" uid="uid://hsg1vodq0cke" path="res://scenes/world/deskObjects/PC.tscn" id="1_7uwk4"]
-[ext_resource type="PackedScene" uid="uid://beuhvqwj43qeo" path="res://scenes/world/environmentGarita.tscn" id="1_vsjpj"]
 [ext_resource type="PackedScene" uid="uid://dcxmegobm8xa3" path="res://scenes/world/deskObjects/reporte.tscn" id="2_fvuxs"]
 [ext_resource type="PackedScene" uid="uid://cplwhnoowti86" path="res://scenes/world/deskObjects/carpetaDocumentos.tscn" id="3_ysw8s"]
 [ext_resource type="PackedScene" uid="uid://nyeeya5bg5bx" path="res://scenes/ui/manosJugador.tscn" id="4_fgqlb"]
-[ext_resource type="PackedScene" uid="uid://b3t6dmgcnxw8s" path="res://scenes/ui/hudOverlay.tscn" id="5_3drsx"]
 [ext_resource type="PackedScene" uid="uid://c5ybjdinenp6p" path="res://scenes/gameplay/gameplayController.tscn" id="7_fgqlb"]
 [ext_resource type="PackedScene" uid="uid://dkon2go7p7dlw" path="res://scenes/ui/dialoguePanel.tscn" id="8_3drsx"]
 [ext_resource type="PackedScene" uid="uid://ma1uf2g4inis" path="res://scenes/characters/npc.tscn" id="9_d1myb"]
+[ext_resource type="Texture2D" uid="uid://bck50kc6v0rtd" path="res://assets/objetos/muro.png" id="10_73ynv"]
+[ext_resource type="Texture2D" uid="uid://51s1jxse4w8l" path="res://assets/objetos/muro_iz.png" id="11_no0k4"]
+[ext_resource type="PackedScene" uid="uid://bprosf8ro6jsv" path="res://scenes/world/deskObjects/mesa.tscn" id="12_ksadw"]
+[ext_resource type="PackedScene" uid="uid://cwxumyxiqbjfk" path="res://scenes/world/deskObjects/radio.tscn" id="13_8tfxl"]
+[ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://globals/camera2d.gd" id="14_73ynv"]
+[ext_resource type="PackedScene" uid="uid://dfh51iwhvhhss" path="res://scenes/world/weather/weatherController.tscn" id="14_odw3v"]
 
 [node name="NivelGarita" type="Node" unique_id=134314660]
 script = ExtResource("1_3drsx")
 
-[node name="EnvironmentGarita" parent="." unique_id=1960233612 instance=ExtResource("1_vsjpj")]
-position = Vector2(66, -8)
+[node name="WeatherController" parent="." unique_id=1164922981 instance=ExtResource("14_odw3v")]
+z_index = -10
 
-[node name="Pc" parent="." unique_id=2120212604 instance=ExtResource("1_7uwk4")]
-position = Vector2(2564, 576)
+[node name="Muro" type="Sprite2D" parent="." unique_id=346987954]
+z_index = 1
+position = Vector2(2842, 547)
+scale = Vector2(0.7252907, 0.7815755)
+texture = ExtResource("10_73ynv")
 
-[node name="Reporte" parent="." unique_id=1216192213 instance=ExtResource("2_fvuxs")]
-position = Vector2(2732, 874)
+[node name="MuroIz" type="Sprite2D" parent="." unique_id=1522365974]
+z_index = 1
+position = Vector2(1251, 466.50006)
+scale = Vector2(0.98271275, 0.75596905)
+texture = ExtResource("11_no0k4")
 
-[node name="CarpetaDocumentos" parent="." unique_id=389950837 instance=ExtResource("3_ysw8s")]
-position = Vector2(2827, 924)
-
-[node name="ManosJugador" parent="." unique_id=1443160236 instance=ExtResource("4_fgqlb")]
-position = Vector2(2905, 904)
-
-[node name="HudOverlay" parent="." unique_id=58143630 instance=ExtResource("5_3drsx")]
+[node name="Npc" parent="." unique_id=72313117 instance=ExtResource("9_d1myb")]
+z_index = -1
+position = Vector2(-17, -1)
 
 [node name="GameplayController" parent="." unique_id=1302597862 instance=ExtResource("7_fgqlb")]
 
 [node name="DialoguePanel" parent="." unique_id=334300632 instance=ExtResource("8_3drsx")]
 layout_mode = 3
 anchors_preset = -1
-anchor_left = 1.9750001
-anchor_right = 2.9280002
-anchor_bottom = 1.062
-offset_left = -0.20019531
-offset_top = 40.0
-offset_right = -0.056152344
-offset_bottom = -0.17602539
+anchor_left = 1.7960001
+anchor_top = -0.079
+anchor_right = 3.265
+anchor_bottom = 1.368
+offset_left = 437.0078
+offset_top = 128.192
+offset_right = -537.28
+offset_bottom = -446.464
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Npc" parent="." unique_id=72313117 instance=ExtResource("9_d1myb")]
-position = Vector2(226, -1)
+[node name="Camera2D" type="Camera2D" parent="." unique_id=528954651]
+position = Vector2(2908, 751)
+script = ExtResource("14_73ynv")
+vista_afuera = Vector2(2885, 520)
+zoom_normal = Vector2(1.3, 1.3)
+zoom_out = Vector2(1.3, 1.2)
+permitir_paneo_libre = false
+
+[node name="Mesa" parent="." unique_id=1067390501 instance=ExtResource("12_ksadw")]
+z_index = 2
+position = Vector2(50, 174.00002)
+scale = Vector2(0.98271275, 0.75596905)
+
+[node name="Radio" parent="Mesa" unique_id=1661157786 instance=ExtResource("13_8tfxl")]
+position = Vector2(2820.7632, 910.0902)
+
+[node name="Reporte" parent="." unique_id=1216192213 instance=ExtResource("2_fvuxs")]
+z_index = 3
+position = Vector2(2728, 882)
+
+[node name="Pc" parent="." unique_id=2120212604 instance=ExtResource("1_7uwk4")]
+z_index = 3
+position = Vector2(2527, 576)
+
+[node name="CarpetaDocumentos" parent="." unique_id=389950837 instance=ExtResource("3_ysw8s")]
+z_index = 3
+position = Vector2(2813, 912)
+
+[node name="ManosJugador" parent="." unique_id=1443160236 instance=ExtResource("4_fgqlb")]
+position = Vector2(2905, 904)

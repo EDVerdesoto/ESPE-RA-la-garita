@@ -16,7 +16,7 @@ size = Vector2(50, 50)
 script = ExtResource("1_pc")
 
 [node name="SpriteMonitor" type="Sprite2D" parent="." unique_id=1197247725]
-position = Vector2(40.999996, 34.999996)
+position = Vector2(32, 35)
 scale = Vector2(0.42, 0.42)
 texture = ExtResource("2_8ok64")
 
@@ -25,6 +25,7 @@ shape = SubResource("RectangleShape2D_pc_body")
 
 [node name="PantallaMonitor" type="Control" parent="." unique_id=2101749325]
 visible = false
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = -95.0

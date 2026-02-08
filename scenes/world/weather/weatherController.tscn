@@ -7,9 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://c3a7t5wbjwy53" path="res://assets/fondo/fondo izquierda/izquierda_nublado.png" id="5_jquw3"]
 [ext_resource type="Texture2D" uid="uid://di3isgglo3q4d" path="res://assets/fondo/fondo izquierda/izquierda_dia_lluvioso.png" id="6_u1q7b"]
 [ext_resource type="Texture2D" uid="uid://cnubsfgktbe1t" path="res://assets/fondo/fondo izquierda/izquierda_soleado.png" id="7_g2kw5"]
-[ext_resource type="Texture2D" uid="uid://bck50kc6v0rtd" path="res://assets/objetos/muro.png" id="8_8eehv"]
-[ext_resource type="Texture2D" uid="uid://51s1jxse4w8l" path="res://assets/objetos/muro_iz.png" id="9_ui6i4"]
-[ext_resource type="PackedScene" uid="uid://b3t6dmgcnxw8s" path="res://scenes/ui/hudOverlay.tscn" id="10_hud01"]
 
 [sub_resource type="Gradient" id="Gradient_job3a"]
 offsets = PackedFloat32Array(0, 0.012578616, 1)
@@ -79,15 +76,3 @@ initial_velocity_min = 200.0
 initial_velocity_max = 400.0
 scale_amount_max = 2.0
 color = Color(0.68000215, 0.79739296, 0.8509393, 0.62352943)
-
-[node name="Muro" type="Sprite2D" parent="." unique_id=1502443961]
-position = Vector2(2842, 547)
-scale = Vector2(0.7252907, 0.7815755)
-texture = ExtResource("8_8eehv")
-
-[node name="MuroIz" type="Sprite2D" parent="." unique_id=1635748858]
-position = Vector2(1251, 466.50006)
-scale = Vector2(0.98271275, 0.75596905)
-texture = ExtResource("9_ui6i4")
-
-[node name="HudOverlay" parent="." unique_id=1729628180 instance=ExtResource("10_hud01")]

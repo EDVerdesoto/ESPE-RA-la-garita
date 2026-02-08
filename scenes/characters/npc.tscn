@@ -23,3 +23,4 @@ position = Vector2(12.5, -177.5)
 shape = SubResource("RectangleShape2D_bgitj")
 
 [node name="CarnetVisual" parent="." unique_id=1346391406 instance=ExtResource("3_bgitj")]
+position = Vector2(-132, -103)

@@ -36,7 +36,7 @@ func _ready():
 	
 	# 3. Timer para "tirar el dado" cada 20 segundos
 	var timer = Timer.new()
-	timer.wait_time = 5.0
+	timer.wait_time = 30.0
 	timer.autostart = true
 	timer.timeout.connect(_intentar_cambio_clima)
 	add_child(timer)

@@ -2,19 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://dfh51iwhvhhss" path="res://scenes/world/weather/weatherController.tscn" id="1_dpp3o"]
 [ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://globals/camera2d.gd" id="2_7l4h6"]
-[ext_resource type="PackedScene" uid="uid://bprosf8ro6jsv" path="res://scenes/world/deskObjects/mesa.tscn" id="3_1mip0"]
-[ext_resource type="PackedScene" uid="uid://cwxumyxiqbjfk" path="res://scenes/world/deskObjects/radio.tscn" id="3_a5j03"]
-[ext_resource type="Script" uid="uid://dpovuoe5hfgjf" path="res://scenes/world/environmentGarita.gd" id="10_env01"]
+
+[sub_resource type="GDScript" id="GDScript_hsb2b"]
+script/source = "extends Node2D
+"
 
 [node name="EnvironmentGarita" type="Node2D" unique_id=1960233612]
-script = ExtResource("10_env01")
-
-[node name="WeatherController" parent="." unique_id=1164922981 instance=ExtResource("1_dpp3o")]
-
-[node name="Mesa" parent="." unique_id=562084354 instance=ExtResource("3_1mip0")]
-
-[node name="Radio" parent="Mesa" unique_id=1661157786 instance=ExtResource("3_a5j03")]
-position = Vector2(2822, 899)
+script = SubResource("GDScript_hsb2b")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=236578820]
 position = Vector2(2908, 751)
@@ -23,3 +17,6 @@ vista_afuera = Vector2(2885, 520)
 zoom_normal = Vector2(1.3, 1.3)
 zoom_out = Vector2(1.3, 1.2)
 permitir_paneo_libre = false
+
+[node name="WeatherController" parent="." unique_id=1164922981 instance=ExtResource("1_dpp3o")]
+position = Vector2(72, 122)
