@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://cxswrjg7au4to"]
+[gd_scene format=3 uid="uid://dvympyc7hpaa"]
 
-[ext_resource type="Script" uid="uid://7kafkmxrrero" path="res://scenes/characters/carnetVisual.gd" id="1_carnet"]
-[ext_resource type="Texture2D" uid="uid://biriu30202ppb" path="res://assets/objetos/carnet.png" id="2_y758m"]
+[ext_resource type="Script" uid="uid://dbbdq73wwpbf4" path="res://scenes/characters/carnetVisual.gd" id="1_carnet"]
+[ext_resource type="Texture2D" uid="uid://uxr2pkpattrp" path="res://assets/objetos/carnet.png" id="2_y758m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_carnet_main"]
-size = Vector2(63, 52)
+size = Vector2(54.5, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_nombre"]
 size = Vector2(78, 10)
@@ -19,7 +19,7 @@ size = Vector2(36, 10)
 size = Vector2(78, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_foto"]
-size = Vector2(86, 67)
+size = Vector2(41, 61)
 
 [node name="CarnetVisual" type="Area2D" unique_id=1346391406]
 position = Vector2(-8, 0)
@@ -39,43 +39,58 @@ offset_left = -224.85242
 offset_top = 11.863312
 offset_right = -126.114716
 offset_bottom = 47.453285
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 21
 text = "Nombre"
 metadata/_edit_use_anchors_ = true
 
 [node name="LblApellido" type="Label" parent="SpriteFondo" unique_id=383409503]
-offset_left = -218.60657
-offset_top = 83.043274
-offset_right = -128.60657
-offset_bottom = 106.043274
+offset_left = -224.85242
+offset_top = 77.11163
+offset_right = -134.85242
+offset_bottom = 107.11163
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 21
 text = "Apellido"
 metadata/_edit_use_anchors_ = true
 
 [node name="LblCarrera" type="Label" parent="SpriteFondo" unique_id=1336569545]
-offset_left = 37.475433
-offset_top = 148.29155
-offset_right = 127.47543
-offset_bottom = 171.29155
+offset_left = 37.475464
+offset_top = 142.35992
+offset_right = 127.475464
+offset_bottom = 172.35992
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 21
 text = "Carrera"
 metadata/_edit_use_anchors_ = true
 
 [node name="LblCodigo" type="Label" parent="SpriteFondo" unique_id=1546205571]
-offset_left = -216.11475
-offset_top = 213.67639
-offset_right = -86.114746
-offset_bottom = 236.67639
+offset_left = -228.60657
+offset_top = 207.74475
+offset_right = -59.606567
+offset_bottom = 237.74475
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 21
 text = "ESPE-0000-00000"
 metadata/_edit_use_anchors_ = true
 
 [node name="LblRol" type="Label" parent="SpriteFondo" unique_id=1073982696]
-offset_left = -228.60706
-offset_top = 148.29163
-offset_right = -138.60706
-offset_bottom = 172.0182
+offset_left = -228.60693
+offset_top = 142.35992
+offset_right = -120.60693
+offset_bottom = 172.35992
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 21
 text = "Estudiante"
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionCarnet" type="CollisionShape2D" parent="." unique_id=565534728]
-position = Vector2(9.5, 76)
+position = Vector2(10.25, 79.5)
 shape = SubResource("RectangleShape2D_carnet_main")
 
 [node name="ClickNombre" type="Area2D" parent="." unique_id=1935979689]
@@ -105,5 +120,5 @@ shape = SubResource("RectangleShape2D_campo_codigo")
 [node name="ClickFoto" type="Area2D" parent="." unique_id=845848289]
 
 [node name="Col" type="CollisionShape2D" parent="ClickFoto" unique_id=1087789909]
-position = Vector2(9, -37.5)
+position = Vector2(7.5, -32.5)
 shape = SubResource("RectangleShape2D_campo_foto")
