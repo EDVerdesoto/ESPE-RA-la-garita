@@ -28,7 +28,7 @@ func _ready():
 	
 	# Conectar regresar (si no existe el nodo te dará error, ¡créalo!)
 	if btn_regresar:
-		btn_regresar.pressed.connect(func(): get_tree().change_scene_to_file("res://escenas/menu_principal.tscn"))
+		btn_regresar.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/ui/menus/menuPrincipal.tscn"))
 
 func actualizar_info_visual(num_slot, lbl_tit, lbl_det):
 	var info = SaveManager.obtener_info_resumida(num_slot)
@@ -53,4 +53,4 @@ func _jugar_slot(num: int):
 		print("Cargando partida existente...")
 		SaveManager.cargar_partida()
 	
-	get_tree().change_scene_to_file("res://escenas/mesa principal.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/loading/loadingScreen.tscn")

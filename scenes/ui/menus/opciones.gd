@@ -1,9 +1,9 @@
 extends Control
 
 # Referencias
-@onready var slider_volumen = $ColorRect2/VBox_Principal/VBox_Titulo/slider_volumen
-@onready var check_pantalla = $ColorRect2/VBox_Principal/VBox_Titulo/HBoxContainer/chck_full
-@onready var btn_regresar = $ColorRect2/VBox_Principal/VBox_Titulo/btn_regresar
+@onready var slider_volumen = $ColorRect2/VBoxContainer/VBox_Titulo/VBoxVolumen/slider_volumen
+@onready var check_pantalla = $ColorRect2/VBoxContainer/VBox_Titulo/HBoxContainer/chck_full
+@onready var btn_regresar = $ColorRect2/VBoxContainer/VBox_Titulo/btn_regresar
 
 func _ready():
 	# Conectamos señales
@@ -31,13 +31,12 @@ func _on_volumen_changed(valor):
 	var bus_index = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(valor))
 
-func _on_pantalla_toggled(esta_activo):
-	var ventana = get_window()
-	
-	if esta_activo:
-		# Intentamos Exclusive (el mejor), si falla, usa el Fullscreen normal
-		ventana.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
-		if ventana.mode != Window.MODE_EXCLUSIVE_FULLSCREEN:
-			ventana.mode = Window.MODE_FULLSCREEN
+func _on_pantalla_toggled(toggled_on):
+	if toggled_on:
+		# Cambiar a Pantalla Completa
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
-		ventana.mode = Window.MODE_WINDOWED
+		# Regresar a Ventana
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		# Opcional: Centrar la ventana al salir
+		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)

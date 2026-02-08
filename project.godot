@@ -19,7 +19,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="ESPE-RA la garita"
-run/main_scene="uid://csavcagqqsg32"
+run/main_scene="uid://55c8s8k2k1x1"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -31,6 +31,14 @@ ProgresoGlobal="*res://scenes/gameplay/providers/progresoGlobal.gd"
 NpcFactoryProvider="*res://scenes/gameplay/providers/npcFactoryProvider.gd"
 DocumentoNpcFactoryProvider="*res://scenes/gameplay/providers/documentoNpcFactoryProvider.gd"
 GeminiManager="*res://scenes/gameplay/geminiManager.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=2
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor]
 

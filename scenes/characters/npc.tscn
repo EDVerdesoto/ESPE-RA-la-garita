@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ma1uf2g4inis"]
 
-[ext_resource type="Texture2D" uid="uid://c6pbudnnh0i5v" path="res://assets/personajes/estudiante.png" id="1_84hc2"]
+[ext_resource type="Texture2D" uid="uid://bfd55mfybve27" path="res://assets/personajes/NPCs/NPC-estudiante-9.png" id="1_84hc2"]
 [ext_resource type="Script" uid="uid://cpfiivutmrm36" path="res://scenes/characters/npc.gd" id="1_bgitj"]
-[ext_resource type="PackedScene" uid="uid://cxswrjg7au4to" path="res://scenes/characters/carnetVisual.tscn" id="3_bgitj"]
+[ext_resource type="PackedScene" uid="uid://dvympyc7hpaa" path="res://scenes/characters/carnetVisual.tscn" id="3_bgitj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgitj"]
 size = Vector2(109, 109)

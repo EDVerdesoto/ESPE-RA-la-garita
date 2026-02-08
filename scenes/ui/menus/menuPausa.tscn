@@ -4,8 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://6wmi5tg46jx2" path="res://fotos/sello(1).png" id="1_v2jgs"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_1cdjc"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_k07w2"]
+font_size = 120
+font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+outline_size = 4
+outline_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajpfe"]
-bg_color = Color(0.21950099, 0.21950105, 0.21950087, 0.8)
+bg_color = Color(0.21960784, 0.21960784, 0.21960784, 0.88235295)
+border_color = Color(0.973535, 0.9735351, 0.973535, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color(0.26657522, 0.2665752, 0.2665752, 0.8509804)
+shadow_size = 3
+shadow_offset = Vector2(1, 1)
 
 [node name="MenuPausa" type="Control" unique_id=807289076]
 process_mode = 3
@@ -13,10 +27,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 205.0
-offset_top = 88.0
-offset_right = -98.0
-offset_bottom = -128.0
+offset_left = 151.0
+offset_top = 109.0
+offset_right = -151.0
+offset_bottom = -109.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k07w2")
@@ -30,17 +44,37 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.45490196)
 
+[node name="Label" type="Label" parent="ColorRect" unique_id=969535614]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -350.0
+offset_top = 35.0
+offset_right = 350.0
+offset_bottom = 91.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("2_1cdjc")
+theme_override_font_sizes/font_size = 49
+text = "PAUSA"
+label_settings = SubResource("LabelSettings_k07w2")
+horizontal_alignment = 1
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect" unique_id=899365705]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -349.5
-offset_right = 350.5
+offset_left = -612.0
+offset_top = 192.0
+offset_right = 612.0
+offset_bottom = -178.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+theme_override_constants/separation = 25
 
 [node name="Sello" type="TextureRect" parent="ColorRect/VBoxContainer2" unique_id=1513109525]
 modulate = Color(1, 1, 1, 0.68235296)
@@ -54,24 +88,29 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 60
+theme_override_constants/separation = 52
 alignment = 1
 
 [node name="btnContinuar" type="Button" parent="ColorRect/VBoxContainer2/VBoxContainer" unique_id=1523899916]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("2_1cdjc")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_ajpfe")
 text = "CONTINUAR"
 
-[node name="btn_opciones" type="Button" parent="ColorRect/VBoxContainer2/VBoxContainer" unique_id=469010288]
+[node name="btnOpciones" type="Button" parent="ColorRect/VBoxContainer2/VBoxContainer" unique_id=211918088]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("2_1cdjc")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_ajpfe")
 text = "OPCIONES"
 
-[node name="Button3" type="Button" parent="ColorRect/VBoxContainer2/VBoxContainer" unique_id=1036678995]
+[node name="btnSalirAlMenu" type="Button" parent="ColorRect/VBoxContainer2/VBoxContainer" unique_id=814469801]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("2_1cdjc")
-theme_override_font_sizes/font_size = 20
-text = "SALIR AL MENÚ"
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_ajpfe")
+text = "  SALIR AL MENU  "

@@ -7,7 +7,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_chcw5"]
 font = ExtResource("2_4n5yr")
-font_size = 96
+font_size = 150
 font_color = Color(0.8320714, 0.7792464, 0.6268813, 1)
 outline_size = 6
 outline_color = Color(0.83137256, 0.78039217, 0.627451, 1)
@@ -64,71 +64,80 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 73.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.16470589, 0.2, 0.14509805, 1)
+color = Color(0.16470589, 0.2, 0.14509805, 0.9019608)
 
-[node name="VBox_Principal" type="VBoxContainer" parent="ColorRect2" unique_id=1164246225]
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2" unique_id=850636087]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 259.5
+offset_top = 226.5
+offset_right = -259.5
+offset_bottom = -226.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 35
-
-[node name="VBox_Titulo" type="VBoxContainer" parent="ColorRect2/VBox_Principal" unique_id=1270263730]
-custom_minimum_size = Vector2(0, 570)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_constants/separation = 13
+theme_override_constants/separation = 80
 alignment = 1
 
-[node name="lbl_Titulo" type="Label" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=861920421]
+[node name="lbl_Titulo" type="Label" parent="ColorRect2/VBoxContainer" unique_id=861920421]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_fonts/font = ExtResource("2_4n5yr")
 theme_override_font_sizes/font_size = 100
-text = "Opciones"
+text = "OPCIONES"
 label_settings = SubResource("LabelSettings_chcw5")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="lbl_volumen" type="Label" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=1641455956]
+[node name="VBox_Titulo" type="VBoxContainer" parent="ColorRect2/VBoxContainer" unique_id=1270263730]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 55
+alignment = 1
+
+[node name="VBoxVolumen" type="VBoxContainer" parent="ColorRect2/VBoxContainer/VBox_Titulo" unique_id=17768982]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="lbl_volumen" type="Label" parent="ColorRect2/VBoxContainer/VBox_Titulo/VBoxVolumen" unique_id=1641455956]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_fonts/font = ExtResource("2_4n5yr")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 55
 theme_override_styles/normal = SubResource("StyleBoxFlat_4n5yr")
 text = "Volumen"
 
-[node name="slider_volumen" type="HSlider" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=1842159574]
+[node name="slider_volumen" type="HSlider" parent="ColorRect2/VBoxContainer/VBox_Titulo/VBoxVolumen" unique_id=1842159574]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_s8bbw")
 max_value = 1.0
 step = 0.1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=103446849]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect2/VBoxContainer/VBox_Titulo" unique_id=103446849]
 layout_mode = 2
 theme_override_constants/separation = 26
 alignment = 1
 
-[node name="lbl_fullscreen" type="Label" parent="ColorRect2/VBox_Principal/VBox_Titulo/HBoxContainer" unique_id=2048257906]
+[node name="lbl_fullscreen" type="Label" parent="ColorRect2/VBoxContainer/VBox_Titulo/HBoxContainer" unique_id=2048257906]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_fonts/font = ExtResource("2_4n5yr")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 55
 theme_override_styles/normal = SubResource("StyleBoxFlat_4n5yr")
 text = "Pantalla Completa"
 
-[node name="chck_full" type="CheckBox" parent="ColorRect2/VBox_Principal/VBox_Titulo/HBoxContainer" unique_id=173786549]
+[node name="chck_full" type="CheckBox" parent="ColorRect2/VBoxContainer/VBox_Titulo/HBoxContainer" unique_id=173786549]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/normal = SubResource("StyleBoxEmpty_s8bbw")
@@ -141,26 +150,16 @@ theme_override_icons/checked = ExtResource("3_chcw5")
 theme_override_icons/unchecked = ExtResource("4_os4os")
 icon_alignment = 2
 
-[node name="btn_regresar" type="Button" parent="ColorRect2/VBox_Principal/VBox_Titulo" unique_id=1577344710]
+[node name="btn_regresar" type="Button" parent="ColorRect2/VBoxContainer/VBox_Titulo" unique_id=1577344710]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
 theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
 theme_override_fonts/font = ExtResource("2_4n5yr")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 55
 theme_override_styles/normal = SubResource("StyleBoxFlat_3aarh")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_lqae7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ay0lj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6soht")
 text = "Regresar"
-
-[node name="lbl_Version" type="Label" parent="ColorRect2" unique_id=242659399]
-layout_mode = 0
-offset_top = 559.0
-offset_right = 1152.0
-offset_bottom = 574.0
-theme_override_fonts/font = ExtResource("2_4n5yr")
-text = "v0.0.1 "
-horizontal_alignment = 2
-vertical_alignment = 2

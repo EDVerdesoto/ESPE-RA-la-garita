@@ -6,11 +6,11 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjnd6"]
 bg_color = Color(0.101960786, 0.14117648, 0.078431375, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.4862745, 0.44313726, 0.38039216, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sffut"]
 bg_color = Color(0.17548501, 0.23260301, 0.1412526, 1)
@@ -21,12 +21,20 @@ border_width_bottom = 2
 border_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rchmj"]
+content_margin_left = 5.0
+content_margin_top = 1.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
 bg_color = Color(0.101960786, 0.14117648, 0.078431375, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
+border_color = Color(0.48702145, 0.44497937, 0.37914324, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_860wr"]
 bg_color = Color(0.1764706, 0.23137255, 0.14117648, 1)
@@ -64,6 +72,15 @@ grow_vertical = 2
 theme_override_constants/separation = 100
 alignment = 1
 
+[node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer" unique_id=1832291991]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+theme_override_fonts/font = ExtResource("3_336hp")
+theme_override_font_sizes/font_size = 110
+text = "SELECCIONE UN ARCHIVO 
+DE GUARDADO"
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer" unique_id=1532594743]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
@@ -71,7 +88,7 @@ theme_override_constants/separation = 100
 alignment = 1
 
 [node name="BtnSlot1" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=50254332]
-custom_minimum_size = Vector2(280, 2)
+custom_minimum_size = Vector2(350, 380)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_yjnd6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sffut")
@@ -97,7 +114,8 @@ stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer" unique_id=834031092]
 layout_mode = 2
-theme_override_constants/margin_left = 5
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer" unique_id=920600320]
 layout_mode = 2
@@ -107,6 +125,7 @@ alignment = 1
 [node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer/VBoxContainer" unique_id=37213014]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("3_336hp")
 theme_override_font_sizes/font_size = 40
 text = "VACÍO"
@@ -115,13 +134,14 @@ autowrap_mode = 3
 [node name="lblDetalles" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot1/MarginContainer/MarginContainer/VBoxContainer" unique_id=543078669]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("3_336hp")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 40
 text = "Nueva Partida"
 autowrap_mode = 3
 
 [node name="BtnSlot2" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=1529538812]
-custom_minimum_size = Vector2(280, 2)
+custom_minimum_size = Vector2(350, 380)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_yjnd6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sffut")
@@ -147,7 +167,8 @@ stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer" unique_id=2093985578]
 layout_mode = 2
-theme_override_constants/margin_left = 5
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer/MarginContainer" unique_id=717579660]
 layout_mode = 2
@@ -157,6 +178,7 @@ alignment = 1
 [node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer/MarginContainer/VBoxContainer" unique_id=1553047461]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("3_336hp")
 theme_override_font_sizes/font_size = 40
 text = "VACÍO"
@@ -165,13 +187,14 @@ autowrap_mode = 3
 [node name="lblDetalles" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot2/MarginContainer/MarginContainer/VBoxContainer" unique_id=1355428787]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("3_336hp")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 40
 text = "Nueva Partida"
 autowrap_mode = 3
 
 [node name="BtnSlot3" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=1774729387]
-custom_minimum_size = Vector2(280, 2)
+custom_minimum_size = Vector2(350, 380)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_yjnd6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sffut")
@@ -197,7 +220,8 @@ stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer" unique_id=848380443]
 layout_mode = 2
-theme_override_constants/margin_left = 5
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer/MarginContainer" unique_id=169423903]
 layout_mode = 2
@@ -207,6 +231,7 @@ alignment = 1
 [node name="lblTitulo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer/MarginContainer/VBoxContainer" unique_id=852281022]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("3_336hp")
 theme_override_font_sizes/font_size = 40
 text = "VACÍO"
@@ -215,8 +240,9 @@ autowrap_mode = 3
 [node name="lblDetalles" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer/BtnSlot3/MarginContainer/MarginContainer/VBoxContainer" unique_id=1158317342]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("3_336hp")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 40
 text = "Nueva Partida"
 autowrap_mode = 3
 
@@ -225,13 +251,13 @@ layout_mode = 2
 theme_override_constants/margin_right = 52
 
 [node name="btn_regresar" type="Button" parent="ColorRect/VBoxContainer/MarginContainer" unique_id=1598072960]
+layout_direction = 4
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-theme_override_constants/outline_size = 1
-theme_override_constants/line_spacing = 0
+theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
 theme_override_fonts/font = ExtResource("3_336hp")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 37
 theme_override_styles/normal = SubResource("StyleBoxFlat_rchmj")
 theme_override_styles/hover = SubResource("StyleBoxFlat_860wr")
 text = "Regresar"

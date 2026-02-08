@@ -2,7 +2,7 @@ extends Node
 
 # --- CONFIGURACIÓN DE SISTEMA ---
 # Aquí guardamos a dónde volver si das clic en "Regresar" (Menú Principal por defecto)
-var escena_retorno: String = "res://menu_principal.tscn"
+var escena_retorno: String = "res://scenes/ui/menus/menuPrincipal.tscn"
 
 # --- SISTEMA DE GUARDADO ---
 # ¿En qué carpeta (slot) estamos jugando? (1, 2 o 3)

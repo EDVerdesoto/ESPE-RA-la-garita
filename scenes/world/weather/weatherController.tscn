@@ -64,11 +64,11 @@ scale = Vector2(0.46458337, 0.4776786)
 texture = ExtResource("7_g2kw5")
 
 [node name="Lluvia" type="CPUParticles2D" parent="." unique_id=1944737018]
-position = Vector2(2137, -58)
-amount = 300
+position = Vector2(2444, -83)
+amount = 350
 texture = SubResource("GradientTexture2D_dwmpw")
 emission_shape = 3
-emission_rect_extents = Vector2(1400, 1)
+emission_rect_extents = Vector2(1150, 25)
 particle_flag_align_y = true
 direction = Vector2(-0.5, 1)
 spread = 0.0

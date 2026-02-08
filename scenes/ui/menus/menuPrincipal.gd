@@ -46,24 +46,24 @@ func conectar_botones():
 
 func _on_continuar_pressed():
 	print("Continuando partida...")
-	get_tree().change_scene_to_file("res://escenas/SelectorPartida.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/menus/selectorPartida.tscn")
 	
 
 func _on_nuevo_turno_pressed():
 	print("Iniciando nuevo turno...")
-	get_tree().change_scene_to_file("res://escenas/SelectorPartida.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/menus/selectorPartida.tscn")
 
 func _on_puntuacion_pressed():
 	print("Abriendo puntuación...")
-	get_tree().change_scene_to_file("res://escenas/puntuacion.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/menus/puntuacion.tscn")
 
 func _on_opciones_pressed():
 	print("Abriendo opciones...")
-	get_tree().change_scene_to_file("res://escenas/opciones.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/menus/opciones.tscn")
 
 func _on_creditos_pressed():
 	print("Mostrando créditos...")
-	get_tree().change_scene_to_file("res://escenas/creditos.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/menus/creditos.tscn")
 
 func _on_salir_pressed():
 	print("Saliendo del juego...")
