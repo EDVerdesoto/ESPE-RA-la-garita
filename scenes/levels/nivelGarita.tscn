@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cplwhnoowti86" path="res://scenes/world/deskObjects/carpetaDocumentos.tscn" id="3_ysw8s"]
 [ext_resource type="PackedScene" uid="uid://nyeeya5bg5bx" path="res://scenes/ui/manosJugador.tscn" id="4_fgqlb"]
 [ext_resource type="Texture2D" uid="uid://d1jwaidqhsu0e" path="res://assets/fondo/gatito.jpg" id="4_no0k4"]
+[ext_resource type="Script" uid="uid://bm663jc0c3mgi" path="res://scenes/levels/gato_area.gd" id="5_8tfxl"]
+[ext_resource type="AudioStream" uid="uid://cl35rah4pm221" path="res://assets/sounds/miau_hombre.mp3" id="6_odw3v"]
 [ext_resource type="PackedScene" uid="uid://c5ybjdinenp6p" path="res://scenes/gameplay/gameplayController.tscn" id="7_fgqlb"]
 [ext_resource type="PackedScene" uid="uid://ma1uf2g4inis" path="res://scenes/characters/npc.tscn" id="9_d1myb"]
 [ext_resource type="Texture2D" uid="uid://bck50kc6v0rtd" path="res://assets/objetos/muro.png" id="10_73ynv"]
@@ -15,6 +17,9 @@
 [ext_resource type="Script" uid="uid://c2qbo8ghvyke3" path="res://globals/camera2d.gd" id="14_73ynv"]
 [ext_resource type="PackedScene" uid="uid://cs2wrqej12fgn" path="res://scenes/ui/UI.tscn" id="14_no0k4"]
 [ext_resource type="PackedScene" uid="uid://dfh51iwhvhhss" path="res://scenes/world/weather/weatherController.tscn" id="14_odw3v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8vem6"]
+size = Vector2(317.97803, 426.0625)
 
 [node name="NivelGarita" type="Node" unique_id=134314660]
 script = ExtResource("1_3drsx")
@@ -34,6 +39,18 @@ offset_right = 1108.5212
 offset_bottom = -101.62109
 texture = ExtResource("4_no0k4")
 expand_mode = 1
+
+[node name="gatoArea" type="Area2D" parent="Muro/TextureRect" unique_id=362690164]
+script = ExtResource("5_8tfxl")
+
+[node name="Miau" type="CollisionShape2D" parent="Muro/TextureRect/gatoArea" unique_id=118247739]
+z_index = 4
+position = Vector2(159.5044, 213.0313)
+scale = Vector2(1.0000001, 1)
+shape = SubResource("RectangleShape2D_8vem6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Muro/TextureRect/gatoArea" unique_id=1334058965]
+stream = ExtResource("6_odw3v")
 
 [node name="MuroIz" type="Sprite2D" parent="." unique_id=1522365974]
 z_index = 1

@@ -21,6 +21,30 @@ shadow_color = Color(0.26657522, 0.2665752, 0.2665752, 0.8509804)
 shadow_size = 3
 shadow_offset = Vector2(1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k07w2"]
+bg_color = Color(0.37036446, 0.3703645, 0.37036446, 0.88235295)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.54497427, 0.5449743, 0.54497397, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pr6m4"]
+bg_color = Color(0.21960784, 0.21960784, 0.21960784, 0.88235295)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7371737, 0.70621496, 0.44711483, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
 [node name="MenuPausa" type="Control" unique_id=807289076]
 process_mode = 3
 layout_mode = 3
@@ -42,7 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.45490196)
+color = Color(0.16470589, 0.2, 0.14509805, 0.9019608)
 
 [node name="Label" type="Label" parent="ColorRect" unique_id=969535614]
 layout_mode = 1
@@ -94,23 +118,35 @@ alignment = 1
 [node name="btnContinuar" type="Button" parent="ColorRect/VBoxContainer2/VBoxContainer" unique_id=1523899916]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
+theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
 theme_override_fonts/font = ExtResource("2_1cdjc")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_ajpfe")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k07w2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pr6m4")
 text = "CONTINUAR"
 
 [node name="btnOpciones" type="Button" parent="ColorRect/VBoxContainer2/VBoxContainer" unique_id=211918088]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
+theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
 theme_override_fonts/font = ExtResource("2_1cdjc")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_ajpfe")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k07w2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pr6m4")
 text = "OPCIONES"
 
 [node name="btnSalirAlMenu" type="Button" parent="ColorRect/VBoxContainer2/VBoxContainer" unique_id=814469801]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+theme_override_colors/font_pressed_color = Color(0.8117647, 0.8784314, 0.627451, 1)
+theme_override_colors/font_hover_color = Color(1, 0.7019608, 0.2784314, 1)
 theme_override_fonts/font = ExtResource("2_1cdjc")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_ajpfe")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k07w2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pr6m4")
 text = "  SALIR AL MENU  "

@@ -48,7 +48,6 @@ func _on_continuar_pressed():
 	print("Continuando partida...")
 	get_tree().change_scene_to_file("res://scenes/ui/menus/selectorPartida.tscn")
 	
-
 func _on_nuevo_turno_pressed():
 	print("Iniciando nuevo turno...")
 	get_tree().change_scene_to_file("res://scenes/ui/menus/selectorPartida.tscn")
