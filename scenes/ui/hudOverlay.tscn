@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b3t6dmgcnxw8s"]
+[gd_scene format=3 uid="uid://chhfpvi1cjo8m"]
 
 [sub_resource type="GDScript" id="GDScript_5fx1s"]
 script/source = "## HUD Overlay: Muestra información del estado del juego al jugador

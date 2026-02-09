@@ -2,6 +2,9 @@
 ## Coordina: NPCs → Carnet → Monitor → Comparaciones → Decisiones → Economía
 extends Node
 
+# --- SEÑALES ---
+signal dia_finalizado(resumen: Dictionary)  ## Se emite al terminar todos los NPCs del día
+
 # --- REFERENCIAS DE ESCENA (configurar en editor) ---
 @export_group("Nodos Principales")
 @export var npc_visual_node: NodePath       ## Nodo NPC visual (Area2D con carnet)
@@ -9,7 +12,7 @@ extends Node
 @export var dialogue_panel_node: NodePath   ## Panel de diálogo y decisión
 
 @export_group("Configuración")
-@export var npcs_por_dia: int = 2
+@export var npcs_por_dia: int = 10
 @export var tiempo_por_npc: float = 60.0    ## Segundos antes de timeout
 
 # --- NODOS RESUELTOS ---
@@ -77,8 +80,6 @@ func _conectar_senales():
 	if dialogue_panel:
 		if dialogue_panel.has_signal("decision_tomada"):
 			dialogue_panel.decision_tomada.connect(_on_decision_tomada)
-		if dialogue_panel.has_signal("incidencia_reportada"):
-			dialogue_panel.incidencia_reportada.connect(_on_incidencia_reportada)
 	
 	# --- Comparación Manager ---
 	comparacion_manager.discrepancia_detectada.connect(_on_discrepancia_detectada)
@@ -256,11 +257,8 @@ func _on_decision_tomada(decision: int):
 	
 	if decision == GlobalEnums.DecisionGuardia.APROBADO:
 		_procesar_aprobacion()
-	# Rechazado se maneja después de que el jugador seleccione el motivo
-
-func _on_incidencia_reportada(incidencia_reportada: int):
-	# El guardia rechaza y reporta una incidencia específica
-	_procesar_rechazo(incidencia_reportada)
+	elif decision == GlobalEnums.DecisionGuardia.RECHAZADO:
+		_procesar_rechazo()
 
 func _procesar_aprobacion():
 	var resultado = comparacion_manager.evaluar_decision(GlobalEnums.DecisionGuardia.APROBADO)
@@ -270,9 +268,11 @@ func _procesar_aprobacion():
 	else:
 		GlobalGameManager.errores_hoy += 1
 	
-	# Mostrar feedback
-	if dialogue_panel and dialogue_panel.has_method("mostrar_feedback"):
-		dialogue_panel.mostrar_feedback(resultado)
+	# Registrar post-acción según tipo de NPC
+	if npc_actual:
+		var post_action = PostActionCatalog.obtener_post_action(npc_actual, true)
+		GlobalGameManager.registrar_post_action(post_action)
+	
 	if dialogue_panel and dialogue_panel.has_method("mostrar_dialogo_aprobado"):
 		dialogue_panel.mostrar_dialogo_aprobado()
 	
@@ -284,26 +284,19 @@ func _procesar_aprobacion():
 		await get_tree().create_timer(2.0).timeout
 		_on_npc_salio()
 
-func _procesar_rechazo(incidencia_reportada: int):
+func _procesar_rechazo():
 	var resultado = comparacion_manager.evaluar_decision(GlobalEnums.DecisionGuardia.RECHAZADO)
 	
-	# Verificar si la incidencia reportada es la correcta
-	var reporte_correcto = (incidencia_reportada == npc_actual.incidencia) if npc_actual else false
-	
-	if resultado.correcta and reporte_correcto:
+	if resultado.correcta:
+		# Rechazó a alguien que sí tenía incidencia → bien hecho
 		GlobalGameManager.aciertos_hoy += 1
-		resultado["correcta"] = true
-	elif resultado.correcta and not reporte_correcto:
-		# Rechazó correctamente pero motivo equivocado - medio punto
-		GlobalGameManager.aciertos_hoy += 1
-		resultado["correcta"] = true
-		print("[GAMEPLAY] Rechazo correcto pero motivo inexacto")
 	else:
+		# Rechazó a un inocente → error + post-action de rechazo injusto
 		GlobalGameManager.errores_hoy += 1
-		resultado["correcta"] = false
+		if npc_actual:
+			var post_action = PostActionCatalog.obtener_post_action_rechazo_injusto(npc_actual)
+			GlobalGameManager.registrar_post_action(post_action)
 	
-	if dialogue_panel and dialogue_panel.has_method("mostrar_feedback"):
-		dialogue_panel.mostrar_feedback(resultado)
 	if dialogue_panel and dialogue_panel.has_method("mostrar_dialogo_rechazado"):
 		dialogue_panel.mostrar_dialogo_rechazado()
 	
@@ -328,7 +321,13 @@ func finalizar_dia():
 	print("\n========== FIN DEL DÍA ", GlobalGameManager.dia_actual, " ==========")
 	print("Aciertos: ", GlobalGameManager.aciertos_hoy)
 	print("Errores: ", GlobalGameManager.errores_hoy)
-	GlobalGameManager.calcular_fin_de_dia()
+	print("Post-acciones: ", GlobalGameManager.post_actions_hoy.size())
+	
+	# Calcular el resumen (no resetea aún)
+	var resumen = GlobalGameManager.calcular_fin_de_dia()
+	
+	# Emitir señal para que la UI muestre el reporte
+	dia_finalizado.emit(resumen)
 
 func _limpiar_estado():
 	timer_npc.stop()

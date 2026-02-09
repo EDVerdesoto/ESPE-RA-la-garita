@@ -260,17 +260,4 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="LblFeedback" type="Label" parent="MainLayout" unique_id=442529802]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -200.0
-offset_top = 55.0
-offset_right = 200.0
-offset_bottom = 100.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 18
-horizontal_alignment = 1
-vertical_alignment = 1
+

@@ -18,7 +18,17 @@ func _ready():
 		gameplay_controller.pc_monitor = pc_monitor
 		gameplay_controller.dialogue_panel = ui
 		gameplay_controller._conectar_senales()
+		
+		# Conectar señal de fin de día → mostrar reporte
+		if not gameplay_controller.dia_finalizado.is_connected(_on_dia_finalizado):
+			gameplay_controller.dia_finalizado.connect(_on_dia_finalizado)
+		
 		gameplay_controller.iniciar_dia()
+	
+	# Conectar señal de cierre de reporte
+	if ui and ui.has_signal("reporte_fin_dia_cerrado"):
+		if not ui.reporte_fin_dia_cerrado.is_connected(_on_reporte_cerrado):
+			ui.reporte_fin_dia_cerrado.connect(_on_reporte_cerrado)
 	
 	_actualizar_hud()
 
@@ -55,3 +65,23 @@ func pausar_juego():
 		print("Juego Pausado")
 	else:
 		print("Error: No se cargó la escena de pausa")
+
+# =====================================================
+# FIN DE DÍA → REPORTE → NUEVO DÍA
+# =====================================================
+
+## Cuando el GameplayController termina todos los NPCs del día
+func _on_dia_finalizado(resumen: Dictionary):
+	print("[NIVEL] Día finalizado, mostrando reporte...")
+	if ui and ui.has_method("mostrar_reporte_fin_de_dia"):
+		ui.mostrar_reporte_fin_de_dia(resumen)
+
+## Cuando el jugador cierra el reporte de fin de día
+func _on_reporte_cerrado():
+	print("[NIVEL] Reporte cerrado, preparando nuevo día...")
+	GlobalGameManager.confirmar_fin_de_dia()
+	
+	# Iniciar nuevo día
+	if gameplay_controller:
+		gameplay_controller.iniciar_dia()
+	_actualizar_hud()

@@ -4,7 +4,7 @@ extends CanvasLayer
 
 signal decision_tomada(decision: int)
 signal respuesta_guardia_seleccionada(indice: int, texto: String)
-signal incidencia_reportada(campo: int)
+signal reporte_fin_dia_cerrado()  ## Se emite cuando el jugador cierra el reporte de fin de día
 
 # --- TOP BAR / HUD ---
 @onready var main_layout: Control = $MainLayout
@@ -27,13 +27,6 @@ signal incidencia_reportada(campo: int)
 # --- Botones de acción (esquinas inferiores) ---
 @onready var btn_aprobar: TextureButton = $MainLayout/BtnAprobar
 @onready var btn_rechazar: TextureButton = $MainLayout/BtnRechazar
-
-# --- Reporte ---
-@onready var panel_reporte: PanelContainer = $MainLayout/PanelReporte
-@onready var contenedor_incidencias: VBoxContainer = $MainLayout/PanelReporte/ReporteMargin/VBox/ContenedorIncidencias
-
-# --- Feedback ---
-@onready var lbl_feedback: Label = $MainLayout/LblFeedback
 
 # --- Estado ---
 var npc_actual: AbstractNPC = null
@@ -324,83 +317,6 @@ func mostrar_dialogo_rechazado() -> void:
 	agregar_mensaje_npc(texto)
 
 # =====================================================
-# FEEDBACK Y REPORTE
-# =====================================================
-
-func mostrar_feedback(resultado: Dictionary) -> void:
-	if not lbl_feedback:
-		return
-	lbl_feedback.visible = true
-	if resultado.get("correcta", false):
-		lbl_feedback.text = "✓ DECISIÓN CORRECTA (+$%.0f)" % GlobalGameManager.pago_por_acierto
-		lbl_feedback.modulate = Color(0.2, 1.0, 0.2)
-	else:
-		var incidencia_real = resultado.get("incidencia_real", 0)
-		lbl_feedback.text = "✗ DECISIÓN INCORRECTA (-$%.0f)" % GlobalGameManager.multa_por_error
-		if incidencia_real != GlobalEnums.Incidencia.NINGUNA:
-			lbl_feedback.text += "\nIncidencia: " + _nombre_incidencia(incidencia_real)
-		lbl_feedback.modulate = Color(1.0, 0.2, 0.2)
-
-func mostrar_panel_reporte() -> void:
-	if not panel_reporte:
-		return
-	panel_reporte.visible = true
-	_limpiar_incidencias()
-
-	var incidencias_reportables = [
-		{ "id": GlobalEnums.Incidencia.NOMBRE_CEDULA_DIFERENTE, "texto": "Nombre en cédula no coincide" },
-		{ "id": GlobalEnums.Incidencia.NOMBRE_CARNET_DIFERENTE, "texto": "Nombre en carnet no coincide" },
-		{ "id": GlobalEnums.Incidencia.FECHA_CEDULA_CADUCADA, "texto": "Cédula caducada" },
-		{ "id": GlobalEnums.Incidencia.FOTO_CARNET_DIFERENTE, "texto": "Foto del carnet no coincide" },
-		{ "id": GlobalEnums.Incidencia.CARRERA_DIFERENTE, "texto": "Carrera no coincide" },
-		{ "id": GlobalEnums.Incidencia.SOSPECHOSO, "texto": "Persona sospechosa" },
-	]
-
-	for inc in incidencias_reportables:
-		var btn = _crear_boton_reporte(inc["texto"])
-		var inc_id = inc["id"]
-		btn.pressed.connect(func():
-			incidencia_reportada.emit(inc_id)
-			panel_reporte.visible = false
-		)
-		if contenedor_incidencias:
-			contenedor_incidencias.add_child(btn)
-
-## Crea un botón estilizado para el panel de reporte
-func _crear_boton_reporte(texto: String) -> Button:
-	var btn = Button.new()
-	btn.text = texto
-	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	btn.custom_minimum_size = Vector2(0, 36)
-
-	var style_n = StyleBoxFlat.new()
-	style_n.bg_color = Color(0.22, 0.1, 0.1, 0.9)
-	style_n.corner_radius_top_left = 6
-	style_n.corner_radius_top_right = 6
-	style_n.corner_radius_bottom_left = 6
-	style_n.corner_radius_bottom_right = 6
-	style_n.content_margin_left = 8
-	style_n.content_margin_right = 8
-	style_n.content_margin_top = 6
-	style_n.content_margin_bottom = 6
-	style_n.border_width_left = 1
-	style_n.border_width_top = 1
-	style_n.border_width_right = 1
-	style_n.border_width_bottom = 1
-	style_n.border_color = Color(0.6, 0.2, 0.2, 0.5)
-	btn.add_theme_stylebox_override("normal", style_n)
-
-	var style_h = style_n.duplicate()
-	style_h.bg_color = Color(0.35, 0.12, 0.12, 0.95)
-	style_h.border_color = Color(0.8, 0.3, 0.3, 0.8)
-	btn.add_theme_stylebox_override("hover", style_h)
-
-	btn.add_theme_color_override("font_color", Color(1.0, 0.8, 0.8))
-	btn.add_theme_color_override("font_hover_color", Color(1.0, 1.0, 1.0))
-
-	return btn
-
-# =====================================================
 # CONTROL DE VISIBILIDAD
 # =====================================================
 
@@ -415,8 +331,6 @@ func ocultar_todo() -> void:
 	if options_panel: options_panel.visible = false
 	if btn_aprobar: btn_aprobar.visible = false
 	if btn_rechazar: btn_rechazar.visible = false
-	if panel_reporte: panel_reporte.visible = false
-	if lbl_feedback: lbl_feedback.visible = false
 	_limpiar_chat()
 	_limpiar_opciones()
 	esperando_respuesta = false
@@ -426,27 +340,37 @@ func _limpiar_opciones() -> void:
 		for child in contenedor_opciones.get_children():
 			child.queue_free()
 
-func _limpiar_incidencias() -> void:
-	if contenedor_incidencias:
-		for child in contenedor_incidencias.get_children():
-			child.queue_free()
-
 func _on_aprobar() -> void:
 	mostrar_botones_decision(false)
 	decision_tomada.emit(GlobalEnums.DecisionGuardia.APROBADO)
 
 func _on_rechazar() -> void:
 	mostrar_botones_decision(false)
-	mostrar_panel_reporte()
+	decision_tomada.emit(GlobalEnums.DecisionGuardia.RECHAZADO)
 
-func _nombre_incidencia(inc: int) -> String:
-	match inc:
-		GlobalEnums.Incidencia.NOMBRE_CEDULA_DIFERENTE: return "Nombre cédula diferente"
-		GlobalEnums.Incidencia.NOMBRE_CARNET_DIFERENTE: return "Nombre carnet diferente"
-		GlobalEnums.Incidencia.FECHA_CEDULA_CADUCADA: return "Cédula caducada"
-		GlobalEnums.Incidencia.FOTO_CARNET_DIFERENTE: return "Foto no coincide"
-		GlobalEnums.Incidencia.CARRERA_DIFERENTE: return "Carrera diferente"
-		GlobalEnums.Incidencia.CARNET_OLVIDADO: return "No tiene carnet"
-		GlobalEnums.Incidencia.CEDULA_OLVIDADA: return "No tiene cédula"
-		GlobalEnums.Incidencia.SOSPECHOSO: return "Sospechoso"
-	return "Desconocida"
+# =====================================================
+# REPORTE DE FIN DE DÍA
+# =====================================================
+
+## Escena preload del menú de puntuación
+var escena_puntuacion = preload("res://scenes/ui/menus/puntuacion.tscn")
+var panel_puntuacion_actual: Control = null
+
+## Muestra la pantalla de puntuación con el resumen del día basado en post-acciones.
+func mostrar_reporte_fin_de_dia(resumen: Dictionary) -> void:
+	ocultar_todo()
+	
+	# Instanciar la escena de puntuación
+	panel_puntuacion_actual = escena_puntuacion.instantiate()
+	panel_puntuacion_actual.configurar(resumen)
+	
+	# Conectar señal de continuar
+	panel_puntuacion_actual.continuar_pressed.connect(func():
+		if panel_puntuacion_actual:
+			panel_puntuacion_actual.queue_free()
+			panel_puntuacion_actual = null
+		reporte_fin_dia_cerrado.emit()
+	)
+	
+	# Agregar como hijo del main_layout para que cubra todo
+	main_layout.add_child(panel_puntuacion_actual)

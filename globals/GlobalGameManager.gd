@@ -18,14 +18,16 @@ var errores_totales: int = 0
 
 # --- ECONOMÍA --- 
 var dinero: float = 0.0
-var sueldo_base: float = 20.0       # Lo que gana por asomar la nariz
-var pago_por_acierto: float = 5.0   # Bono por dejar pasar bien
-var multa_por_error: float = 10.0   # Multa por dejar pasar un narco/erroneo
+var sueldo_base: float = 20.0       # Recompensa fija por completar el día
 var arriendo_diario: float = 15.0   # Gastos fijos (comida, arriendo)
 
 # Contadores de la sesión (se reinician cada día)
 var aciertos_hoy: int = 0
 var errores_hoy: int = 0
+
+# --- POST-ACCIONES DEL DÍA ---
+# Cada entrada: { "texto": String, "valor": float, "categoria": String, "npc_nombre": String }
+var post_actions_hoy: Array = []
 # Aquí puedes sumar más cosas (reputación, mejoras compradas, etc.)
 
 # --- DATOS DE LA SESIÓN (Memoria RAM del nivel) ---
@@ -49,9 +51,17 @@ func reiniciar_datos():
 func resetear_sesion_diaria():
 	npc_actual_index = 0
 	npcs_del_dia = []
-	aciertos_hoy = 0 # Aseguramos que empiece en 0
-	errores_hoy = 0  # Aseguramos que empiece en 0
+	aciertos_hoy = 0
+	errores_hoy = 0
+	post_actions_hoy = []
 	dialogos_del_dia_cache = []
+
+## Registra una post-acción para el reporte de fin de día
+func registrar_post_action(post_action: Dictionary) -> void:
+	if post_action.is_empty():
+		return
+	post_actions_hoy.append(post_action)
+	print("[POST-ACTION] ", post_action.get("categoria", "?"), ": ", post_action.get("texto", "?"))
 
 # Esta función recibe los datos cargados desde el archivo
 func cargar_datos_desde_save(datos: Dictionary):
@@ -76,34 +86,73 @@ func cargar_datos_desde_save(datos: Dictionary):
 		dialogos_del_dia_cache = datos.sesion.dialogos
 		
 		
-func calcular_fin_de_dia():
+## Calcula el resumen económico del día.
+## Retorna un Dictionary con el desglose completo para mostrar en la UI.
+## NO resetea la sesión — eso lo hace quien muestre el reporte después.
+func calcular_fin_de_dia() -> Dictionary:
 	print("--- CERRANDO CAJA DEL DÍA ", dia_actual, " ---")
 	
-	# 1. Calculamos ingresos y egresos
-	var ingresos = sueldo_base + (aciertos_hoy * pago_por_acierto)
-	var multas = errores_hoy * multa_por_error
+	# 1. Sueldo base por completar el día
+	var ingresos_base = sueldo_base
+	
+	# 2. Sumar/restar valores de todas las post-acciones
+	var total_post_actions: float = 0.0
+	var buenas: Array = []
+	var malas: Array = []
+	var graves: Array = []
+	var rechazos_injustos: Array = []
+	
+	for pa in post_actions_hoy:
+		var valor = pa.get("valor", 0.0)
+		total_post_actions += valor
+		match pa.get("categoria", ""):
+			"buena": buenas.append(pa)
+			"mala": malas.append(pa)
+			"grave": graves.append(pa)
+			"rechazo_injusto": rechazos_injustos.append(pa)
+	
+	# 3. Gastos fijos
 	var gastos = arriendo_diario
 	
-	var total_dia = ingresos - multas - gastos
+	# 4. Total neto del día
+	var total_dia = ingresos_base + total_post_actions - gastos
 	
-	# 2. Actualizamos la billetera real
+	# 5. Actualizar billetera
 	dinero += total_dia
 	
-	# 3. ¡IMPORTANTE! Sumamos al historial antes de borrar lo de hoy
+	# 6. Historial
 	aciertos_totales += aciertos_hoy
 	errores_totales += errores_hoy
 	
-	print("Ganaste: $", ingresos)
-	print("Perdiste: $", multas + gastos)
+	print("Sueldo base: $", ingresos_base)
+	print("Post-acciones: $", total_post_actions)
+	print("Gastos fijos: -$", gastos)
 	print("Total Neto: $", total_dia)
 	print("Nueva Billetera: $", dinero)
 	
-	# 3. Avanzamos al siguiente día
-	dia_actual += 1
+	# 7. Construir resumen para la UI
+	var resumen = {
+		"dia": dia_actual,
+		"sueldo_base": ingresos_base,
+		"gastos_fijos": gastos,
+		"total_post_actions": total_post_actions,
+		"total_dia": total_dia,
+		"dinero_final": dinero,
+		"aciertos": aciertos_hoy,
+		"errores": errores_hoy,
+		"buenas": buenas,
+		"malas": malas,
+		"graves": graves,
+		"rechazos_injustos": rechazos_injustos,
+		"todas_post_actions": post_actions_hoy,
+	}
 	
-	# 4. ¡GUARDAMOS AUTOMÁTICAMENTE!
-	# Aquí es donde la persistencia cobra vida.
+	# 8. Avanzar día y guardar
+	dia_actual += 1
 	SaveManager.guardar_partida()
 	
-	# 5. Limpiamos contadores para mañana
+	return resumen
+
+## Llama después de que el jugador cierre el reporte de fin de día
+func confirmar_fin_de_dia() -> void:
 	resetear_sesion_diaria()

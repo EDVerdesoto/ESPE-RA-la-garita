@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://hl0wis6tycxo"]
+[gd_scene format=3 uid="uid://c1napxq4avj10"]
 
 [sub_resource type="GDScript" id="GDScript_p77wq"]
 script/source = "## Panel de diálogos estilo chat: NPC a la izquierda, Guardia a la derecha
@@ -16,7 +16,6 @@ signal incidencia_reportada(campo: int)
 @onready var btn_aprobar: Button = $PanelDecision/BtnAprobar
 @onready var btn_rechazar: Button = $PanelDecision/BtnRechazar
 @onready var panel_decision: HBoxContainer = $PanelDecision
-@onready var lbl_feedback: Label = $LblFeedback
 @onready var panel_reporte: PanelContainer = $PanelReporte
 @onready var contenedor_incidencias: VBoxContainer = $PanelReporte/VBox/ContenedorIncidencias
 
@@ -211,20 +210,6 @@ func mostrar_dialogo_rechazado() -> void:
 	var texto = dialogos_actuales.get(\"respuesta_rechazado\", \"¡Esto es injusto! Voy a hablar con el decano.\")
 	agregar_mensaje_npc(texto)
 
-## Muestra feedback al guardia
-func mostrar_feedback(resultado: Dictionary) -> void:
-	if not lbl_feedback:
-		return
-	lbl_feedback.visible = true
-	if resultado.get(\"correcta\", false):
-		lbl_feedback.text = \"✓ DECISIÓN CORRECTA (+$%.0f)\" % GlobalGameManager.pago_por_acierto
-		lbl_feedback.modulate = Color(0.2, 1.0, 0.2)
-	else:
-		var incidencia_real = resultado.get(\"incidencia_real\", 0)
-		lbl_feedback.text = \"✗ DECISIÓN INCORRECTA (-$%.0f)\" % GlobalGameManager.multa_por_error
-		if incidencia_real != GlobalEnums.Incidencia.NINGUNA:
-			lbl_feedback.text += \"\\nIncidencia: \" + _nombre_incidencia(incidencia_real)
-		lbl_feedback.modulate = Color(1.0, 0.2, 0.2)
 
 ## Muestra el panel de reporte
 func mostrar_panel_reporte() -> void:
@@ -261,7 +246,6 @@ func ocultar_todo() -> void:
 	if fondo_dialogo: fondo_dialogo.visible = false
 	if panel_decision: panel_decision.visible = false
 	if panel_reporte: panel_reporte.visible = false
-	if lbl_feedback: lbl_feedback.visible = false
 	_limpiar_chat()
 	_limpiar_opciones()
 	esperando_respuesta = false
@@ -284,17 +268,7 @@ func _on_rechazar() -> void:
 	mostrar_botones_decision(false)
 	mostrar_panel_reporte()
 
-func _nombre_incidencia(inc: int) -> String:
-	match inc:
-		GlobalEnums.Incidencia.NOMBRE_CEDULA_DIFERENTE: return \"Nombre cédula diferente\"
-		GlobalEnums.Incidencia.NOMBRE_CARNET_DIFERENTE: return \"Nombre carnet diferente\"
-		GlobalEnums.Incidencia.FECHA_CEDULA_CADUCADA: return \"Cédula caducada\"
-		GlobalEnums.Incidencia.FOTO_CARNET_DIFERENTE: return \"Foto no coincide\"
-		GlobalEnums.Incidencia.CARRERA_DIFERENTE: return \"Carrera diferente\"
-		GlobalEnums.Incidencia.CARNET_OLVIDADO: return \"No tiene carnet\"
-		GlobalEnums.Incidencia.CEDULA_OLVIDADA: return \"No tiene cédula\"
-		GlobalEnums.Incidencia.SOSPECHOSO: return \"Sospechoso\"
-	return \"Desconocida\"
+
 "
 
 [node name="DialoguePanel" type="Control" unique_id=894473297]
@@ -402,16 +376,3 @@ horizontal_alignment = 1
 
 [node name="ContenedorIncidencias" type="VBoxContainer" parent="PanelReporte/VBox" unique_id=221012394]
 layout_mode = 2
-
-[node name="LblFeedback" type="Label" parent="." unique_id=1732259013]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -200.0
-offset_top = 20.0
-offset_right = 200.0
-offset_bottom = 60.0
-grow_horizontal = 2
-horizontal_alignment = 1

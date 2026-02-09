@@ -73,42 +73,6 @@ theme_override_font_sizes/font_size = 50
 text = "3"
 horizontal_alignment = 1
 
-[node name="lblAciertos" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=898937933]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.40100002
-anchor_top = 0.252
-anchor_right = 0.40100002
-anchor_bottom = 0.252
-offset_left = -154.35004
-offset_top = 306.88
-offset_right = -40.350037
-offset_bottom = 350.88
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_y7qf5")
-theme_override_font_sizes/font_size = 50
-text = "3"
-horizontal_alignment = 1
-
-[node name="lblErrores" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=438707297]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.40100002
-anchor_top = 0.252
-anchor_right = 0.40100002
-anchor_bottom = 0.252
-offset_left = 393.64996
-offset_top = 182.88
-offset_right = 508.64996
-offset_bottom = 226.88
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_y7qf5")
-theme_override_font_sizes/font_size = 50
-text = "3"
-horizontal_alignment = 1
-
 [node name="lblDescuentos" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1820530487]
 layout_mode = 1
 anchors_preset = -1
