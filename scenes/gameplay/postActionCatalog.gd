@@ -1,198 +1,153 @@
-## PostActionCatalog: Catálogo masivo de consecuencias post-entrada
-## Cada NPC que entra (aprobado) genera una postAction según su tipo:
-##   - BUENAS: NPC sin incidencia que pasa → cosas positivas para la ESPE
-##   - MALAS: NPC con incidencia menor que se coló → líos administrativos
-##   - GRAVES: Delincuente que se coló → desastres en el campus
+## PostActionCatalog: Catálogo de consecuencias post-entrada
+## Solo se activan para NPCs CON incidencia que fueron aprobados (se colaron).
+## NPCs sin incidencia que pasan correctamente NO generan post-action.
+##   - BUENAS: Algo positivo pasó a pesar de la incidencia → propina/bonus
+##   - MALAS: Consecuencia negativa por dejar pasar a alguien con incidencia
+##   - GRAVES: Delincuente que se coló → desastre serio (SIEMPRE para atacantes)
 ##
-## Cada entrada tiene: texto (lo que aparece en el reporte), valor (dinero +/-)
+## Textos impersonales, narrados como eventos con impacto económico directo.
+## Cada entrada: { "texto": String, "valor": float }
 class_name PostActionCatalog
 extends RefCounted
 
 # =====================================================
-# ESTRUCTURA: { "texto": String, "valor": float }
-#   valor positivo = recompensa/propina
-#   valor negativo = multa/penalización
-# =====================================================
-
-# =====================================================
-# POST-ACCIONES BUENAS (NPC legítimo que pasó correctamente)
-# Pequeñas recompensas por buen trabajo del guardia
+# POST-ACCIONES BUENAS
+# Algo salió bien a pesar de que el NPC tenía incidencia.
+# Pequeñas ganancias inesperadas para el guardia.
 # =====================================================
 const ACCIONES_BUENAS: Array = [
-	# --- Reconocimientos de la universidad ---
-	{"texto": "📋 El decano felicitó tu buen control de acceso hoy.", "valor": 3.0},
-	{"texto": "📋 Seguridad interna reportó cero incidentes. Bono de desempeño.", "valor": 4.0},
-	{"texto": "📋 El rector pasó por la garita y dijo: 'Buen trabajo, soldado.'", "valor": 2.0},
-	{"texto": "📋 Recursos Humanos te nominó al 'Guardia del Mes'.", "valor": 5.0},
-	{"texto": "📋 El jefe de seguridad te dio una palmada en la espalda.", "valor": 1.0},
-	
-	# --- Gratitud de estudiantes ---
-	{"texto": "😊 Un estudiante te trajo un cafecito de agradecimiento.", "valor": 1.0},
-	{"texto": "😊 Una estudiante dejó una nota: 'Gracias por cuidarnos, don.'", "valor": 1.5},
-	{"texto": "😊 El presidente estudiantil te agradeció públicamente en redes.", "valor": 2.0},
-	{"texto": "😊 Un grupo de estudiantes te compró un almuerzo.", "valor": 3.0},
-	{"texto": "😊 Te dejaron un jugo en la garita con una nota de gracias.", "valor": 1.0},
-	{"texto": "😊 Un estudiante te presentó a su mamá: 'Él es el guardia buena gente.'", "valor": 1.5},
-	
-	# --- Propinas y favores ---
-	{"texto": "💰 Un profesor te dio propina por ayudarle con las maletas.", "valor": 2.0},
-	{"texto": "💰 Un padre de familia te dejó $1 de propina.", "valor": 1.0},
-	{"texto": "💰 Encontraste una moneda de $1 en tu caseta.", "valor": 1.0},
-	{"texto": "💰 Te pagaron horas extra por quedarte 10 minutos más.", "valor": 2.5},
-	{"texto": "💰 El administrador te dio un vale de almuerzo gratis.", "valor": 2.0},
-	
-	# --- Día tranquilo ---
-	{"texto": "☀️ Día tranquilo. Ningún problema reportado.", "valor": 0.5},
-	{"texto": "☀️ Turno sin novedades. Pudiste leer tu libro en paz.", "valor": 0.0},
-	{"texto": "☀️ Todo el mundo entró con papeles en orden. Buen día.", "valor": 1.0},
-	{"texto": "☀️ Los profes del departamento te saludaron amablemente hoy.", "valor": 0.5},
-	{"texto": "☀️ Un perrito callejero se echó junto a tu garita. Compañía gratis.", "valor": 0.0},
-	{"texto": "☀️ El clima estuvo perfecto. Ni frío ni calor.", "valor": 0.0},
-	{"texto": "☀️ Alguien dejó un paraguas olvidado. Ahora tienes uno de repuesto.", "valor": 0.5},
+	{"texto": "Alguien dejó $10 de propina en la garita.", "valor": 10.0},
+	{"texto": "Un padre de familia dejó $5 por la amabilidad del guardia.", "valor": 5.0},
+	{"texto": "Se encontró un billete de $2 en el suelo de la caseta.", "valor": 2.0},
+	{"texto": "La administración pagó un bono sorpresa de $8 por turno completo.", "valor": 8.0},
+	{"texto": "Un estudiante compró un almuerzo para el guardia de turno.", "valor": 4.0},
+	{"texto": "El comedor regaló la comida sobrante del día al personal de seguridad.", "valor": 3.0},
+	{"texto": "Seguridad interna entregó un incentivo de $6 por asistencia perfecta.", "valor": 6.0},
+	{"texto": "Alguien olvidó una funda con snacks en la ventanilla. Nadie la reclamó.", "valor": 2.0},
+	{"texto": "Se autorizó un pago extra de $7 por cubrir turno extendido.", "valor": 7.0},
+	{"texto": "Un profesor dejó una propina de $3 por ayudarle a cargar materiales.", "valor": 3.0},
+	{"texto": "La cooperativa depositó un dividendo de $5 a la cuenta del guardia.", "valor": 5.0},
+	{"texto": "Se aplicó un reajuste salarial retroactivo de $4.", "valor": 4.0},
+	{"texto": "El proveedor de la cafetería regaló café gratis al personal de garita.", "valor": 1.0},
+	{"texto": "Un grupo de estudiantes hizo una colecta de $6 para el guardia.", "valor": 6.0},
+	{"texto": "La persona que entró dejó una donación de $3 para el fondo de seguridad.", "valor": 3.0},
 ]
 
 # =====================================================
-# POST-ACCIONES MALAS (NPC con incidencia menor que se coló)
-# Consecuencias leves/medias: líos administrativos, quejas, etc.
+# POST-ACCIONES MALAS
+# Consecuencias negativas por dejar pasar a alguien con incidencia.
+# Afectan el salario del guardia directa o indirectamente.
 # =====================================================
 const ACCIONES_MALAS: Array = [
-	# --- Problemas con documentos ---
-	{"texto": "⚠️ Auditoría detectó que dejaste pasar a alguien con carnet vencido.", "valor": -5.0},
-	{"texto": "⚠️ Un estudiante usó el carnet de su hermano. Le robaron el celular adentro.", "valor": -4.0},
-	{"texto": "⚠️ Alguien con nombre incorrecto en el carnet causó confusión en secretaría.", "valor": -3.0},
-	{"texto": "⚠️ El sistema registró una entrada con cédula caducada. Te llaman la atención.", "valor": -4.0},
-	{"texto": "⚠️ Un infiltrado con carnet ajeno se metió a un examen y lo anulan entero.", "valor": -6.0},
-	{"texto": "⚠️ Dejaste pasar a alguien con la foto diferente. Resultó ser un ex-alumno expulsado.", "valor": -5.0},
-	
-	# --- Quejas de profesores ---
-	{"texto": "😤 Un profesor se quejó porque entró un desconocido a su clase.", "valor": -3.0},
-	{"texto": "😤 La secretaria dijo que alguien sacó copias con carnet prestado.", "valor": -2.0},
-	{"texto": "😤 El laboratorio reportó un 'estudiante fantasma' que no existe en el sistema.", "valor": -4.0},
-	{"texto": "😤 Un docente encontró a alguien durmiendo en el aula. No era de la ESPE.", "valor": -3.0},
-	{"texto": "😤 Coordinación académica te mandó un memo: 'Revise mejor los documentos.'", "valor": -2.0},
-	
-	# --- Incidentes menores ---
-	{"texto": "🔧 Alguien que entró sin carnet se cayó en las gradas. La ESPE paga médico.", "valor": -5.0},
-	{"texto": "🔧 Entró un tipo a vender empanadas sin permiso. Decomisaron todo.", "valor": -2.0},
-	{"texto": "🔧 Un estudiante con datos incorrectos retiró un libro a nombre de otro.", "valor": -3.0},
-	{"texto": "🔧 Se coló un vendedor de seguros y molestó a medio campus.", "valor": -2.0},
-	{"texto": "🔧 Dejaste pasar a alguien de carrera equivocada. Fue a un lab que no le tocaba y dañó un equipo.", "valor": -6.0},
-	{"texto": "🔧 El de la foto distinta resultó ser un periodista. Publicó un artículo vergonzoso.", "valor": -4.0},
-	{"texto": "🔧 Alguien que pasó con cédula caducada hizo un escándalo en bienestar estudiantil.", "valor": -3.0},
-	
-	# --- Reprimendas ---
-	{"texto": "📝 Te pusieron un llamado de atención por escrito.", "valor": -3.0},
-	{"texto": "📝 Tu jefe dice que si sigues así, te cambian al turno de madrugada.", "valor": -2.0},
-	{"texto": "📝 Recursos Humanos abrió un expediente menor sobre tu desempeño.", "valor": -4.0},
-	{"texto": "📝 El encargado de seguridad te miró feo todo el día.", "valor": -1.0},
-	{"texto": "📝 Te quitaron el bono del mes por 'falta de atención'.", "valor": -5.0},
-	{"texto": "📝 Tu compañero del turno siguiente se quejó del desorden que dejaste.", "valor": -1.5},
-	{"texto": "📝 Recibiste un correo de advertencia del departamento de personal.", "valor": -2.0},
-	{"texto": "📝 Te redujeron la hora de almuerzo como 'medida correctiva'.", "valor": -2.5},
+	{"texto": "Una persona tiró un tacho de basura. Descuento de limpieza al guardia.", "valor": -6.0},
+	{"texto": "Alguien sin carnet válido sacó copias a nombre de otro. Multa administrativa.", "valor": -5.0},
+	{"texto": "Se reportó un desconocido en el aula B3. Descuento por falta de control.", "valor": -4.0},
+	{"texto": "Un individuo con documentos irregulares causó una fila en secretaría.", "valor": -3.0},
+	{"texto": "Auditoría detectó una entrada con cédula caducada. Sanción al guardia.", "valor": -7.0},
+	{"texto": "Un sujeto entró con carnet ajeno y retiró un libro de biblioteca.", "valor": -4.0},
+	{"texto": "Se encontró a una persona no autorizada en el laboratorio de cómputo.", "valor": -5.0},
+	{"texto": "Alguien con datos incorrectos hizo un reclamo agresivo en ventanilla.", "valor": -3.0},
+	{"texto": "Un vendedor ambulante se coló y montó un puesto en el patio. Multa.", "valor": -4.0},
+	{"texto": "Coordinación envió un memo formal por dejar pasar documentación irregular.", "valor": -6.0},
+	{"texto": "Un ex-alumno expulsado fue visto en campus. Descuento disciplinario.", "valor": -8.0},
+	{"texto": "Se anuló un examen porque entró alguien con identidad falsa al aula.", "valor": -7.0},
+	{"texto": "El sistema de control registró una anomalía. Descuento por negligencia.", "valor": -5.0},
+	{"texto": "Un extraño entró a un laboratorio y derramó reactivos. Costo de limpieza.", "valor": -6.0},
+	{"texto": "Se perdió material de escritorio de una oficina. Descuento compartido.", "valor": -3.0},
+	{"texto": "Bienestar estudiantil reportó una queja por presencia de personas ajenas.", "valor": -4.0},
+	{"texto": "El jefe de seguridad aplicó una amonestación con descuento de $5.", "valor": -5.0},
+	{"texto": "Se dañó una cerradura porque alguien forzó una puerta. Costo al guardia.", "valor": -6.0},
+	{"texto": "Recursos Humanos abrió un expediente menor. Retención de $4 del sueldo.", "valor": -4.0},
+	{"texto": "Un infiltrado causó un corto circuito en el bloque C. Reparación descontada.", "valor": -8.0},
 ]
 
 # =====================================================
-# POST-ACCIONES GRAVES (Delincuente que se coló)
-# Consecuencias severas: robos, daños, peligro real
+# POST-ACCIONES GRAVES (Solo para NPCDelincuente)
+# Consecuencias severas. Impacto económico fuerte y directo.
 # =====================================================
 const ACCIONES_GRAVES: Array = [
-	# --- Robos ---
-	{"texto": "🚨 ¡ROBO! Desaparecieron 3 laptops del laboratorio de software.", "valor": -15.0},
-	{"texto": "🚨 ¡ROBO! Robaron proyectores del edificio de Biotecnología.", "valor": -12.0},
-	{"texto": "🚨 ¡ROBO! Un delincuente se llevó las mochilas de un aula entera.", "valor": -10.0},
-	{"texto": "🚨 ¡ROBO! Vaciaron la oficina del decano de Economía.", "valor": -14.0},
-	{"texto": "🚨 ¡ROBO! Se robaron el microscopio nuevo del laboratorio.", "valor": -13.0},
-	{"texto": "🚨 ¡ROBO! Desapareció la caja chica de la cafetería.", "valor": -8.0},
-	{"texto": "🚨 ¡ROBO! Un sujeto robó celulares en el comedor. 5 víctimas.", "valor": -12.0},
-	{"texto": "🚨 ¡ROBO! Se llevaron cables de cobre del edificio en construcción.", "valor": -10.0},
-	{"texto": "🚨 ¡ROBO! Hurtaron el equipo de audio del auditorio principal.", "valor": -11.0},
-	
-	# --- Vandalismo ---
-	{"texto": "💥 ¡VANDALISMO! Rayaron la fachada del edificio central con grafiti.", "valor": -8.0},
-	{"texto": "💥 ¡VANDALISMO! Rompieron ventanales del bloque de aulas.", "valor": -10.0},
-	{"texto": "💥 ¡VANDALISMO! Dañaron los baños del segundo piso. Inundación.", "valor": -9.0},
-	{"texto": "💥 ¡VANDALISMO! Destrozaron el jardín botánico que los de Biotec cuidaban.", "valor": -7.0},
-	{"texto": "💥 ¡VANDALISMO! Le desinflaron las llantas al carro del vicerrector.", "valor": -6.0},
-	{"texto": "💥 ¡VANDALISMO! Dibujaron obscenidades en la pizarra del aula magna.", "valor": -5.0},
-	
-	# --- Agresiones ---
-	{"texto": "🏥 ¡AGRESIÓN! Un sospechoso golpeó a un estudiante en el estacionamiento.", "valor": -15.0},
-	{"texto": "🏥 ¡AGRESIÓN! Amenazaron con cuchillo a una profesora de Derecho.", "valor": -18.0},
-	{"texto": "🏥 ¡AGRESIÓN! Un tipo agredió al conserje cuando le pidió identificación.", "valor": -12.0},
-	{"texto": "🏥 ¡AGRESIÓN! Tuvieron que llamar a la policía por una pelea con arma blanca.", "valor": -20.0},
-	{"texto": "🏥 ¡AGRESIÓN! Un intruso acosó a estudiantes en los pasillos.", "valor": -14.0},
-	
-	# --- Estafas ---
-	{"texto": "💸 ¡ESTAFA! Un sujeto vendió carnets falsos a estudiantes nuevos.", "valor": -10.0},
-	{"texto": "💸 ¡ESTAFA! Alguien cobró matrículas falsas a padres de familia.", "valor": -15.0},
-	{"texto": "💸 ¡ESTAFA! Un tipo se hizo pasar por profesor y dio clases por 3 días.", "valor": -8.0},
-	{"texto": "💸 ¡ESTAFA! Vendieron supuestas 'becas' a estudiantes ingenuos.", "valor": -12.0},
-	{"texto": "💸 ¡ESTAFA! Alguien clonó tarjetas en la fotocopiadora.", "valor": -10.0},
-	
-	# --- Sustancias ---
-	{"texto": "🚬 ¡DROGAS! Encontraron sustancias ilegales en el baño del tercer piso.", "valor": -12.0},
-	{"texto": "🚬 ¡DROGAS! Un delincuente vendió sustancias prohibidas detrás del coliseo.", "valor": -15.0},
-	{"texto": "🚬 ¡DROGAS! La policía antinarcóticos llegó al campus. El rector está furioso contigo.", "valor": -20.0},
-	
-	# --- Consecuencias para ti ---
-	{"texto": "📛 El rector dijo que si pasa algo más, te despiden.", "valor": -8.0},
-	{"texto": "📛 Tu contrato está en revisión por 'negligencia grave'.", "valor": -10.0},
-	{"texto": "📛 Te suspendieron 1 día sin sueldo por el incidente.", "valor": -15.0},
-	{"texto": "📛 La policía te interrogó por 2 horas por dejar pasar al sospechoso.", "valor": -5.0},
-	{"texto": "📛 Tu foto salió en el periódico local como 'el guardia que dejó entrar al ladrón'.", "valor": -8.0},
-	{"texto": "📛 Te cambiaron al turno de medianoche como castigo.", "valor": -6.0},
-	{"texto": "📛 El sindicato dice que no te puede defender esta vez.", "valor": -7.0},
+	{"texto": "Un profesor fue asaltado por un intruso en el estacionamiento.", "valor": -200.0},
+	{"texto": "Desaparecieron 5 laptops del laboratorio principal. Costo al guardia.", "valor": -180.0},
+	{"texto": "Un sujeto robó mochilas de un aula completa. Demanda colectiva.", "valor": -150.0},
+	{"texto": "Vaciaron la oficina del decano. Pérdidas superiores a $300.", "valor": -250.0},
+	{"texto": "Un intruso agredió a un conserje. Gastos médicos descontados.", "valor": -170.0},
+	{"texto": "Se robaron equipos del laboratorio de electrónica por $400.", "valor": -220.0},
+	{"texto": "Amenazaron con arma blanca a una docente. Intervino la policía.", "valor": -300.0},
+	{"texto": "Un delincuente vendió sustancias prohibidas detrás del coliseo.", "valor": -250.0},
+	{"texto": "Rompieron ventanales del edificio central. Reparación millonaria.", "valor": -190.0},
+	{"texto": "Robaron la caja fuerte de la cafetería. Pérdida total.", "valor": -160.0},
+	{"texto": "Un sujeto clonó tarjetas de estudiantes en la fotocopiadora.", "valor": -200.0},
+	{"texto": "Incendiaron un basurero en el bloque de aulas. Bomberos en campus.", "valor": -180.0},
+	{"texto": "Un intruso acosó a estudiantes en los pasillos. Escándalo público.", "valor": -210.0},
+	{"texto": "Hurtaron el equipo de audio del auditorio. Evento cancelado.", "valor": -170.0},
+	{"texto": "Alguien cobró matrículas falsas a padres de familia. Fraude masivo.", "valor": -280.0},
+	{"texto": "Robaron cables de cobre del edificio en construcción. Obra paralizada.", "valor": -150.0},
+	{"texto": "La policía antinarcóticos realizó un operativo dentro del campus.", "valor": -320.0},
+	{"texto": "Destrozaron el jardín botánico de Biotecnología. Daño irreparable.", "valor": -140.0},
+	{"texto": "Un sospechoso golpeó a un estudiante y le robó el celular.", "valor": -160.0},
+	{"texto": "Se filtró en prensa que un delincuente entró sin control. Desprestigio.", "valor": -230.0},
 ]
 
 # =====================================================
 # FUNCIONES DE SELECCIÓN
 # =====================================================
 
-## Selecciona una post-acción aleatoria según el tipo de NPC y su resultado
-## Retorna: { "texto": String, "valor": float, "categoria": String }
+## Probabilidad de que un NPC con incidencia aprobado genere una post-acción.
+## No siempre pasa algo: solo el 40% de las veces.
+const PROBABILIDAD_POST_ACTION: float = 0.4
+
+## Selecciona una post-acción para NPCs aprobados.
+## - NPCs SIN incidencia → {} (no generan post-action, entrada legítima)
+## - NPCs CON incidencia → 40% de chance de generar post-action:
+##     - Genéricos: BUENA o MALA (50/50)
+##     - NPCDelincuente: SIEMPRE GRAVE
 static func obtener_post_action(npc: AbstractNPC, fue_aprobado: bool) -> Dictionary:
 	if not fue_aprobado:
-		# Si fue rechazado, no genera post-action (no entró al campus)
 		return {}
 	
-	# NPC sin incidencia que pasó correctamente → acción buena
+	# NPC sin incidencia → sin consecuencias
 	if not npc.tiene_incidencia():
-		var accion = ACCIONES_BUENAS.pick_random().duplicate()
-		accion["categoria"] = "buena"
-		accion["npc_nombre"] = npc.nombre + " " + npc.apellido
-		return accion
+		return {}
 	
-	# NPC con incidencia que se coló (el guardia no la detectó o lo dejó pasar)
+	# Solo el 40% de las veces se genera una post-acción
+	if randf() > PROBABILIDAD_POST_ACTION:
+		return {}
+	
+	# ── NPCDelincuente con incidencia → SIEMPRE GRAVE (cuando se activa) ──
 	if npc is NPCDelincuente:
-		# Delincuente que entró → consecuencia GRAVE
 		var accion = ACCIONES_GRAVES.pick_random().duplicate()
 		accion["categoria"] = "grave"
 		accion["npc_nombre"] = npc.nombre + " " + npc.apellido
 		return accion
+	
+	# ── NPC genérico con incidencia → BUENA o MALA (50/50) ──
+	if randf() < 0.5:
+		var accion = ACCIONES_BUENAS.pick_random().duplicate()
+		accion["categoria"] = "buena"
+		accion["npc_nombre"] = npc.nombre + " " + npc.apellido
+		return accion
 	else:
-		# Ciudadano con incidencia menor → consecuencia MALA
 		var accion = ACCIONES_MALAS.pick_random().duplicate()
 		accion["categoria"] = "mala"
 		accion["npc_nombre"] = npc.nombre + " " + npc.apellido
 		return accion
 
 ## Para rechazos incorrectos (rechazaste a alguien sin incidencia)
-## Retorna una penalización por abuso de autoridad
+## Penalización por negar el acceso a una persona legítima.
 static func obtener_post_action_rechazo_injusto(npc: AbstractNPC) -> Dictionary:
 	var acciones_rechazo_injusto = [
-		{"texto": "⚖️ %s puso una queja formal en Recursos Humanos por trato injusto.", "valor": -4.0},
-		{"texto": "⚖️ %s fue a llorar a Bienestar Estudiantil. Te mandaron un memo.", "valor": -3.0},
-		{"texto": "⚖️ La mamá de %s llamó al rector para quejarse de ti.", "valor": -5.0},
-		{"texto": "⚖️ %s publicó en Twitter que le negaste la entrada sin razón. Trending.", "valor": -4.0},
-		{"texto": "⚖️ %s perdió su examen final porque no lo dejaste entrar. El decano te busca.", "valor": -6.0},
-		{"texto": "⚖️ %s se fue llorando. Sus compañeros te miran feo el resto del día.", "valor": -2.0},
-		{"texto": "⚖️ El abogado de %s envió una carta notarial a la universidad.", "valor": -5.0},
-		{"texto": "⚖️ %s era hijo del vicerrector. Oops.", "valor": -8.0},
-		{"texto": "⚖️ %s grabó todo con el celular. El video tiene 10K vistas.", "valor": -4.0},
-		{"texto": "⚖️ La asociación de estudiantes pidió tu destitución por rechazar a %s.", "valor": -5.0},
+		{"texto": "Se presentó una queja formal en Recursos Humanos por acceso denegado sin causa.", "valor": -8.0},
+		{"texto": "Bienestar estudiantil reportó una denuncia por rechazo injustificado.", "valor": -6.0},
+		{"texto": "Un familiar llamó al rectorado para reclamar por trato indebido en garita.", "valor": -10.0},
+		{"texto": "Se publicó un video en redes sociales denunciando abuso de autoridad en la entrada.", "valor": -9.0},
+		{"texto": "Un estudiante perdió su examen final por no poder ingresar. Sanción al guardia.", "valor": -12.0},
+		{"texto": "El gremio estudiantil envió una carta exigiendo explicaciones por el rechazo.", "valor": -7.0},
+		{"texto": "Se recibió una carta notarial por denegación de acceso sin fundamento.", "valor": -10.0},
+		{"texto": "La persona rechazada resultó ser familiar de un directivo. Consecuencias graves.", "valor": -15.0},
+		{"texto": "El incidente fue grabado y compartido en medios locales. Desprestigio institucional.", "valor": -8.0},
+		{"texto": "La asociación de estudiantes solicitó formalmente la remoción del guardia.", "valor": -11.0},
 	]
 	var accion = acciones_rechazo_injusto.pick_random().duplicate()
-	accion["texto"] = accion["texto"] % npc.nombre
 	accion["categoria"] = "rechazo_injusto"
 	accion["npc_nombre"] = npc.nombre + " " + npc.apellido
 	return accion

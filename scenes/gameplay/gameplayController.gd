@@ -271,10 +271,11 @@ func _procesar_aprobacion():
 		if _verificar_game_over():
 			return
 	
-	# Registrar post-acción según tipo de NPC
+	# Registrar post-acción (el catálogo filtra internamente: solo genera para NPCs con incidencia)
 	if npc_actual:
 		var post_action = PostActionCatalog.obtener_post_action(npc_actual, true)
-		GlobalGameManager.registrar_post_action(post_action)
+		if not post_action.is_empty():
+			GlobalGameManager.registrar_post_action(post_action)
 	
 	if dialogue_panel and dialogue_panel.has_method("mostrar_dialogo_aprobado"):
 		dialogue_panel.mostrar_dialogo_aprobado()

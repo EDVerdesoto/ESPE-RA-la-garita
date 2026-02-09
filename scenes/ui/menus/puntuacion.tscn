@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ccitr8jw8uwjh"]
 
 [ext_resource type="Script" uid="uid://c7wangrhssjkg" path="res://scenes/ui/menus/puntuacion.gd" id="1_360jr"]
-[ext_resource type="Texture2D" uid="uid://b27fypjbkkjtk" path="res://assets/HUD/reporte.png" id="2_ady4d"]
+[ext_resource type="Texture2D" uid="uid://bpowwdu1f48wt" path="res://assets/HUD/FondoPuntuacion.png" id="2_ady4d"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="3_y7qf5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ady4d"]
@@ -54,6 +54,25 @@ texture = ExtResource("2_ady4d")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="lblGastosDiarios" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=218526628]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = 445.39996
+offset_top = 92.880005
+offset_right = 593.39996
+offset_bottom = 126.880005
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 36
+text = "$ 15.00"
+horizontal_alignment = 1
+
 [node name="lblDiaActual" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1611598910]
 layout_mode = 1
 anchors_preset = -1
@@ -61,34 +80,17 @@ anchor_left = 0.40100002
 anchor_top = 0.252
 anchor_right = 0.40100002
 anchor_bottom = 0.252
-offset_left = -56.400024
-offset_top = -32.119995
-offset_right = -14.400024
-offset_bottom = 11.880005
+offset_left = -193.60004
+offset_top = -24.119995
+offset_right = -151.60004
+offset_bottom = 9.880005
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("3_y7qf5")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 36
 text = "3"
 horizontal_alignment = 1
-
-[node name="lblDescuentos" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1820530487]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.40100002
-anchor_top = 0.252
-anchor_right = 0.40100002
-anchor_bottom = 0.252
-offset_left = 216.64996
-offset_top = 229.88
-offset_right = 340.64996
-offset_bottom = 273.88
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_y7qf5")
-theme_override_font_sizes/font_size = 50
-text = "3"
 
 [node name="lblTitulo" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1315104424]
 layout_mode = 1
@@ -135,33 +137,16 @@ anchor_left = 0.40100002
 anchor_top = 0.252
 anchor_right = 0.40100002
 anchor_bottom = 0.252
-offset_left = 349.64996
-offset_top = 492.88
-offset_right = 469.64996
-offset_bottom = 572.88
+offset_left = 392.39996
+offset_top = 488.88
+offset_right = 621.39996
+offset_bottom = 568.88
 theme_override_colors/font_color = Color(0.3529412, 0.34117648, 0.21960784, 0.85490197)
 theme_override_fonts/font = ExtResource("3_y7qf5")
 theme_override_font_sizes/font_size = 60
 text = "$30"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="lblAciertosDinero" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=442337322]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.40100002
-anchor_top = 0.252
-anchor_right = 0.40100002
-anchor_bottom = 0.252
-offset_left = -341.35004
-offset_top = 353.88
-offset_right = -218.35004
-offset_bottom = 397.88
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_y7qf5")
-theme_override_font_sizes/font_size = 50
-text = "3"
 
 [node name="lblDineroTotal" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1206930483]
 layout_mode = 1
@@ -170,18 +155,55 @@ anchor_left = 0.40100002
 anchor_top = 0.252
 anchor_right = 0.40100002
 anchor_bottom = 0.252
-offset_left = 559.39996
-offset_top = -30.119995
-offset_right = 588.39996
-offset_bottom = 13.880005
+offset_left = 537.39996
+offset_top = -32.119995
+offset_right = 706.39996
+offset_bottom = 2.880005
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_constants/line_spacing = -100
 theme_override_constants/paragraph_spacing = -10000
 theme_override_fonts/font = ExtResource("3_y7qf5")
-theme_override_font_sizes/font_size = 45
-text = "3"
+theme_override_font_sizes/font_size = 36
+text = "$ 133.00
+"
 horizontal_alignment = 1
+
+[node name="lblDineroTotalTitl" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=506510307]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = 231.39996
+offset_top = -33.119995
+offset_right = 527.39996
+offset_bottom = 10.880005
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = -100
+theme_override_constants/paragraph_spacing = -10000
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 36
+text = "Dinero actual:"
+horizontal_alignment = 1
+
+[node name="lblPostActions" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=680857643]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = -389.60004
+offset_top = 177.88
+offset_right = 681.39996
+offset_bottom = 431.88
+theme_override_colors/font_color = Color(0.25, 0.18, 0.12, 0.9)
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 3
 
 [node name="Button" type="Button" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=266884407]
 layout_mode = 0
@@ -189,6 +211,87 @@ offset_left = 547.0
 offset_top = 932.0
 offset_right = 1027.0
 offset_bottom = 1030.0
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ady4d")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_y7qf5")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y7qf5")
+text = "CONTINUAR"
+
+[node name="lblDiaActualTitl" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1464678800]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = -303.60004
+offset_top = -25.119995
+offset_right = -200.60004
+offset_bottom = 6.880005
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 36
+text = "Día:"
+horizontal_alignment = 1
+
+[node name="lblPagaDiariaTitulo" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=453540427]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = -281.60004
+offset_top = 92.880005
+offset_right = 3.3999634
+offset_bottom = 136.88
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = -100
+theme_override_constants/paragraph_spacing = -10000
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 36
+text = "Paga del día:"
+horizontal_alignment = 1
+
+[node name="lblPagaDiaria" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=551151659]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = 27.399963
+offset_top = 93.880005
+offset_right = 175.39996
+offset_bottom = 127.880005
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 36
+text = "$ 20.00"
+horizontal_alignment = 1
+
+[node name="lblGastosDiariosTitulo" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1885283103]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = 250.39996
+offset_top = 91.880005
+offset_right = 422.39996
+offset_bottom = 135.88
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = -100
+theme_override_constants/paragraph_spacing = -10000
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 36
+text = "Gastos:"
+horizontal_alignment = 1

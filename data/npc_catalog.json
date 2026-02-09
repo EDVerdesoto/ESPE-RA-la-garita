@@ -60,7 +60,7 @@
 		"apellido": "Hernández",
 		"personalidad": "Tímida",
 		"rol_base": "Estudiante",
-		"carrera": "Ingeniería en Software",
+		"carrera": "Software",
 		"sprite_path": "res://assets/personajes/estudiante.png",
 		"cara_path": "res://assets/personajes/caras/cara_006.png",
 		"numero_cedula": "1745678901"
