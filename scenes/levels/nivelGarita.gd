@@ -16,7 +16,7 @@ func _ready():
 	if gameplay_controller:
 		gameplay_controller.npc_visual = npc_node
 		gameplay_controller.pc_monitor = pc_monitor
-		gameplay_controller.dialogue_panel = dialogue_panel
+		gameplay_controller.dialogue_panel = ui
 		gameplay_controller._conectar_senales()
 		gameplay_controller.iniciar_dia()
 	
@@ -48,12 +48,7 @@ func pausar_juego():
 		# Instanciamos directo de la variable (porque ya hicimos preload arriba)
 		var menu_instance = escena_pausa.instantiate()
 		
-		# Añadimos al HUD (Para que quede encima de todo y fijo en pantalla)
-		if hud_overlay:
-			hud_overlay.add_child(menu_instance)
-		else:
-			# Por si acaso no tengas HUD, lo ponemos directo al nivel
-			add_child(menu_instance)
+		add_child(menu_instance)
 		
 		# CONGELAMOS EL TIEMPO
 		get_tree().paused = true
