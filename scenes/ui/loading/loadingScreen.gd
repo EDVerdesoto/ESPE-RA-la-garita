@@ -1,9 +1,22 @@
 extends CanvasLayer
-
 # Rutas según tu foto image_f96180.png
 @onready var lbl_cargando = $ColorRect/lbl_cargando
 @onready var anim_player = $AnimationPlayer
 @onready var icono_carga = $ColorRect/iconoCarga # Referencia al icono
+
+# --- SISTEMA DE CARGA ASÍNCRONA ---
+const ESCENA_DESTINO = "res://scenes/levels/nivelGarita.tscn"
+const NPCS_POR_DIA = 4
+var progreso: Array = []  # ResourceLoader devuelve el progreso aquí
+
+# --- ESTADO DE CARGA ---
+var escena_cargada: PackedScene = null
+var escena_lista: bool = false
+var gemini_listo: bool = false
+var transicionando: bool = false
+
+# --- MANAGERS ---
+var daily_manager: DailyManager = DailyManager.new()
 
 # Las frases del guardia
 var frases = [
@@ -28,7 +41,6 @@ var frases_disponibles: Array = []
 
 func _ready():
 	# 1. Animamos el ícono de carga para que gire siempre
-	# Creamos una interpolación simple (Tween) para rotar
 	var tween = create_tween().set_loops()
 	tween.tween_property(icono_carga, "rotation_degrees", 360, 1.2).from(0.0)
 	frases_disponibles = frases.duplicate()
@@ -39,6 +51,100 @@ func _ready():
 	
 	# Conectamos la señal para saber cuando termina la animación
 	anim_player.animation_finished.connect(_on_animation_finished)
+	
+	# 3. Iniciamos la carga asíncrona de la escena de juego
+	ResourceLoader.load_threaded_request(ESCENA_DESTINO)
+	
+	# 4. Generamos los NPCs del día y los guardamos en GlobalGameManager
+	print("[LOADING] Generando NPCs para el día ", GlobalGameManager.dia_actual, "...")
+	GlobalGameManager.aciertos_hoy = 0
+	GlobalGameManager.errores_hoy = 0
+	var lista_npcs = daily_manager.generar_npcs_para_hoy(NPCS_POR_DIA)
+	GlobalGameManager.npcs_del_dia = lista_npcs
+	GlobalGameManager.npc_actual_index = 0
+	
+	# 5. Solicitamos diálogos a Gemini (si está disponible)
+	if GeminiManager and GeminiManager.API_KEY and not GeminiManager.API_KEY.is_empty():
+		print("[LOADING] Solicitando diálogos a Gemini...")
+		if not GeminiManager.batch_completed.is_connected(_on_gemini_completed):
+			GeminiManager.batch_completed.connect(_on_gemini_completed)
+		if not GeminiManager.error_ocurred.is_connected(_on_gemini_error):
+			GeminiManager.error_ocurred.connect(_on_gemini_error)
+		GeminiManager.solicitar_dialogos_batch(lista_npcs, "soleado")
+	else:
+		print("[LOADING] Sin API de Gemini, continuando sin diálogos IA")
+		gemini_listo = true
+
+func _process(_delta):
+	if transicionando:
+		return
+	
+	# Revisar el estado de la carga de la escena
+	if not escena_lista:
+		var status = ResourceLoader.load_threaded_get_status(ESCENA_DESTINO, progreso)
+		match status:
+			ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+				pass
+			ResourceLoader.THREAD_LOAD_LOADED:
+				escena_cargada = ResourceLoader.load_threaded_get(ESCENA_DESTINO)
+				escena_lista = true
+				print("[LOADING] Escena cargada, esperando Gemini...")
+			ResourceLoader.THREAD_LOAD_FAILED:
+				printerr("[LOADING] Error al cargar: ", ESCENA_DESTINO)
+				lbl_cargando.text = "Error al cargar el nivel..."
+				set_process(false)
+				return
+	
+	# Cuando AMBOS están listos → transición con fade
+	if escena_lista and gemini_listo:
+		transicionando = true
+		_iniciar_transicion()
+
+# --- CALLBACKS DE GEMINI ---
+
+func _on_gemini_completed(dialogos_array: Array):
+	# Asignar los diálogos a cada NPC
+	var lista_npcs = GlobalGameManager.npcs_del_dia
+	for i in range(min(lista_npcs.size(), dialogos_array.size())):
+		if dialogos_array[i] is Dictionary:
+			lista_npcs[i].dialogos_ia = dialogos_array[i]
+	print("[LOADING] Diálogos de Gemini listos ✓")
+	_desconectar_gemini()
+	gemini_listo = true
+
+func _on_gemini_error(mensaje: String):
+	print("[LOADING] Error de Gemini: ", mensaje, " - continuando sin IA")
+	_desconectar_gemini()
+	gemini_listo = true
+
+func _desconectar_gemini():
+	if GeminiManager.batch_completed.is_connected(_on_gemini_completed):
+		GeminiManager.batch_completed.disconnect(_on_gemini_completed)
+	if GeminiManager.error_ocurred.is_connected(_on_gemini_error):
+		GeminiManager.error_ocurred.disconnect(_on_gemini_error)
+
+# --- TRANSICIÓN CON FADE ---
+
+func _iniciar_transicion():
+	print("[LOADING] ¡Todo listo! Iniciando fade...")
+	
+	# Creamos un rectángulo negro encima de todo para el fade
+	var fade_rect = ColorRect.new()
+	fade_rect.color = Color(0, 0, 0, 0)  # Empieza transparente
+	fade_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$ColorRect.add_child(fade_rect)
+	# Aseguramos que quede encima de todo
+	fade_rect.move_to_front()
+	
+	# Fade a negro en 0.8 segundos
+	var tween = create_tween()
+	tween.tween_property(fade_rect, "color:a", 1.0, 0.8)
+	tween.tween_callback(_cambiar_a_nivel)
+
+func _cambiar_a_nivel():
+	print("[LOADING] Cambiando al nivel...")
+	get_tree().change_scene_to_packed(escena_cargada)
 
 func cambiar_frase():
 	if frases_disponibles.is_empty():

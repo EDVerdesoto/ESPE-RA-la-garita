@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ccitr8jw8uwjh"]
 
 [ext_resource type="Script" uid="uid://c7wangrhssjkg" path="res://scenes/ui/menus/puntuacion.gd" id="1_360jr"]
-[ext_resource type="Texture2D" uid="uid://b27fypjbkkjtk" path="res://assets/HUD/Gemini_Generated_Image_h273boh273boh273.png" id="2_ady4d"]
+[ext_resource type="Texture2D" uid="uid://b27fypjbkkjtk" path="res://assets/HUD/reporte.png" id="2_ady4d"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="3_y7qf5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ady4d"]

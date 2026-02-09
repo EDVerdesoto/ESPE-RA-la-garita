@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqji0ap6doxj2" path="res://scenes/ui/loading/loadingScreen.gd" id="1_v66jl"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_ta715"]
-[ext_resource type="Texture2D" uid="uid://c5wgdupv72n1h" path="res://assets/HUD/Gemini_Generated_Image_2a8git2a8git2a8g.png" id="3_l1vi5"]
+[ext_resource type="Texture2D" uid="uid://c5wgdupv72n1h" path="res://assets/HUD/iconoCarga.png" id="3_l1vi5"]
 
 [sub_resource type="Animation" id="Animation_0snwj"]
 length = 0.001
@@ -94,10 +94,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -139.0
-offset_top = 212.0
-offset_right = 177.0
-offset_bottom = 283.0
+offset_left = -715.0
+offset_top = 210.0
+offset_right = 820.0
+offset_bottom = 479.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
@@ -107,5 +107,6 @@ text = "Cargando "
 label_settings = SubResource("LabelSettings_wrvgo")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Timer" type="Timer" parent="." unique_id=868303787]

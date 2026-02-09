@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bso0cft686ask"]
+
+[ext_resource type="Texture2D" uid="uid://c5jqyyvsrpro" path="res://assets/HUD/game_over.png" id="1_i0uvi"]
+[ext_resource type="Script" uid="uid://2ifkspxyr8gj" path="res://scenes/ui/menus/game_over.gd" id="1_qeaq5"]
+[ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_qeaq5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83rqp"]
+bg_color = Color(0.47397572, 0.47397578, 0.4739756, 0.44313726)
+border_width_bottom = 2
+border_color = Color(0.4745098, 0.4745098, 0.4745098, 0.44313726)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3cix"]
+bg_color = Color(0.17254902, 0.17254902, 0.17254902, 0.14117648)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7upvb"]
+bg_color = Color(0.3217278, 0.321728, 0.32172793, 0.18039216)
+
+[node name="GameOver" type="Control" unique_id=918481301]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qeaq5")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1797705333]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_i0uvi")
+expand_mode = 1
+
+[node name="btn_regresar" type="Button" parent="TextureRect" unique_id=1246466834]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -113.0
+offset_right = 117.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_qeaq5")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_83rqp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_u3cix")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7upvb")
+text = "Regresar"

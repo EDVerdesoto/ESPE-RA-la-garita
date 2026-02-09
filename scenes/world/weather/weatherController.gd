@@ -14,19 +14,11 @@ extends Node2D
 @export_group("Efectos")
 @export var lluvia_particulas: CPUParticles2D
 
-# Referencias al NPC y al HUD (hijos de esta escena)
-@onready var npc = $Npc
-@onready var hud = $HudOverlay/HUD
-
 # Estados del clima en orden lineal
 enum Clima { SOLEADO, NUBLADO, LLUVIOSO, MOJADO }
 var estado_actual: int
 
 func _ready():
-	# Conectar señales NPC <-> HUD
-	if npc and hud:
-		npc.llego_a_ventanilla.connect(hud.empezar_conteo)
-		hud.tiempo_agotado.connect(npc.iniciar_salida)
 	
 	# 1. Elegir un clima aleatorio para empezar de una
 	estado_actual = randi() % 4 
@@ -36,7 +28,7 @@ func _ready():
 	
 	# 3. Timer para "tirar el dado" cada 20 segundos
 	var timer = Timer.new()
-	timer.wait_time = 30.0
+	timer.wait_time = 120.0
 	timer.autostart = true
 	timer.timeout.connect(_intentar_cambio_clima)
 	add_child(timer)
