@@ -215,8 +215,10 @@ func _on_discrepancia_detectada(campo: int, val_carnet: String, val_sistema: Str
 	if pc_monitor and pc_monitor.has_method("mostrar_resultado"):
 		pc_monitor.mostrar_resultado(campo, GlobalEnums.ResultadoComparacion.NO_COINCIDE)
 	
-	# Disparar diálogo de incidencia correcta
-	if dialogue_panel and dialogue_panel.has_method("mostrar_dialogo_incidencia_correcta"):
+	# Mostrar mensaje del guardia confrontando + reacción del NPC + opciones de respuesta
+	if dialogue_panel and dialogue_panel.has_method("mostrar_discrepancia_encontrada"):
+		dialogue_panel.mostrar_discrepancia_encontrada(campo, val_carnet, val_sistema)
+	elif dialogue_panel and dialogue_panel.has_method("mostrar_dialogo_incidencia_correcta"):
 		dialogue_panel.mostrar_dialogo_incidencia_correcta()
 
 ## Comparación correcta (campo coincide)
@@ -228,13 +230,22 @@ func _on_comparacion_correcta(campo: int):
 			carnet.mostrar_resultado(campo, GlobalEnums.ResultadoComparacion.COINCIDE)
 	if pc_monitor and pc_monitor.has_method("mostrar_resultado"):
 		pc_monitor.mostrar_resultado(campo, GlobalEnums.ResultadoComparacion.COINCIDE)
+	# Mostrar feedback en el chat: guardia verifica + NPC responde brevemente
+	if dialogue_panel and dialogue_panel.has_method("mostrar_comparacion_coincide"):
+		dialogue_panel.mostrar_comparacion_coincide(campo)
 
 ## Resultado de comparación de foto
 func _on_foto_comparada(coinciden: bool):
 	if not coinciden:
 		print("[GAMEPLAY] ¡La foto del carnet NO coincide con la cara real!")
-		if dialogue_panel and dialogue_panel.has_method("mostrar_dialogo_incidencia_correcta"):
+		if dialogue_panel and dialogue_panel.has_method("mostrar_discrepancia_encontrada"):
+			dialogue_panel.mostrar_discrepancia_encontrada(
+				GlobalEnums.CampoComparacion.FOTO, "foto_carnet", "foto_real")
+		elif dialogue_panel and dialogue_panel.has_method("mostrar_dialogo_incidencia_correcta"):
 			dialogue_panel.mostrar_dialogo_incidencia_correcta()
+	else:
+		if dialogue_panel and dialogue_panel.has_method("mostrar_comparacion_coincide"):
+			dialogue_panel.mostrar_comparacion_coincide(GlobalEnums.CampoComparacion.FOTO)
 
 # =====================================================
 # DECISIÓN DEL GUARDIA

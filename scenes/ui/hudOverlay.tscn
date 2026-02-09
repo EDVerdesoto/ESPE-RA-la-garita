@@ -1,37 +1,57 @@
 [gd_scene format=3 uid="uid://b3t6dmgcnxw8s"]
 
-[ext_resource type="Script" uid="uid://c26blqes8eev0" path="res://scenes/ui/hudOverlay.gd" id="1_8771v"]
+[sub_resource type="GDScript" id="GDScript_5fx1s"]
+script/source = "## HUD Overlay: Muestra información del estado del juego al jugador
+extends Control
+
+@onready var lbl_dia: Label = $PanelHUD/LblDia
+@onready var lbl_dinero: Label = $PanelHUD/LblDinero
+@onready var lbl_aciertos: Label = $PanelHUD/LblAciertos
+@onready var lbl_errores: Label = $PanelHUD/LblErrores
+
+func _ready():
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func actualizar(datos: Dictionary) -> void:
+	if lbl_dia:
+		lbl_dia.text = \"DÍA \" + str(datos.get(\"dia\", 1))
+	if lbl_dinero:
+		lbl_dinero.text = \"$\" + str(datos.get(\"dinero\", 0.0))
+	if lbl_aciertos:
+		lbl_aciertos.text = \"✓ \" + str(datos.get(\"aciertos\", 0))
+	if lbl_errores:
+		lbl_errores.text = \"✗ \" + str(datos.get(\"errores\", 0))
+"
 
 [node name="HudOverlay" type="Control" unique_id=58143630]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
-script = ExtResource("1_8771v")
+script = SubResource("GDScript_5fx1s")
 
-[node name="PanelHUD" type="HBoxContainer" parent="."]
+[node name="PanelHUD" type="HBoxContainer" parent="." unique_id=707830401]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 500.0
 offset_bottom = 40.0
 
-[node name="LblDia" type="Label" parent="PanelHUD"]
+[node name="LblDia" type="Label" parent="PanelHUD" unique_id=1987619454]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "DÍA 1"
-custom_minimum_size = Vector2(80, 0)
 
-[node name="LblDinero" type="Label" parent="PanelHUD"]
+[node name="LblDinero" type="Label" parent="PanelHUD" unique_id=211463030]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "$0.00"
-custom_minimum_size = Vector2(80, 0)
 
-[node name="LblAciertos" type="Label" parent="PanelHUD"]
+[node name="LblAciertos" type="Label" parent="PanelHUD" unique_id=1333633247]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "✓ 0"
-custom_minimum_size = Vector2(50, 0)
 
-[node name="LblErrores" type="Label" parent="PanelHUD"]
+[node name="LblErrores" type="Label" parent="PanelHUD" unique_id=1176897386]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "✗ 0"
-custom_minimum_size = Vector2(50, 0)
-

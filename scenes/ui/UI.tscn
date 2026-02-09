@@ -1,58 +1,276 @@
 [gd_scene format=3 uid="uid://cs2wrqej12fgn"]
 
 [ext_resource type="Script" uid="uid://bmfev5yvft66" path="res://scenes/ui/UI.gd" id="1_d2gw2"]
+[ext_resource type="Texture2D" uid="uid://cmily01torb6i" path="res://assets/HUD/BotonAprobar.png" id="2_nnfdp"]
+[ext_resource type="Texture2D" uid="uid://cudjmsps2cd3p" path="res://assets/HUD/BotonAprobarHover.png" id="3_dqg8s"]
+[ext_resource type="Texture2D" uid="uid://nhrdslkfn56c" path="res://assets/HUD/BotonRechazar.png" id="3_s64wo"]
+[ext_resource type="Texture2D" uid="uid://cbqaultdmeoa0" path="res://assets/HUD/BotonAprobarPress.png" id="3_tnv4l"]
+[ext_resource type="Texture2D" uid="uid://cnks2e8dbvhrc" path="res://assets/HUD/BotonRechazarPress.png" id="6_j3nm3"]
+[ext_resource type="Texture2D" uid="uid://dj8c4nh212k3l" path="res://assets/HUD/BotonRechazarHover.png" id="6_tnv4l"]
 
-[node name="UI" type="CanvasLayer" unique_id=183366563]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chat"]
+bg_color = Color(0.08, 0.1, 0.16, 0.85)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_options"]
+bg_color = Color(0.08, 0.12, 0.1, 0.85)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reporte"]
+bg_color = Color(0.12, 0.08, 0.08, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.2, 0.2, 0.6)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="UI" type="CanvasLayer" unique_id=1650246286]
 script = ExtResource("1_d2gw2")
 
-[node name="MainLayout" type="Control" parent="." unique_id=1239981275]
+[node name="MainLayout" type="Control" parent="." unique_id=1809914982]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainLayout" unique_id=1026178231]
+[node name="TopBar" type="Control" parent="MainLayout" unique_id=1152779128]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="TopBarBg" type="ColorRect" parent="MainLayout/TopBar" unique_id=1223604379]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.06, 0.08, 0.12, 0.92)
+
+[node name="TopBarTexture" type="TextureRect" parent="MainLayout/TopBar" unique_id=1141569529]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TopBarMargin" type="MarginContainer" parent="MainLayout/TopBar" unique_id=461827023]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 6
 
-[node name="TopHUD" type="HBoxContainer" parent="MainLayout/MarginContainer" unique_id=1552337285]
+[node name="TopBarHBox" type="HBoxContainer" parent="MainLayout/TopBar/TopBarMargin" unique_id=1447783942]
 layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
 
-[node name="LblDia" type="Label" parent="MainLayout/MarginContainer/TopHUD" unique_id=911007908]
+[node name="LblDia" type="Label" parent="MainLayout/TopBar/TopBarMargin/TopBarHBox" unique_id=1114509954]
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "DÍA 1"
+horizontal_alignment = 1
 
-[node name="LblDinero" type="Label" parent="MainLayout/MarginContainer/TopHUD" unique_id=1315104915]
+[node name="LblDinero" type="Label" parent="MainLayout/TopBar/TopBarMargin/TopBarHBox" unique_id=637649291]
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "$0.00"
+horizontal_alignment = 1
 
-[node name="MiddleLayout" type="HBoxContainer" parent="MainLayout/MarginContainer" unique_id=949960340]
+[node name="LblAciertos" type="Label" parent="MainLayout/TopBar/TopBarMargin/TopBarHBox" unique_id=4241145]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 1, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "✓ 0"
+horizontal_alignment = 1
 
-[node name="ChatContainer" type="PanelContainer" parent="MainLayout/MarginContainer/MiddleLayout" unique_id=205564684]
+[node name="LblErrores" type="Label" parent="MainLayout/TopBar/TopBarMargin/TopBarHBox" unique_id=1958698581]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "✗ 0"
+horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="MainLayout/MarginContainer/MiddleLayout/ChatContainer" unique_id=1007918721]
-layout_mode = 2
+[node name="ChatPanel" type="PanelContainer" parent="MainLayout" unique_id=902671630]
+visible = false
+layout_mode = 1
+offset_left = 10.0
+offset_top = 55.0
+offset_right = 320.0
+offset_bottom = 230.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_chat")
 
-[node name="Spacer" type="Control" parent="MainLayout/MarginContainer/MiddleLayout" unique_id=1952501596]
+[node name="ChatMargin" type="MarginContainer" parent="MainLayout/ChatPanel" unique_id=90058438]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
 
-[node name="ResponseMenu" type="VBoxContainer" parent="MainLayout/MarginContainer/MiddleLayout" unique_id=96425782]
+[node name="ChatVBox" type="VBoxContainer" parent="MainLayout/ChatPanel/ChatMargin" unique_id=822113491]
 layout_mode = 2
+theme_override_constants/separation = 6
 
-[node name="ActionFooter" type="HBoxContainer" parent="MainLayout/MarginContainer" unique_id=1400400436]
+[node name="LblNombreNPC" type="Label" parent="MainLayout/ChatPanel/ChatMargin/ChatVBox" unique_id=670987251]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "Nombre NPC"
 
-[node name="BtnAprobar" type="TextureButton" parent="MainLayout/MarginContainer/ActionFooter" unique_id=171459681]
+[node name="ScrollChat" type="ScrollContainer" parent="MainLayout/ChatPanel/ChatMargin/ChatVBox" unique_id=306584182]
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
-[node name="BtnRechazar" type="TextureButton" parent="MainLayout/MarginContainer/ActionFooter" unique_id=1464010216]
+[node name="ChatContainer" type="VBoxContainer" parent="MainLayout/ChatPanel/ChatMargin/ChatVBox/ScrollChat" unique_id=1283218676]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="OptionsPanel" type="PanelContainer" parent="MainLayout" unique_id=497036351]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -310.0
+offset_top = 55.0
+offset_right = -10.0
+offset_bottom = 280.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_options")
+
+[node name="OptionsMargin" type="MarginContainer" parent="MainLayout/OptionsPanel" unique_id=1642148610]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="OptionsVBox" type="VBoxContainer" parent="MainLayout/OptionsPanel/OptionsMargin" unique_id=674552857]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LblOpcionesHeader" type="Label" parent="MainLayout/OptionsPanel/OptionsMargin/OptionsVBox" unique_id=1520492465]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 1, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "🛡️ Elige tu respuesta:"
+
+[node name="ContenedorOpciones" type="VBoxContainer" parent="MainLayout/OptionsPanel/OptionsMargin/OptionsVBox" unique_id=1878632070]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BtnAprobar" type="TextureButton" parent="MainLayout" unique_id=1746092159]
+visible = false
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -75.0
+offset_right = 85.0
+scale = Vector2(1.5, 1.5)
+texture_normal = ExtResource("2_nnfdp")
+texture_pressed = ExtResource("3_tnv4l")
+texture_hover = ExtResource("3_dqg8s")
+stretch_mode = 0
+
+[node name="BtnRechazar" type="TextureButton" parent="MainLayout" unique_id=531268516]
+visible = false
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -75.0
+offset_right = -15.0
+scale = Vector2(1.5, 1.5)
+texture_normal = ExtResource("3_s64wo")
+texture_pressed = ExtResource("6_j3nm3")
+texture_hover = ExtResource("6_tnv4l")
+stretch_mode = 0
+
+[node name="PanelReporte" type="PanelContainer" parent="MainLayout" unique_id=314481690]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -150.0
+offset_right = 180.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_reporte")
+
+[node name="ReporteMargin" type="MarginContainer" parent="MainLayout/PanelReporte" unique_id=1315760592]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="MainLayout/PanelReporte/ReporteMargin" unique_id=2108139726]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LblReporteHeader" type="Label" parent="MainLayout/PanelReporte/ReporteMargin/VBox" unique_id=1323873672]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7, 0.3, 1)
+theme_override_font_sizes/font_size = 15
+text = "⚠️ Reportar incidencia:"
+horizontal_alignment = 1
+
+[node name="ContenedorIncidencias" type="VBoxContainer" parent="MainLayout/PanelReporte/ReporteMargin/VBox" unique_id=83685568]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="LblFeedback" type="Label" parent="MainLayout" unique_id=442529802]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 55.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -6,8 +6,7 @@ extends Node
 @onready var gameplay_controller = $GameplayController
 @onready var npc_node = $Npc
 @onready var pc_monitor = $Pc
-@onready var dialogue_panel = $DialoguePanel
-@onready var hud_overlay = $HudOverlay
+@onready var ui = $UI
 
 func _ready():
 	print("=== NIVEL GARITA CARGADO ===")
@@ -16,7 +15,7 @@ func _ready():
 	if gameplay_controller:
 		gameplay_controller.npc_visual = npc_node
 		gameplay_controller.pc_monitor = pc_monitor
-		gameplay_controller.dialogue_panel = dialogue_panel
+		gameplay_controller.dialogue_panel = ui
 		
 		# Reconectar señales ahora que tenemos las referencias
 		gameplay_controller._conectar_senales()
@@ -31,8 +30,8 @@ func _process(_delta):
 	_actualizar_hud()
 
 func _actualizar_hud():
-	if hud_overlay and hud_overlay.has_method("actualizar"):
-		hud_overlay.actualizar({
+	if ui and ui.has_method("actualizar"):
+		ui.actualizar({
 			"dia": GlobalGameManager.dia_actual,
 			"dinero": GlobalGameManager.dinero,
 			"aciertos": GlobalGameManager.aciertos_hoy,

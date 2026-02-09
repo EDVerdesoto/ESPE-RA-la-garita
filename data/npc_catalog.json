@@ -28,7 +28,7 @@
 		"personalidad": "Agresivo",
 		"rol_base": "Estudiante",
 		"carrera": "Economía",
-		"sprite_path": "res://assets/personajes/estudiante.png",
+		"sprite_path": "res://assets/personajes/NPC-estudiante-3.png",
 		"cara_path": "res://assets/personajes/caras/cara_003.png",
 		"numero_cedula": "1709876543"
 	},

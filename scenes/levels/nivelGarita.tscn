@@ -42,8 +42,7 @@ scale = Vector2(0.98271275, 0.75596905)
 texture = ExtResource("11_no0k4")
 
 [node name="Npc" parent="." unique_id=72313117 instance=ExtResource("9_d1myb")]
-z_index = -1
-position = Vector2(-17, -1)
+position = Vector2(4180, 588)
 
 [node name="GameplayController" parent="." unique_id=1302597862 instance=ExtResource("7_fgqlb")]
 
