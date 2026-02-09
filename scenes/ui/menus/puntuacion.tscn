@@ -1,16 +1,230 @@
 [gd_scene format=3 uid="uid://ccitr8jw8uwjh"]
 
 [ext_resource type="Script" uid="uid://c7wangrhssjkg" path="res://scenes/ui/menus/puntuacion.gd" id="1_360jr"]
+[ext_resource type="Texture2D" uid="uid://b27fypjbkkjtk" path="res://assets/HUD/Gemini_Generated_Image_h273boh273boh273.png" id="2_ady4d"]
+[ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="3_y7qf5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ady4d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y7qf5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7qf5"]
+bg_color = Color(0.9019608, 0.9019608, 0.9019608, 0.16470589)
 
 [node name="puntuacion" type="Control" unique_id=979815780]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_360jr")
 
-[node name="Label" type="Label" parent="." unique_id=264159267]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1263349662]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16470589, 0.2, 0.14509805, 1)
+
+[node name="VBox_Principal" type="VBoxContainer" parent="ColorRect" unique_id=602910383]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 35
+alignment = 1
+
+[node name="VBox_TituloSello" type="VBoxContainer" parent="ColorRect/VBox_Principal" unique_id=2128743582]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/VBox_Principal/VBox_TituloSello" unique_id=1720589534]
+custom_minimum_size = Vector2(1600, 1060)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_ady4d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="lblDiaActual" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1611598910]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = -56.400024
+offset_top = -32.119995
+offset_right = -14.400024
+offset_bottom = 11.880005
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 50
+text = "3"
+horizontal_alignment = 1
+
+[node name="lblAciertos" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=898937933]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = -154.35004
+offset_top = 306.88
+offset_right = -40.350037
+offset_bottom = 350.88
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 50
+text = "3"
+horizontal_alignment = 1
+
+[node name="lblErrores" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=438707297]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = 393.64996
+offset_top = 182.88
+offset_right = 508.64996
+offset_bottom = 226.88
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 50
+text = "3"
+horizontal_alignment = 1
+
+[node name="lblDescuentos" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1820530487]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = 215.64996
+offset_top = 229.88
+offset_right = 339.64996
+offset_bottom = 273.88
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 50
+text = "3"
+
+[node name="lblTitulo" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1315104424]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = -282.60004
+offset_top = -219.12
+offset_right = 547.39996
+offset_bottom = -121.119995
+theme_override_colors/font_color = Color(0.79607844, 0.7411765, 0.5647059, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 85
+text = "Informe de Día"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lblBalanceMensaje" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=349875395]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = -191.35004
+offset_top = 491.88
+offset_right = 379.64996
+offset_bottom = 571.88
+theme_override_colors/font_color = Color(0.3529412, 0.34117648, 0.21960784, 0.85490197)
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 65
+text = "Balance de día:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lblBalanceDinero" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1304309810]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = 349.64996
+offset_top = 492.88
+offset_right = 469.64996
+offset_bottom = 572.88
+theme_override_colors/font_color = Color(0.3529412, 0.34117648, 0.21960784, 0.85490197)
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 60
+text = "$30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lblAciertosDinero" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=442337322]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = -341.35004
+offset_top = 353.88
+offset_right = -218.35004
+offset_bottom = 397.88
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 50
+text = "3"
+
+[node name="lblDineroTotal" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1206930483]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40100002
+anchor_top = 0.252
+anchor_right = 0.40100002
+anchor_bottom = 0.252
+offset_left = 557.39996
+offset_top = -30.119995
+offset_right = 586.39996
+offset_bottom = 13.880005
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = -100
+theme_override_constants/paragraph_spacing = -10000
+theme_override_fonts/font = ExtResource("3_y7qf5")
+theme_override_font_sizes/font_size = 45
+text = "3"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=266884407]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "PUNTUACION"
+offset_left = 425.0
+offset_top = 912.0
+offset_right = 905.0
+offset_bottom = 1010.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ady4d")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_y7qf5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y7qf5")

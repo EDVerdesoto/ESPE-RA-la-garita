@@ -11,6 +11,11 @@ var slot_actual: int = 1
 # --- DATOS DEL JUEGO (Lo que se guarda) ---
 var dia_actual: int = 1
 
+# --- ESTADÍSTICAS TOTALES (HISTORIAL DE VIDA) ---
+# ¡NUEVO! Esto guarda el acumulado de toda la partida
+var aciertos_totales: int = 0
+var errores_totales: int = 0
+
 # --- ECONOMÍA --- 
 var dinero: float = 0.0
 var sueldo_base: float = 20.0       # Lo que gana por asomar la nariz
@@ -35,12 +40,17 @@ var dialogos_del_dia_cache: Array = [] # Lo que escribió Gemini (para no gastar
 func reiniciar_datos():
 	dia_actual = 1
 	dinero = 0.0
+	# Reiniciamos también los totales históricos
+	aciertos_totales = 0
+	errores_totales = 0
 	resetear_sesion_diaria()
 
 # Llama a esto cuando empiece un NUEVO DÍA (limpia los NPCs viejos)
 func resetear_sesion_diaria():
 	npc_actual_index = 0
 	npcs_del_dia = []
+	aciertos_hoy = 0 # Aseguramos que empiece en 0
+	errores_hoy = 0  # Aseguramos que empiece en 0
 	dialogos_del_dia_cache = []
 
 # Esta función recibe los datos cargados desde el archivo
@@ -50,7 +60,16 @@ func cargar_datos_desde_save(datos: Dictionary):
 		dia_actual = datos.progreso.dia
 		dinero = datos.progreso.dinero
 	
-	# 2. Recuperamos la sesión interrumpida (si existe)
+	# 2. Recuperamos estadísticas totales (¡NUEVO!)
+	if datos.has("estadisticas"):
+		aciertos_totales = datos.estadisticas.aciertos
+		errores_totales = datos.estadisticas.errores
+	else:
+		# Por si cargas un save viejo que no tenía esto
+		aciertos_totales = 0
+		errores_totales = 0
+	
+	# 3. Recuperamos la sesión interrumpida (si existe)
 	if datos.has("sesion"):
 		npc_actual_index = datos.sesion.npc_index
 		npcs_del_dia = datos.sesion.npcs_data
@@ -69,6 +88,10 @@ func calcular_fin_de_dia():
 	
 	# 2. Actualizamos la billetera real
 	dinero += total_dia
+	
+	# 3. ¡IMPORTANTE! Sumamos al historial antes de borrar lo de hoy
+	aciertos_totales += aciertos_hoy
+	errores_totales += errores_hoy
 	
 	print("Ganaste: $", ingresos)
 	print("Perdiste: $", multas + gastos)

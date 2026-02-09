@@ -1,6 +1,26 @@
 [gd_scene format=3 uid="uid://qqwspqsy4fbw"]
 
 [ext_resource type="Script" uid="uid://c0hc3m1ldeagm" path="res://scenes/ui/menus/creditos.gd" id="1_rsilq"]
+[ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_bguww"]
+[ext_resource type="Texture2D" uid="uid://cmr5eby6bncn4" path="res://assets/HUD/Gemini_Generated_Image_6co7426co7426co7.png" id="3_3sxrg"]
+[ext_resource type="Texture2D" uid="uid://dytloctd3yfmp" path="res://assets/HUD/Gemini_Generated_Image_w1xihvw1xihvw1xi.png" id="4_7wurh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3kyjl"]
+font = ExtResource("2_bguww")
+font_size = 160
+font_color = Color(0.8320714, 0.7792464, 0.6268813, 1)
+outline_size = 6
+outline_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_htdgp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xe2ed"]
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wl6km"]
+content_margin_left = 1.0
+content_margin_top = 2.0
 
 [node name="creditos" type="Control" unique_id=494089894]
 layout_mode = 3
@@ -10,3 +30,163 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rsilq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1440105878]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16470589, 0.2, 0.14509805, 1)
+
+[node name="VBox_Principal" type="VBoxContainer" parent="ColorRect" unique_id=327800504]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 35
+alignment = 1
+
+[node name="VBox_TituloSello" type="VBoxContainer" parent="ColorRect/VBox_Principal" unique_id=1277409415]
+layout_mode = 2
+
+[node name="lbl_Titulo" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello" unique_id=1477582529]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
+theme_override_fonts/font = ExtResource("2_bguww")
+theme_override_font_sizes/font_size = 100
+text = "CREDITOS"
+label_settings = SubResource("LabelSettings_3kyjl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/VBox_Principal/VBox_TituloSello" unique_id=535279090]
+custom_minimum_size = Vector2(1200, 550)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_3sxrg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="lblDiseño" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=104096050]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24700001
+anchor_top = 0.294
+anchor_right = 0.24700001
+anchor_bottom = 0.294
+offset_left = -0.4000244
+offset_top = -6.699997
+offset_right = 219.59998
+offset_bottom = 16.300003
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bguww")
+theme_override_font_sizes/font_size = 25
+text = "Joan Cobeña"
+
+[node name="lblMusica" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=546613375]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.578
+anchor_top = 0.537
+anchor_right = 0.578
+anchor_bottom = 0.537
+offset_left = 0.39996338
+offset_top = -13.350006
+offset_right = 161.39996
+offset_bottom = 9.649994
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bguww")
+theme_override_font_sizes/font_size = 25
+text = "Carlos Jaya"
+
+[node name="lblArte" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=293804005]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24700001
+anchor_top = 0.52500004
+anchor_right = 0.24700001
+anchor_bottom = 0.52500004
+offset_left = 0.5999756
+offset_top = -6.7500305
+offset_right = 235.59998
+offset_bottom = 16.24997
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bguww")
+theme_override_font_sizes/font_size = 25
+text = "Edison Verdesoto"
+
+[node name="lblProgramacion" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1407454134]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.577
+anchor_top = 0.303
+anchor_right = 0.577
+anchor_bottom = 0.303
+offset_left = 0.5999756
+offset_top = -11.650009
+offset_right = 162.59998
+offset_bottom = 11.349991
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bguww")
+theme_override_font_sizes/font_size = 25
+text = "Ruben Benavides"
+
+[node name="lblAgradecimiento" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=1876621824]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.76500005
+anchor_right = 0.5
+anchor_bottom = 0.76500005
+offset_left = -117.5
+offset_top = -23.75003
+offset_right = 117.5
+offset_bottom = 23.24997
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bguww")
+theme_override_font_sizes/font_size = 25
+text = "Joan Cobeña
+Edison Verdesoto"
+horizontal_alignment = 1
+
+[node name="lblAgradecimientoTitulo" type="Label" parent="ColorRect/VBox_Principal/VBox_TituloSello/TextureRect" unique_id=850457736]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.68600005
+anchor_right = 0.5
+anchor_bottom = 0.68600005
+offset_left = -80.5
+offset_top = -11.300018
+offset_right = 80.5
+offset_bottom = 11.699982
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_bguww")
+theme_override_font_sizes/font_size = 25
+text = "THE GOATS"
+horizontal_alignment = 1
+
+[node name="btnRegresar" type="Button" parent="ColorRect/VBox_Principal" unique_id=1728861883]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_htdgp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xe2ed")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wl6km")
+icon = ExtResource("4_7wurh")

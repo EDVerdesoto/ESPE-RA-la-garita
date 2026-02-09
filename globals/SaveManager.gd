@@ -1,6 +1,5 @@
 extends Node
 
-# Construimos la ruta según el slot elegido en el Global
 func get_ruta_archivo() -> String:
 	return "user://slot_" + str(GlobalGameManager.slot_actual) + ".save"
 
@@ -15,6 +14,10 @@ func guardar_partida():
 			"dia": GlobalGameManager.dia_actual,
 			"dinero": GlobalGameManager.dinero
 		},
+		"estadisticas": { # ¡NUEVO! Guardamos los totales
+			"aciertos": GlobalGameManager.aciertos_totales,
+			"errores": GlobalGameManager.errores_totales
+		},
 		"sesion": {
 			"npc_index": GlobalGameManager.npc_actual_index,
 			"npcs_data": GlobalGameManager.npcs_del_dia,
@@ -22,7 +25,6 @@ func guardar_partida():
 		}
 	}
 	
-	# Escribimos el archivo
 	var file = FileAccess.open(ruta, FileAccess.WRITE)
 	file.store_var(datos_a_guardar)
 	file.close()
@@ -39,10 +41,8 @@ func cargar_partida():
 	var datos = file.get_var()
 	file.close()
 	
-	# Le mandamos los datos al cerebro para que se actualice
 	GlobalGameManager.cargar_datos_desde_save(datos)
 
-# Función rápida para ver qué hay en el slot (para el menú de selección)
 func obtener_info_resumida(num_slot: int) -> String:
 	var ruta = "user://slot_" + str(num_slot) + ".save"
 	if FileAccess.file_exists(ruta):

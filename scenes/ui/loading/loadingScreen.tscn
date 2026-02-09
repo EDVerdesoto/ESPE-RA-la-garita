@@ -1,21 +1,111 @@
 [gd_scene format=3 uid="uid://bmx8puneodbuk"]
 
 [ext_resource type="Script" uid="uid://dqji0ap6doxj2" path="res://scenes/ui/loading/loadingScreen.gd" id="1_v66jl"]
+[ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_ta715"]
+[ext_resource type="Texture2D" uid="uid://c5wgdupv72n1h" path="res://assets/HUD/Gemini_Generated_Image_2a8git2a8git2a8g.png" id="3_l1vi5"]
 
-[node name="LoadingScreen" type="Control" unique_id=783104558]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="Animation" id="Animation_0snwj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lbl_cargando:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_33og6"]
+resource_name = "cambio_frase"
+length = 6.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lbl_cargando:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 4.4666667, 5.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ko75j"]
+_data = {
+&"RESET": SubResource("Animation_0snwj"),
+&"cambio_frase": SubResource("Animation_33og6")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_fe0om"]
+font = ExtResource("2_ta715")
+font_size = 90
+font_color = Color(0.8320714, 0.7792464, 0.6268813, 1)
+outline_size = 6
+outline_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wrvgo"]
+font = ExtResource("2_ta715")
+font_size = 50
+font_color = Color(0.83137256, 0.78039217, 0.627451, 1)
+
+[node name="LoadingScreen" type="CanvasLayer" unique_id=1126453590]
+layer = 100
 script = ExtResource("1_v66jl")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1229933292]
+root_node = NodePath("../ColorRect")
+libraries/ = SubResource("AnimationLibrary_ko75j")
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1293472028]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.16470589, 0.2, 0.14509805, 1)
+
+[node name="lbl_Titulo" type="Label" parent="ColorRect" unique_id=1339181727]
+layout_mode = 0
+offset_right = 876.0
+offset_bottom = 186.0
+theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
+theme_override_fonts/font = ExtResource("2_ta715")
+theme_override_font_sizes/font_size = 100
+text = "CARGANDO NIVEL"
+label_settings = SubResource("LabelSettings_fe0om")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="iconoCarga" type="Sprite2D" parent="ColorRect" unique_id=614360751]
+position = Vector2(1023.00006, 560)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_l1vi5")
+
+[node name="lbl_cargando" type="Label" parent="ColorRect" unique_id=1404468146]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = 212.0
+offset_right = 177.0
+offset_bottom = 283.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8117647, 0.7764706, 0.72156864, 1)
+theme_override_fonts/font = ExtResource("2_ta715")
+theme_override_font_sizes/font_size = 100
+text = "Cargando "
+label_settings = SubResource("LabelSettings_wrvgo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=868303787]
