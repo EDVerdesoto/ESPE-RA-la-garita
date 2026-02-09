@@ -150,7 +150,7 @@ static func _construir_documentos(
 
 	var nombres_aleatorios: Array[String] = ["Juan", "María", "Carlos", "Ana", "Pedro", "Lucía", "José", "Valentina", "Diego", "Sofía"]
 	var apellidos_aleatorios: Array[String] = ["Pérez", "Gómez", "Rodríguez", "Martínez", "López", "Hernández", "Torres", "Ramírez", "Vargas", "Flores"]
-	var carreras_aleatorias: Array[String] = ["Ingeniería en Software", "Biotecnología", "Economía", "Fisioterapia", "Derecho"]
+	var carreras_aleatorias: Array[String] = ["Software", "Biotecnología", "Economía", "Fisioterapia", "Derecho"]
 
 	# Aplicar discrepancias según incidencia
 	match npc.incidencia:

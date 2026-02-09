@@ -4,11 +4,15 @@ extends Node
 
 # CORRECCIÓN 1: Usamos preload. Esto ya guarda la ESCENA en la variable, no la ruta.
 var escena_pausa = preload("res://scenes/ui/menus/menuPausa.tscn")
+var escena_reglas = preload("res://scenes/ui/ReglasDia.tscn")
 
 @onready var gameplay_controller = $GameplayController
 @onready var npc_node = $Npc
 @onready var pc_monitor = $Pc
 @onready var ui = $UI
+@onready var carpeta = $CarpetaDocumentos
+
+var reglas_visibles: bool = false
 
 func _ready():
 	print("=== NIVEL GARITA CARGADO ===")
@@ -29,6 +33,9 @@ func _ready():
 	if ui and ui.has_signal("reporte_fin_dia_cerrado"):
 		if not ui.reporte_fin_dia_cerrado.is_connected(_on_reporte_cerrado):
 			ui.reporte_fin_dia_cerrado.connect(_on_reporte_cerrado)
+	# Conectar señal de carpeta para abrir reglas del día
+	if carpeta:
+		carpeta.carpeta_abierta.connect(_on_carpeta_abierta)
 	
 	_actualizar_hud()
 
@@ -55,10 +62,17 @@ func _input(event):
 func pausar_juego():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if escena_pausa:
-		# Instanciamos directo de la variable (porque ya hicimos preload arriba)
 		var menu_instance = escena_pausa.instantiate()
 		
-		add_child(menu_instance)
+		# Envolvemos en un CanvasLayer para que se renderice ENCIMA del UI
+		# (UI es un CanvasLayer en layer 1, así que usamos layer 110)
+		var overlay = CanvasLayer.new()
+		overlay.layer = 110
+		add_child(overlay)
+		overlay.add_child(menu_instance)
+		
+		# Cuando el menú se destruya (queue_free), destruir el overlay también
+		menu_instance.tree_exited.connect(overlay.queue_free)
 		
 		# CONGELAMOS EL TIEMPO
 		get_tree().paused = true
@@ -85,3 +99,17 @@ func _on_reporte_cerrado():
 	if gameplay_controller:
 		gameplay_controller.iniciar_dia()
 	_actualizar_hud()
+	
+# --- CARPETA DE REGLAS ---
+func _on_carpeta_abierta():
+	if reglas_visibles:
+		return
+	reglas_visibles = true
+	var reglas_instance = escena_reglas.instantiate()
+	add_child(reglas_instance)
+	# Cuando se cierre (clic en cualquier lugar), actualizar estado
+	reglas_instance.tree_exited.connect(func():
+		reglas_visibles = false
+		if carpeta:
+			carpeta.esta_abierta = false
+	)

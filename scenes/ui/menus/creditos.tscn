@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c0hc3m1ldeagm" path="res://scenes/ui/menus/creditos.gd" id="1_rsilq"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_bguww"]
-[ext_resource type="Texture2D" uid="uid://cmr5eby6bncn4" path="res://assets/HUD/Gemini_Generated_Image_6co7426co7426co7.png" id="3_3sxrg"]
-[ext_resource type="Texture2D" uid="uid://dytloctd3yfmp" path="res://assets/HUD/Gemini_Generated_Image_w1xihvw1xihvw1xi.png" id="4_7wurh"]
+[ext_resource type="Texture2D" uid="uid://cmr5eby6bncn4" path="res://assets/HUD/Creditos.png" id="3_3sxrg"]
+[ext_resource type="Texture2D" uid="uid://dytloctd3yfmp" path="res://assets/HUD/iconovolver.png" id="4_7wurh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3kyjl"]
 font = ExtResource("2_bguww")

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://b8g6otu81vje2"]
+
+[ext_resource type="Texture2D" uid="uid://dhx07htvmwgyw" path="res://assets/HUD/ReglasDiarias.png" id="1_2mf02"]
+[ext_resource type="Script" uid="uid://b71skcr6ty2p2" path="res://scenes/ui/reglas_dia.gd" id="1_v4dvc"]
+[ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_v4dvc"]
+
+[node name="ReglasDia" type="CanvasLayer" unique_id=763916623]
+script = ExtResource("1_v4dvc")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=286195580]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.5
+offset_top = -409.5
+offset_right = 262.5
+offset_bottom = 409.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2mf02")
+
+[node name="lblReglas" type="Label" parent="TextureRect" unique_id=1952328365]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -207.0
+offset_top = -117.0
+offset_right = 210.0
+offset_bottom = 351.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("2_v4dvc")
+theme_override_font_sizes/font_size = 38
+autowrap_mode = 3

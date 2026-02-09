@@ -12,7 +12,7 @@ signal dia_finalizado(resumen: Dictionary)  ## Se emite al terminar todos los NP
 @export var dialogue_panel_node: NodePath   ## Panel de diálogo y decisión
 
 @export_group("Configuración")
-@export var npcs_por_dia: int = 10
+@export var npcs_por_dia: int = 4
 @export var tiempo_por_npc: float = 60.0    ## Segundos antes de timeout
 
 # --- NODOS RESUELTOS ---
@@ -29,6 +29,10 @@ var npc_actual: AbstractNPC = null
 var timer_npc: Timer = null
 var dia_en_curso: bool = false
 var esperando_gemini: bool = false
+
+# --- GAME OVER ---
+const MAX_ERRORES_DIARIOS = 3
+var game_over_activo: bool = false
 
 func _ready():
 	# Crear timer para tiempo límite por NPC
@@ -94,26 +98,21 @@ func iniciar_dia():
 	print("=== INICIANDO DÍA ", GlobalGameManager.dia_actual, " ===")
 	
 	dia_en_curso = true
-	GlobalGameManager.aciertos_hoy = 0
-	GlobalGameManager.errores_hoy = 0
 	
-	# Generar NPCs
-	var lista_npcs = daily_manager.generar_npcs_para_hoy(npcs_por_dia)
-	GlobalGameManager.npcs_del_dia = lista_npcs
-	GlobalGameManager.npc_actual_index = 0
-	
-	# Solicitar diálogos a Gemini (si está configurado)
-	if GeminiManager and GeminiManager.API_KEY and not GeminiManager.API_KEY.is_empty():
-		esperando_gemini = true
-		if not GeminiManager.batch_completed.is_connected(_on_gemini_completed):
-			GeminiManager.batch_completed.connect(_on_gemini_completed)
-		if not GeminiManager.error_ocurred.is_connected(_on_gemini_error):
-			GeminiManager.error_ocurred.connect(_on_gemini_error)
-		GeminiManager.solicitar_dialogos_batch(lista_npcs, "soleado")
+	# Los NPCs y diálogos ya fueron generados/cargados en el LoadingScreen
+	# Solo verificamos que existan
+	if GlobalGameManager.npcs_del_dia.is_empty():
+		# Fallback: generar aquí si no vienen del loading (por si acaso)
+		print("[GAMEPLAY] NPCs no precargados, generando ahora...")
+		GlobalGameManager.aciertos_hoy = 0
+		GlobalGameManager.errores_hoy = 0
+		var lista_npcs = daily_manager.generar_npcs_para_hoy(npcs_por_dia)
+		GlobalGameManager.npcs_del_dia = lista_npcs
+		GlobalGameManager.npc_actual_index = 0
 	else:
-		# Sin Gemini, usar diálogos por defecto
-		print("[GAMEPLAY] Sin API de Gemini, usando diálogos por defecto")
-		cargar_npc_siguiente()
+		print("[GAMEPLAY] Usando ", GlobalGameManager.npcs_del_dia.size(), " NPCs precargados del LoadingScreen")
+	
+	cargar_npc_siguiente()
 
 func _on_gemini_completed(dialogos_array: Array):
 	esperando_gemini = false
@@ -174,6 +173,8 @@ func _on_tiempo_agotado():
 	if npc_actual and npc_actual.tiene_incidencia():
 		GlobalGameManager.errores_hoy += 1
 		print("[GAMEPLAY] Error: NPC con incidencia pasó sin revisión")
+		if _verificar_game_over():
+			return
 	
 	if npc_visual and npc_visual.has_method("forzar_salida"):
 		npc_visual.forzar_salida()
@@ -267,6 +268,8 @@ func _procesar_aprobacion():
 		GlobalGameManager.aciertos_hoy += 1
 	else:
 		GlobalGameManager.errores_hoy += 1
+		if _verificar_game_over():
+			return
 	
 	# Registrar post-acción según tipo de NPC
 	if npc_actual:
@@ -300,6 +303,9 @@ func _procesar_rechazo():
 	if dialogue_panel and dialogue_panel.has_method("mostrar_dialogo_rechazado"):
 		dialogue_panel.mostrar_dialogo_rechazado()
 	
+	if _verificar_game_over():
+		return
+	
 	if npc_visual and npc_visual.has_method("rechazar"):
 		npc_visual.rechazar()
 	else:
@@ -328,6 +334,32 @@ func finalizar_dia():
 	
 	# Emitir señal para que la UI muestre el reporte
 	dia_finalizado.emit(resumen)
+
+# =====================================================
+# GAME OVER
+# =====================================================
+
+## Verifica si se superó el límite de errores diarios.
+## Retorna true si es game over (para cortar el flujo con return).
+func _verificar_game_over() -> bool:
+	if GlobalGameManager.errores_hoy >= MAX_ERRORES_DIARIOS:
+		print("[GAMEPLAY] ¡GAME OVER! Errores: ", GlobalGameManager.errores_hoy, "/", MAX_ERRORES_DIARIOS)
+		_activar_game_over()
+		return true
+	return false
+
+func _activar_game_over():
+	if game_over_activo:
+		return
+	game_over_activo = true
+	dia_en_curso = false
+	timer_npc.stop()
+	
+	# Pequeña pausa dramática antes de mostrar la pantalla
+	await get_tree().create_timer(1.5).timeout
+	
+	# Cambiar directamente a la escena de game over
+	get_tree().change_scene_to_file("res://scenes/ui/menus/gameOver.tscn")
 
 func _limpiar_estado():
 	timer_npc.stop()

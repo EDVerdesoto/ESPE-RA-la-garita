@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://brj0mvv6j3uid" path="res://scenes/ui/menus/selectorPartida.gd" id="1_4ylsk"]
 [ext_resource type="Texture2D" uid="uid://cpxrfi5disgxw" path="res://assets/fondo/fondo normal/normal_noche.png" id="2_t28eo"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="3_336hp"]
-[ext_resource type="Texture2D" uid="uid://dytloctd3yfmp" path="res://assets/HUD/Gemini_Generated_Image_w1xihvw1xihvw1xi.png" id="4_653qw"]
+[ext_resource type="Texture2D" uid="uid://dytloctd3yfmp" path="res://assets/HUD/iconovolver.png" id="4_653qw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjnd6"]
 bg_color = Color(0.101960786, 0.14117648, 0.078431375, 1)
