@@ -118,6 +118,13 @@ theme_override_font_sizes/font_size = 18
 text = "✗ 0"
 horizontal_alignment = 1
 
+[node name="LblTimer" type="Label" parent="MainLayout/TopBar/TopBarMargin/TopBarHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+text = "⏱ --"
+horizontal_alignment = 1
+
 [node name="ChatPanel" type="PanelContainer" parent="MainLayout" unique_id=902671630]
 visible = false
 layout_mode = 1

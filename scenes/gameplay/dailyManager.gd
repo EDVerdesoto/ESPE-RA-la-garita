@@ -41,7 +41,7 @@ func generar_npcs_para_hoy(cantidad: int) -> Array:
 	# --------------------------------------------------
 	# Decidir composición del día
 	# --------------------------------------------------
-	var incluir_atacante = randf() < min(0.1 + GlobalGameManager.dia_actual * 0.05, 0.4)
+	var incluir_atacante = randf() < min(0.1 + GlobalGameManager.dia_actual * 0.80, 1)
 	var cant_atacantes = 1 if (incluir_atacante and atacantes_pool.size() > 0) else 0
 	
 	var plazas_regulares = cantidad - cant_atacantes

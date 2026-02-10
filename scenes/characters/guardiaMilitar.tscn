@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bsyc5k6sj7drn"]
+
+[ext_resource type="Script" path="res://scenes/characters/guardiaMilitar.gd" id="1_guard"]
+[ext_resource type="Texture2D" uid="uid://b3j3xh5ylpvve" path="res://assets/personajes/NPCs/NPC-militar-1.png" id="2_sprite"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guard"]
+size = Vector2(120, 500)
+
+[node name="GuardiaMilitar" type="Area2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_guard")
+sprite_corriendo_path = "res://assets/personajes/NPCs/NPC-militar-1.png"
+sprite_frame2_path = "res://assets/personajes/NPCs/NPC-militar-frame2-1.png"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+texture = ExtResource("2_sprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_guard")
