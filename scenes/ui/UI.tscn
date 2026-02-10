@@ -121,10 +121,10 @@ horizontal_alignment = 1
 [node name="ChatPanel" type="PanelContainer" parent="MainLayout" unique_id=902671630]
 visible = false
 layout_mode = 1
-offset_left = 10.0
+offset_left = 37.0
 offset_top = 55.0
-offset_right = 320.0
-offset_bottom = 230.0
+offset_right = 504.0
+offset_bottom = 280.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_chat")
 
 [node name="ChatMargin" type="MarginContainer" parent="MainLayout/ChatPanel" unique_id=90058438]
@@ -161,10 +161,11 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -310.0
-offset_top = 55.0
-offset_right = -10.0
-offset_bottom = 280.0
+offset_left = -458.0
+offset_top = 86.0
+offset_right = -147.0
+offset_bottom = 341.0
+grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_options")
 
 [node name="OptionsMargin" type="MarginContainer" parent="MainLayout/OptionsPanel" unique_id=1642148610]
@@ -189,23 +190,23 @@ layout_mode = 2
 theme_override_constants/separation = 6
 
 [node name="BtnAprobar" type="TextureButton" parent="MainLayout" unique_id=1746092159]
-visible = false
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -75.0
-offset_right = 85.0
-scale = Vector2(1.5, 1.5)
+offset_left = 170.0
+offset_top = -380.0
+offset_right = 320.0
+offset_bottom = -310.0
+grow_vertical = 0
 texture_normal = ExtResource("2_nnfdp")
 texture_pressed = ExtResource("3_tnv4l")
 texture_hover = ExtResource("3_dqg8s")
-stretch_mode = 0
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="BtnRechazar" type="TextureButton" parent="MainLayout" unique_id=531268516]
-visible = false
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 1
 anchors_preset = 3
@@ -213,14 +214,17 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -85.0
-offset_top = -75.0
-offset_right = -15.0
-scale = Vector2(1.5, 1.5)
+offset_left = -320.0
+offset_top = -380.0
+offset_right = -170.0
+offset_bottom = -310.0
+grow_horizontal = 0
+grow_vertical = 0
 texture_normal = ExtResource("3_s64wo")
 texture_pressed = ExtResource("6_j3nm3")
 texture_hover = ExtResource("6_tnv4l")
-stretch_mode = 0
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="PanelReporte" type="PanelContainer" parent="MainLayout" unique_id=314481690]
 visible = false
@@ -259,5 +263,3 @@ horizontal_alignment = 1
 [node name="ContenedorIncidencias" type="VBoxContainer" parent="MainLayout/PanelReporte/ReporteMargin/VBox" unique_id=83685568]
 layout_mode = 2
 theme_override_constants/separation = 4
-
-

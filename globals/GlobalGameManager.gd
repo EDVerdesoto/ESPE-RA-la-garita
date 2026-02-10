@@ -1,5 +1,10 @@
 extends Node
 
+func _ready():
+	# Bajar volumen general un 30% (0.7 linear ≈ -3.1 dB)
+	var bus_index = AudioServer.get_bus_index("Master")
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(0.7))
+
 # --- CONFIGURACIÓN DE SISTEMA ---
 # Aquí guardamos a dónde volver si das clic en "Regresar" (Menú Principal por defecto)
 var escena_retorno: String = "res://scenes/ui/menus/menuPrincipal.tscn"

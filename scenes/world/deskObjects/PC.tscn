@@ -7,14 +7,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc_body"]
 size = Vector2(185, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_m"]
-size = Vector2(180, 30)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhvea"]
-size = Vector2(180, 30)
+size = Vector2(130, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgpac"]
-size = Vector2(180, 30)
+size = Vector2(130, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_campo_m"]
+size = Vector2(184, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_foto_m"]
 size = Vector2(50, 50)
@@ -125,42 +125,42 @@ scale = Vector2(0.2, 0.2)
 
 [node name="ClickNombreM" type="Area2D" parent="PantallaMonitor" unique_id=1031105635]
 
-[node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickNombreM" unique_id=1683746420]
-shape = SubResource("RectangleShape2D_campo_m")
-debug_color = Color(0.86596435, 0.3118081, 0.45303166, 0.41960785)
+[node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickNombreM" unique_id=1525574720]
+position = Vector2(69, 28)
+shape = SubResource("RectangleShape2D_uhvea")
 
 [node name="ClickApellidoM" type="Area2D" parent="PantallaMonitor" unique_id=160469792]
 
 [node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickApellidoM" unique_id=730899504]
-position = Vector2(95, 46)
+position = Vector2(69, 45)
 shape = SubResource("RectangleShape2D_uhvea")
 
 [node name="ClickCedulaM" type="Area2D" parent="PantallaMonitor" unique_id=229929061]
 
 [node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickCedulaM" unique_id=1565040315]
-position = Vector2(95, 63)
+position = Vector2(69, 63)
 shape = SubResource("RectangleShape2D_bgpac")
 
 [node name="ClickFechaM" type="Area2D" parent="PantallaMonitor" unique_id=202245620]
 
 [node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickFechaM" unique_id=617586013]
-position = Vector2(95, 80)
+position = Vector2(98, 80)
 shape = SubResource("RectangleShape2D_campo_m")
 
 [node name="ClickCarreraM" type="Area2D" parent="PantallaMonitor" unique_id=87735261]
 
 [node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickCarreraM" unique_id=553567953]
-position = Vector2(95, 97)
+position = Vector2(97, 96)
 shape = SubResource("RectangleShape2D_campo_m")
 
 [node name="ClickCodigoM" type="Area2D" parent="PantallaMonitor" unique_id=980065739]
 
 [node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickCodigoM" unique_id=1601423411]
-position = Vector2(95, 114)
+position = Vector2(98, 112)
 shape = SubResource("RectangleShape2D_campo_m")
 
 [node name="ClickFotoM" type="Area2D" parent="PantallaMonitor" unique_id=633166092]
 
 [node name="Col" type="CollisionShape2D" parent="PantallaMonitor/ClickFotoM" unique_id=1957610331]
-position = Vector2(160, 40)
+position = Vector2(161, 44)
 shape = SubResource("RectangleShape2D_foto_m")

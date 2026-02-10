@@ -31,6 +31,7 @@ ProgresoGlobal="*res://scenes/gameplay/providers/progresoGlobal.gd"
 NpcFactoryProvider="*res://scenes/gameplay/providers/npcFactoryProvider.gd"
 DocumentoNpcFactoryProvider="*res://scenes/gameplay/providers/documentoNpcFactoryProvider.gd"
 GeminiManager="*res://scenes/gameplay/geminiManager.gd"
+MusicManager="*res://globals/MusicManager.gd"
 
 [display]
 

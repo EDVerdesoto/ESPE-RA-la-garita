@@ -15,6 +15,9 @@ extends Control
 const RUTA_GUARDADO = "user://guardado.save"
 
 func _ready():
+	# Reproducir música del menú principal (track4)
+	MusicManager.reproducir("res://music/track4.mp3")
+	
 	# --- PRUEBA TEMPORAL ---
 	if GlobalGameManager.dia_actual == 1:
 		print("SIMULACIÓN")

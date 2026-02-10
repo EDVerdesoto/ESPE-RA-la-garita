@@ -15,6 +15,9 @@ var escena_reglas = preload("res://scenes/ui/ReglasDia.tscn")
 var reglas_visibles: bool = false
 
 func _ready():
+	# Detener la música del menú al entrar al nivel
+	MusicManager.detener()
+	
 	print("=== NIVEL GARITA CARGADO ===")
 	
 	if gameplay_controller:
