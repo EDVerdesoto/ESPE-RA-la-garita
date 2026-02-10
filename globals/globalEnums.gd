@@ -10,7 +10,7 @@ enum Incidencia {
 	FECHA_CEDULA_CADUCADA, CEDULA_OLVIDADA,
 	FOTO_CARNET_DIFERENTE, CARNET_OLVIDADO, CARRERA_DIFERENTE,
 	PASE_VISITANTE_OLVIDADO,
-	SOSPECHOSO 
+	ATAQUE 
 }
 
 ## Campos que el jugador puede comparar entre carnet, monitor y NPC

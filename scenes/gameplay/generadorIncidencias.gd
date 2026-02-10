@@ -108,7 +108,7 @@ static func _generar_fecha_valida_real() -> String:
 
 static func _asignar_error_por_tipo(npc: AbstractNPC) -> void:
 	if npc is NPCDelincuente:
-		npc.incidencia = GlobalEnums.Incidencia.SOSPECHOSO
+		npc.incidencia = GlobalEnums.Incidencia.ATAQUE
 	else:
 		var opciones = [
 			GlobalEnums.Incidencia.NOMBRE_CEDULA_DIFERENTE,

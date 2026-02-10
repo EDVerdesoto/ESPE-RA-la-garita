@@ -22,6 +22,10 @@ signal carnet_escaneado(datos_carnet: Dictionary)
 @onready var click_carrera: Area2D = $ClickCarrera
 @onready var click_codigo: Area2D = $ClickCodigo
 @onready var click_foto: Area2D = $ClickFoto
+@onready var click_foto_col: CollisionShape2D = $ClickFoto/Col
+
+## Tamaño del área de la foto (del CollisionShape de ClickFoto)
+@export var foto_size_objetivo: Vector2 = Vector2(41.0, 61.0)
 
 ## Datos internos del carnet
 var datos_carnet: Dictionary = {}
@@ -73,11 +77,39 @@ func configurar(config: CarnetUniversitarioNPCConfig) -> void:
 	if lbl_rol:
 		lbl_rol.text = config.rol
 	
-	# Cargar foto del carnet
+	# Cargar foto del carnet y ajustar posición/tamaño al ClickFoto collision
 	if foto_sprite and config.foto_path and not config.foto_path.is_empty():
 		var tex = load(config.foto_path)
 		if tex:
 			foto_sprite.texture = tex
+			_ajustar_foto_carnet(tex)
+
+## Ajusta la posición y escala de FotoSprite para que coincida con el CollisionShape de ClickFoto
+## FotoSprite es hijo de SpriteFondo, así que hay que compensar el offset y scale del padre
+func _ajustar_foto_carnet(tex: Texture2D) -> void:
+	var tex_w = float(tex.get_width())
+	var tex_h = float(tex.get_height())
+	if tex_w <= 0 or tex_h <= 0:
+		return
+	
+	# Obtener el scale del padre (SpriteFondo)
+	var fondo_sx = sprite_fondo.scale.x if sprite_fondo.scale.x != 0 else 1.0
+	var fondo_sy = sprite_fondo.scale.y if sprite_fondo.scale.y != 0 else 1.0
+	
+	# Escalar la foto para que quepa en el área de ClickFoto (41×61)
+	var sx_global = foto_size_objetivo.x / tex_w
+	var sy_global = foto_size_objetivo.y / tex_h
+	var s_global = min(sx_global, sy_global)
+	# Compensar el scale heredado del SpriteFondo
+	foto_sprite.scale = Vector2(s_global / fondo_sx, s_global / fondo_sy)
+	
+	# Posicionar la foto en la ubicación del CollisionShape de ClickFoto
+	if click_foto_col:
+		var col_pos = click_foto_col.position     # (7.5, -32.5) en espacio CarnetVisual
+		var fondo_pos = sprite_fondo.position       # (7, 3) en espacio CarnetVisual
+		var offset = col_pos - fondo_pos
+		# Compensar el scale del padre
+		foto_sprite.position = Vector2(offset.x / fondo_sx, offset.y / fondo_sy)
 
 ## Escanear el carnet (click derecho o interacción especial)
 func escanear() -> void:

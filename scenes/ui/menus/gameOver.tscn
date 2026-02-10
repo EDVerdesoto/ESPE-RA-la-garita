@@ -3,11 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://c5jqyyvsrpro" path="res://assets/HUD/game_over.png" id="1_i0uvi"]
 [ext_resource type="Script" uid="uid://2ifkspxyr8gj" path="res://scenes/ui/menus/game_over.gd" id="1_qeaq5"]
 [ext_resource type="FontFile" uid="uid://ccui2i25ouu88" path="res://fonts/fuentes.ttf" id="2_qeaq5"]
+[ext_resource type="AudioStream" uid="uid://7fwopr413mgy" path="res://assets/sounds/game_over.mp3" id="4_83rqp"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83rqp"]
-bg_color = Color(0.47397572, 0.47397578, 0.4739756, 0.44313726)
-border_width_bottom = 2
-border_color = Color(0.4745098, 0.4745098, 0.4745098, 0.44313726)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u3cix"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3cix"]
 bg_color = Color(0.17254902, 0.17254902, 0.17254902, 0.14117648)
@@ -49,7 +47,11 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_qeaq5")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/normal = SubResource("StyleBoxFlat_83rqp")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u3cix")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_u3cix")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7upvb")
 text = "Regresar"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=743894989]
+stream = ExtResource("4_83rqp")
+autoplay = true

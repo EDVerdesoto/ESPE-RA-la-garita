@@ -12,7 +12,7 @@ signal dia_finalizado(resumen: Dictionary)  ## Se emite al terminar todos los NP
 @export var dialogue_panel_node: NodePath   ## Panel de diálogo y decisión
 
 @export_group("Configuración")
-@export var npcs_por_dia: int = 4
+@export var npcs_por_dia: int = 10
 @export var tiempo_por_npc: float = 60.0    ## Segundos antes de timeout
 
 # --- NODOS RESUELTOS ---
@@ -68,6 +68,8 @@ func _conectar_senales():
 			npc_visual.npc_llego_a_ventanilla.connect(_on_npc_llego)
 		if npc_visual.has_signal("npc_salio"):
 			npc_visual.npc_salio.connect(_on_npc_salio)
+		if npc_visual.has_signal("atacante_paso"):
+			npc_visual.atacante_paso.connect(_on_atacante_paso)
 		if npc_visual.has_signal("cara_clickeada"):
 			npc_visual.cara_clickeada.connect(_on_cara_npc_clickeada)
 		if npc_visual.has_signal("carnet_campo_clickeado"):
@@ -142,6 +144,13 @@ func cargar_npc_siguiente():
 	
 	npc_actual = GlobalGameManager.npcs_del_dia[GlobalGameManager.npc_actual_index]
 	GlobalGameManager.npc_actual_index += 1
+	
+	# ---- ATACANTE: flujo especial (sin comparación ni decisión) ----
+	if npc_actual.tipo_npc == "atacante":
+		print("\n--- ATACANTE #", GlobalGameManager.npc_actual_index, " ---")
+		if npc_visual and npc_visual.has_method("cargar_npc"):
+			npc_visual.cargar_npc(npc_actual)
+		return  # El flujo sigue cuando se emita npc_salio desde el atacante
 	
 	print("\n--- NPC #", GlobalGameManager.npc_actual_index, ": ", 
 		npc_actual.nombre, " ", npc_actual.apellido, 
@@ -262,9 +271,25 @@ func _on_decision_tomada(decision: int):
 		_procesar_rechazo()
 
 func _procesar_aprobacion():
-	var resultado = comparacion_manager.evaluar_decision(GlobalEnums.DecisionGuardia.APROBADO)
+	var es_exento = GlobalGameManager.npc_exento_por_reglas(npc_actual)
+	var es_prohibido = GlobalGameManager.npc_prohibido_por_reglas(npc_actual)
 	
-	if resultado.correcta:
+	var decision_correcta: bool
+	if es_prohibido:
+		# Regla dice que NO puede entrar → aprobarlo es error
+		decision_correcta = false
+		print("[REGLAS] ERROR: Aprobaste a un NPC prohibido por las reglas del día (",
+			npc_actual.tipo_npc, " ", npc_actual.nombre, ")")
+	elif es_exento:
+		# Regla dice que pasa libre → aprobarlo siempre es correcto
+		decision_correcta = true
+		print("[REGLAS] Bien: NPC exento por reglas del día (", npc_actual.carrera, ")")
+	else:
+		# Sin regla especial → lógica original basada en incidencias
+		var resultado = comparacion_manager.evaluar_decision(GlobalEnums.DecisionGuardia.APROBADO)
+		decision_correcta = resultado.correcta
+	
+	if decision_correcta:
 		GlobalGameManager.aciertos_hoy += 1
 	else:
 		GlobalGameManager.errores_hoy += 1
@@ -289,13 +314,28 @@ func _procesar_aprobacion():
 		_on_npc_salio()
 
 func _procesar_rechazo():
-	var resultado = comparacion_manager.evaluar_decision(GlobalEnums.DecisionGuardia.RECHAZADO)
+	var es_exento = GlobalGameManager.npc_exento_por_reglas(npc_actual)
+	var es_prohibido = GlobalGameManager.npc_prohibido_por_reglas(npc_actual)
 	
-	if resultado.correcta:
-		# Rechazó a alguien que sí tenía incidencia → bien hecho
+	var decision_correcta: bool
+	if es_prohibido:
+		# Regla dice que NO puede entrar → rechazarlo es correcto
+		decision_correcta = true
+		print("[REGLAS] Bien: Rechazaste a un NPC prohibido por las reglas del día")
+	elif es_exento:
+		# Regla dice que pasa libre → rechazarlo es error
+		decision_correcta = false
+		print("[REGLAS] ERROR: Rechazaste a un NPC exento por reglas del día (",
+			npc_actual.carrera, ")")
+	else:
+		# Sin regla especial → lógica original basada en incidencias
+		var resultado = comparacion_manager.evaluar_decision(GlobalEnums.DecisionGuardia.RECHAZADO)
+		decision_correcta = resultado.correcta
+	
+	if decision_correcta:
 		GlobalGameManager.aciertos_hoy += 1
 	else:
-		# Rechazó a un inocente → error + post-action de rechazo injusto
+		# Error – puede ser rechazo injusto
 		GlobalGameManager.errores_hoy += 1
 		if npc_actual:
 			var post_action = PostActionCatalog.obtener_post_action_rechazo_injusto(npc_actual)
@@ -322,6 +362,18 @@ func _on_npc_salio():
 	# Esperar un momento antes del siguiente
 	await get_tree().create_timer(1.5).timeout
 	cargar_npc_siguiente()
+
+## Un atacante pasó corriendo de largo
+func _on_atacante_paso():
+	print("[GAMEPLAY] ¡ATACANTE pasó de largo hacia el campus!")
+	# Registrar como evento (post-action)
+	if npc_actual:
+		var post_action = {
+			"tipo": "atacante_paso",
+			"texto": "Un intruso pasó corriendo la garita.",
+			"npc_nombre": npc_actual.nombre
+		}
+		GlobalGameManager.registrar_post_action(post_action)
 
 func finalizar_dia():
 	dia_en_curso = false

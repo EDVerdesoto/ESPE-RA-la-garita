@@ -224,7 +224,7 @@ func mostrar_panel_reporte() -> void:
 		{ \"id\": GlobalEnums.Incidencia.FECHA_CEDULA_CADUCADA, \"texto\": \"Cédula caducada\" },
 		{ \"id\": GlobalEnums.Incidencia.FOTO_CARNET_DIFERENTE, \"texto\": \"Foto del carnet no coincide\" },
 		{ \"id\": GlobalEnums.Incidencia.CARRERA_DIFERENTE, \"texto\": \"Carrera no coincide\" },
-		{ \"id\": GlobalEnums.Incidencia.SOSPECHOSO, \"texto\": \"Persona sospechosa\" },
+		{ \"id\": GlobalEnums.Incidencia.ATAQUE, \"texto\": \"Persona sospechosa\" },
 	]
 	
 	for inc in incidencias_reportables:

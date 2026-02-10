@@ -7,6 +7,7 @@ var apellido: String
 var personalidad: String
 var rol: String
 var carrera: String
+var tipo_npc: String = "estudiante"  ## "estudiante", "profesor", "atacante"
 var sprite_path: String
 var cara_path: String          ## Cara REAL del NPC (la que se ve en la ventanilla)
 var foto_carnet_path: String   ## Foto que aparece en el carnet (puede diferir si hay incidencia)

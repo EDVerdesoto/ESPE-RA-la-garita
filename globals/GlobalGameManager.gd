@@ -30,6 +30,12 @@ var errores_hoy: int = 0
 var post_actions_hoy: Array = []
 # Aquí puedes sumar más cosas (reputación, mejoras compradas, etc.)
 
+# --- REGLAS DEL DÍA ---
+# Cada regla: { "id": String, "texto": String, "tipo": String, "valor": Variant }
+# tipo puede ser: "solo_rol", "carrera_libre", "primeros_sin_revision", "caducadas_no_pasan"
+var reglas_del_dia: Array = []
+var reglas_texto_dia: String = ""  # Texto legible para mostrar en la carpeta
+
 # --- DATOS DE LA SESIÓN (Memoria RAM del nivel) ---
 # Esto es lo que NO queremos perder si cerramos el juego a medias
 var npc_actual_index: int = 0
@@ -55,6 +61,8 @@ func resetear_sesion_diaria():
 	errores_hoy = 0
 	post_actions_hoy = []
 	dialogos_del_dia_cache = []
+	reglas_del_dia = []
+	reglas_texto_dia = ""
 
 ## Registra una post-acción para el reporte de fin de día
 func registrar_post_action(post_action: Dictionary) -> void:
@@ -156,3 +164,54 @@ func calcular_fin_de_dia() -> Dictionary:
 ## Llama después de que el jugador cierre el reporte de fin de día
 func confirmar_fin_de_dia() -> void:
 	resetear_sesion_diaria()
+
+# =====================================================
+# SISTEMA DE REGLAS DEL DÍA
+# =====================================================
+
+## Verifica si hay una regla activa del tipo indicado
+func tiene_regla(tipo_regla: String) -> bool:
+	for regla in reglas_del_dia:
+		if regla.get("tipo", "") == tipo_regla:
+			return true
+	return false
+
+## Obtiene el valor de una regla activa por tipo. Retorna null si no existe.
+func obtener_valor_regla(tipo_regla: String):
+	for regla in reglas_del_dia:
+		if regla.get("tipo", "") == tipo_regla:
+			return regla.get("valor", null)
+	return null
+
+## Verifica si un NPC está exento de revisión por las reglas del día.
+## Retorna true si el NPC DEBE ser aprobado sin importar incidencias.
+func npc_exento_por_reglas(npc) -> bool:
+	for regla in reglas_del_dia:
+		match regla.get("tipo", ""):
+			"solo_rol":
+				# Si la regla dice "solo profesores" y el NPC NO es profesor → rechazar
+				# Pero si SÍ es del rol indicado → NO exento, se revisa normal
+				pass
+			"carrera_libre":
+				# Si la carrera del NPC coincide con la carrera libre → exento
+				if npc.carrera == regla.get("valor", ""):
+					return true
+			"primeros_sin_revision":
+				# Si el índice actual es menor al valor → exento
+				var limite = regla.get("valor", 0)
+				if GlobalGameManager.npc_actual_index <= limite:
+					return true
+	return false
+
+## Verifica si un NPC debe ser RECHAZADO obligatoriamente por las reglas.
+## Retorna true si las reglas dicen que este NPC NO puede entrar.
+func npc_prohibido_por_reglas(npc) -> bool:
+	for regla in reglas_del_dia:
+		match regla.get("tipo", ""):
+			"solo_rol":
+				# "Hoy solo profesores" → estudiantes no pasan
+				# "Hoy solo estudiantes" → profesores no pasan
+				var rol_permitido = regla.get("valor", "")
+				if npc.tipo_npc != rol_permitido:
+					return true
+	return false

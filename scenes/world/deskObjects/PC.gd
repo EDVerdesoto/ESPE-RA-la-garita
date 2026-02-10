@@ -22,6 +22,10 @@ var campo_seleccionado: int = GlobalEnums.CampoComparacion.NINGUNO
 @onready var lbl_carrera_sistema: Label = $PantallaMonitor/LblCarreraSistema
 @onready var lbl_codigo_sistema: Label = $PantallaMonitor/LblCodigoSistema
 @onready var foto_sistema: Sprite2D = $PantallaMonitor/FotoSistema
+@onready var click_foto_m_col: CollisionShape2D = $PantallaMonitor/ClickFotoM/Col
+
+## Tamaño objetivo de la foto en el monitor (coincide con ClickFotoM collision: 50×50)
+@export var foto_monitor_size: Vector2 = Vector2(50.0, 50.0)
 
 ## Áreas clickeables del monitor
 @onready var click_nombre_m: Area2D = $PantallaMonitor/ClickNombreM
@@ -105,13 +109,15 @@ func mostrar_datos_sistema(datos_sistema: Dictionary) -> void:
 		lbl_codigo_sistema.text = "CÓDIGO: " + datos_sistema.get("codigo_carnet", "N/A")
 		lbl_codigo_sistema.modulate = COLOR_NORMAL
 	
-	# Cargar foto del sistema
+	# Cargar foto del sistema — estandarizar tamaño y posición, siempre en verde
 	if foto_sistema:
 		var foto_path = datos_sistema.get("foto_sistema", "")
 		if foto_path and not foto_path.is_empty():
 			var tex = load(foto_path)
 			if tex:
 				foto_sistema.texture = tex
+				_ajustar_foto_monitor(tex)
+		foto_sistema.modulate = COLOR_NORMAL  # Verde por defecto
 	
 	print("[MONITOR] Datos del sistema cargados para: ", datos_sistema.get("nombre", "?"))
 	monitor_encendido.emit()
@@ -152,7 +158,21 @@ func _resetear_resaltados() -> void:
 		if lbl:
 			lbl.modulate = COLOR_NORMAL
 	if foto_sistema:
-		foto_sistema.modulate = Color.WHITE
+		foto_sistema.modulate = COLOR_NORMAL  # Verde por defecto, rojo solo al detectar incidencia
+
+## Ajusta la escala y posición de FotoSistema para que coincida con ClickFotoM collision
+func _ajustar_foto_monitor(tex: Texture2D) -> void:
+	var tex_w = float(tex.get_width())
+	var tex_h = float(tex.get_height())
+	if tex_w <= 0 or tex_h <= 0:
+		return
+	var sx = foto_monitor_size.x / tex_w
+	var sy = foto_monitor_size.y / tex_h
+	var s = min(sx, sy)
+	foto_sistema.scale = Vector2(s, s)
+	# Posicionar en la misma ubicación del CollisionShape de ClickFotoM
+	if click_foto_m_col:
+		foto_sistema.position = click_foto_m_col.position
 
 func apagar_monitor() -> void:
 	esta_encendido = false

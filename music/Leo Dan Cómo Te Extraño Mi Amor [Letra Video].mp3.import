@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bcriln4jl41ur"
+path="res://.godot/imported/Leo Dan Cómo Te Extraño Mi Amor [Letra Video].mp3-c46d352544983aa8f966c72026085e41.mp3str"
+
+[deps]
+
+source_file="res://music/Leo Dan Cómo Te Extraño Mi Amor [Letra Video].mp3"
+dest_files=["res://.godot/imported/Leo Dan Cómo Te Extraño Mi Amor [Letra Video].mp3-c46d352544983aa8f966c72026085e41.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
