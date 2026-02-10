@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://ma1uf2g4inis"]
 
-[ext_resource type="Texture2D" uid="uid://bfd55mfybve27" path="res://assets/personajes/NPCs/NPC-estudiante-9.png" id="1_84hc2"]
+[ext_resource type="Texture2D" uid="uid://pjbenmaiobel" path="res://assets/personajes/NPCs/NPC-estudiante-Oswaldo.png" id="1_84hc2"]
 [ext_resource type="Script" uid="uid://cpfiivutmrm36" path="res://scenes/characters/npc.gd" id="1_bgitj"]
 [ext_resource type="PackedScene" uid="uid://dvympyc7hpaa" path="res://scenes/characters/carnetVisual.tscn" id="3_bgitj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgitj"]
-size = Vector2(109, 109)
+size = Vector2(141.25, 137.25)
 
 [node name="Npc" type="Area2D" unique_id=72313117]
 script = ExtResource("1_bgitj")
 
 [node name="SpriteCuerpo" type="Sprite2D" parent="." unique_id=1909539078]
+position = Vector2(48, 33)
 scale = Vector2(0.46, 0.45)
 texture = ExtResource("1_84hc2")
 
@@ -19,7 +20,7 @@ texture = ExtResource("1_84hc2")
 [node name="ClickCara" type="Area2D" parent="." unique_id=639000272]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickCara" unique_id=1374065807]
-position = Vector2(12.5, -177.5)
+position = Vector2(28, -218)
 shape = SubResource("RectangleShape2D_bgitj")
 
 [node name="CarnetVisual" parent="." unique_id=1346391406 instance=ExtResource("3_bgitj")]

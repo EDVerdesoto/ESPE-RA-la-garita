@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bf4we1fa8ww34"
+path="res://.godot/imported/El Tacazo de las 10 - (260118) Radio Canela 107.3 Cuenca - Radiacion Temprana.mp3-c979b0e2916f1e956facda42bf31d150.mp3str"
+
+[deps]
+
+source_file="res://music/El Tacazo de las 10 - (260118) Radio Canela 107.3 Cuenca - Radiacion Temprana.mp3"
+dest_files=["res://.godot/imported/El Tacazo de las 10 - (260118) Radio Canela 107.3 Cuenca - Radiacion Temprana.mp3-c979b0e2916f1e956facda42bf31d150.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -6,7 +6,7 @@ extends CanvasLayer
 
 # --- SISTEMA DE CARGA ASÍNCRONA ---
 const ESCENA_DESTINO = "res://scenes/levels/nivelGarita.tscn"
-const NPCS_POR_DIA = 4
+const NPCS_POR_DIA = 10
 var progreso: Array = []  # ResourceLoader devuelve el progreso aquí
 
 # --- ESTADO DE CARGA ---
@@ -62,6 +62,9 @@ func _ready():
 	var lista_npcs = daily_manager.generar_npcs_para_hoy(NPCS_POR_DIA)
 	GlobalGameManager.npcs_del_dia = lista_npcs
 	GlobalGameManager.npc_actual_index = 0
+	
+	# 4.5  Generar las reglas del día (seed determinista por día + slot)
+	_generar_reglas_del_dia()
 	
 	# 5. Solicitamos diálogos a Gemini (si está disponible)
 	if GeminiManager and GeminiManager.API_KEY and not GeminiManager.API_KEY.is_empty():
@@ -161,3 +164,116 @@ func _on_animation_finished(anim_name):
 	if anim_name == "cambio_frase":
 		cambiar_frase()      # Cambiamos el texto
 		anim_player.play("cambio_frase") # Reproducimos de nuevo
+
+# =====================================================
+# GENERACIÓN DE REGLAS DEL DÍA
+# =====================================================
+
+## Pool de reglas posibles.  Cada una tiene: id, texto (lo que ve el jugador),
+## tipo (clave lógica), y valor (dato asociado al tipo).
+const POOL_REGLAS: Array = [
+	{
+		"id": "solo_profesores",
+		"texto": "Hoy solo pueden ingresar PROFESORES. Estudiantes deben ser rechazados.",
+		"tipo": "solo_rol",
+		"valor": "profesor"
+	},
+	{
+		"id": "solo_estudiantes",
+		"texto": "Hoy solo pueden ingresar ESTUDIANTES. Profesores deben ser rechazados.",
+		"tipo": "solo_rol",
+		"valor": "estudiante"
+	},
+	{
+		"id": "carrera_libre_software",
+		"texto": "Software tiene libre acceso hoy, no requieren revisión.",
+		"tipo": "carrera_libre",
+		"valor": "Software"
+	},
+	{
+		"id": "carrera_libre_biotech",
+		"texto": "Biotecnología tiene libre acceso hoy, no requieren revisión.",
+		"tipo": "carrera_libre",
+		"valor": "Biotecnología"
+	},
+	{
+		"id": "carrera_libre_economia",
+		"texto": "Economía tiene libre acceso hoy, no requieren revisión.",
+		"tipo": "carrera_libre",
+		"valor": "Economía"
+	},
+	{
+		"id": "carrera_libre_fisio",
+		"texto": "Fisioterapia tiene libre acceso hoy, no requieren revisión.",
+		"tipo": "carrera_libre",
+		"valor": "Fisioterapia"
+	},
+	{
+		"id": "carrera_libre_derecho",
+		"texto": "Derecho tiene libre acceso hoy, no requieren revisión.",
+		"tipo": "carrera_libre",
+		"valor": "Derecho"
+	},
+	{
+		"id": "primeros_2_libres",
+		"texto": "Las primeras 2 personas pasan sin revisión.",
+		"tipo": "primeros_sin_revision",
+		"valor": 2
+	},
+	{
+		"id": "primeros_3_libres",
+		"texto": "Las primeras 3 personas pasan sin revisión.",
+		"tipo": "primeros_sin_revision",
+		"valor": 3
+	}
+]
+
+func _generar_reglas_del_dia() -> void:
+	var dia = GlobalGameManager.dia_actual
+	var slot = GlobalGameManager.slot_actual
+	
+	# Seed determinista: mismo día + slot = mismas reglas
+	var rng = RandomNumberGenerator.new()
+	rng.seed = dia * 1000 + slot
+	
+	# Desde el día 1 se aplican reglas reales
+	var pool_copia = POOL_REGLAS.duplicate()
+	pool_copia.shuffle()
+	# Reordenar con el rng determinista
+	for i in range(pool_copia.size() - 1, 0, -1):
+		var j = rng.randi_range(0, i)
+		var tmp = pool_copia[i]
+		pool_copia[i] = pool_copia[j]
+		pool_copia[j] = tmp
+	
+	var reglas_elegidas: Array = []
+	var tipos_usados: Array = []
+	var max_reglas = clampi(1 + (dia / 3), 1, 3)  # sube con los días
+	
+	for regla in pool_copia:
+		if reglas_elegidas.size() >= max_reglas:
+			break
+		var tipo = regla.get("tipo", "")
+		# No repetir el mismo tipo de regla
+		if tipo in tipos_usados:
+			continue
+		# Evitar conflictos: no poner "solo_profesores" y "solo_estudiantes" juntas
+		if tipo == "solo_rol" and "solo_rol" in tipos_usados:
+			continue
+		reglas_elegidas.append(regla)
+		tipos_usados.append(tipo)
+	
+	GlobalGameManager.reglas_del_dia = reglas_elegidas
+	_construir_texto_reglas()
+	print("[LOADING] Reglas del día: ", reglas_elegidas.map(func(r): return r.get("id", "")))
+
+func _construir_texto_reglas() -> void:
+	var lineas: Array = []
+	lineas.append("=== DISPOSICIONES DEL DÍA %d ===" % GlobalGameManager.dia_actual)
+	lineas.append("")
+	for i in range(GlobalGameManager.reglas_del_dia.size()):
+		var regla = GlobalGameManager.reglas_del_dia[i]
+		lineas.append("%d. %s" % [i + 1, regla.get("texto", "")])
+	lineas.append("")
+	lineas.append("Cumpla estas disposiciones al pie de la letra.")
+	GlobalGameManager.reglas_texto_dia = "\n".join(lineas)

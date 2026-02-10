@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bcurunl5souta"
+path="res://.godot/imported/Medley de Pasillos 2.mp3-813af0ce9a2d5170d8b3351008e13ce6.mp3str"
+
+[deps]
+
+source_file="res://music/Medley de Pasillos 2.mp3"
+dest_files=["res://.godot/imported/Medley de Pasillos 2.mp3-813af0ce9a2d5170d8b3351008e13ce6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
