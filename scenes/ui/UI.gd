@@ -13,6 +13,7 @@ signal reporte_fin_dia_cerrado()  ## Se emite cuando el jugador cierra el report
 @onready var lbl_dinero: Label = $MainLayout/TopBar/TopBarMargin/TopBarHBox/LblDinero
 @onready var lbl_aciertos: Label = $MainLayout/TopBar/TopBarMargin/TopBarHBox/LblAciertos
 @onready var lbl_errores: Label = $MainLayout/TopBar/TopBarMargin/TopBarHBox/LblErrores
+@onready var lbl_timer: Label = $MainLayout/TopBar/TopBarMargin/TopBarHBox/LblTimer
 
 # --- Chat flotante (izquierda) ---
 @onready var chat_panel: PanelContainer = $MainLayout/ChatPanel
@@ -60,6 +61,20 @@ func actualizar(datos: Dictionary) -> void:
 		lbl_aciertos.text = "✓ " + str(datos.get("aciertos", 0))
 	if lbl_errores:
 		lbl_errores.text = "✗ " + str(datos.get("errores", 0))
+	# Timer
+	if lbl_timer:
+		var tiempo = datos.get("tiempo", -1.0)
+		if tiempo > 0:
+			lbl_timer.text = "⏱ " + str(int(tiempo))
+			# Cambiar color si queda poco tiempo
+			if tiempo <= 10:
+				lbl_timer.add_theme_color_override("font_color", Color(1, 0.3, 0.3, 1))
+			elif tiempo <= 20:
+				lbl_timer.add_theme_color_override("font_color", Color(1, 0.7, 0.2, 1))
+			else:
+				lbl_timer.add_theme_color_override("font_color", Color(1, 0.85, 0.3, 1))
+		else:
+			lbl_timer.text = "⏱ --"
 
 # =====================================================
 # BURBUJAS DE CHAT (panel izquierdo)
@@ -342,11 +357,20 @@ func _limpiar_opciones() -> void:
 
 func _on_aprobar() -> void:
 	mostrar_botones_decision(false)
+	ocultar_interaccion()
 	decision_tomada.emit(GlobalEnums.DecisionGuardia.APROBADO)
 
 func _on_rechazar() -> void:
 	mostrar_botones_decision(false)
+	ocultar_interaccion()
 	decision_tomada.emit(GlobalEnums.DecisionGuardia.RECHAZADO)
+
+## Oculta chat y opciones (cuando el NPC ya no está en revisión)
+func ocultar_interaccion() -> void:
+	if chat_panel: chat_panel.visible = false
+	if options_panel: options_panel.visible = false
+	_limpiar_opciones()
+	esperando_respuesta = false
 
 # =====================================================
 # REPORTE DE FIN DE DÍA

@@ -20,8 +20,8 @@ signal carnet_escaneado(datos_carnet: Dictionary)
 @export_group("Coordenadas")
 @export var x_inicio: float = 3583.0
 @export var x_ventanilla: float = 2963.0
-@export var x_salida_aceptado: float = 2151.0
-@export var x_salida_rechazado: float = 3700.0
+@export var x_salida_aceptado: float = 1400.0
+@export var x_salida_rechazado: float = 4200.0
 @export var x_atacante_destino: float = 900.0   ## Destino final del atacante
 
 @export var y_base: float = 591.0
@@ -43,10 +43,14 @@ signal carnet_escaneado(datos_carnet: Dictionary)
 var _cara_visible: bool = false  ## Controla si la cara ampliada está mostrada
 
 ## Estado del NPC
-enum State { INACTIVO, ENTRANDO, EN_VENTANILLA, SALIENDO_APROBADO, SALIENDO_RECHAZADO, ESPERANDO, ATACANTE_CORRIENDO, ATACANTE_DETENIDO }
+enum State { INACTIVO, ENTRANDO, EN_VENTANILLA, SALIENDO_APROBADO, SALIENDO_RECHAZADO, ESPERANDO, ATACANTE_CORRIENDO, ATACANTE_DETENIDO, APREHENDIDO }
 var estado_actual: State = State.INACTIVO
 var tiempo_transcurrido: float = 0.0
 var _velocidad_actual: float = 300.0  ## Se ajusta según tipo de NPC
+
+## Sprite de aprehensión
+var sprite_aprehension_path: String = "res://assets/personajes/NPCs/NPC-aprehension-1.png"
+var x_salida_aprehendido: float = -500.0  ## Sale mucho más a la izquierda
 
 ## Datos lógicos del NPC
 var npc_data: AbstractNPC = null
@@ -84,6 +88,10 @@ func _process(delta: float) -> void:
 				_atacante_llego_a_destino()
 		State.ATACANTE_DETENIDO:
 			pass  # Se queda parado en X=900, visible
+		State.APREHENDIDO:
+			_mover_hacia(x_salida_aprehendido, delta)
+			if global_position.x <= x_salida_aprehendido:
+				_npc_fuera_de_escena()
 
 ## Carga un AbstractNPC y configura el visual
 func cargar_npc(data: AbstractNPC) -> void:
@@ -259,6 +267,23 @@ func _atacante_llego_a_destino() -> void:
 	atacante_paso.emit()
 	# También emitimos npc_salio para que el flujo avance al siguiente NPC
 	npc_salio.emit()
+
+## El NPC es aprehendido: cambia sprite y camina a la izquierda por más tiempo
+func aprehender() -> void:
+	print("[NPC] ¡APREHENDIDO! Cambiando sprite y saliendo por la izquierda")
+	# Cambiar sprite al de aprehensión
+	if sprite_cuerpo and sprite_aprehension_path:
+		var tex = load(sprite_aprehension_path)
+		if tex:
+			sprite_cuerpo.texture = tex
+			_ajustar_escala_cuerpo(tex)
+	# Ocultar cara y carnet
+	_ocultar_cara()
+	_ocultar_carnet()
+	# Iniciar caminata de aprehensión (más lenta, más lejos)
+	_velocidad_actual = velocidad * 0.6  # Camina más lento (esposado)
+	estado_actual = State.APREHENDIDO
+	tiempo_transcurrido = 0.0
 
 ## Resetea completamente el NPC visual
 func resetear() -> void:

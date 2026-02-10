@@ -13,7 +13,7 @@ signal dia_finalizado(resumen: Dictionary)  ## Se emite al terminar todos los NP
 
 @export_group("Configuración")
 @export var npcs_por_dia: int = 10
-@export var tiempo_por_npc: float = 60.0    ## Segundos antes de timeout
+@export var tiempo_por_npc: float = 20.0    ## Segundos antes de timeout
 
 # --- NODOS RESUELTOS ---
 var npc_visual: Node = null         # El nodo NPC visual en escena
